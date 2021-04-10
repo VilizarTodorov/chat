@@ -2,8 +2,9 @@ import { Avatar, Button, IconButton } from "@material-ui/core";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
-import styled from "styled-components";
 import React from "react";
+import styled from "styled-components";
+import { auth } from "../firebase";
 
 const Container = styled.div``;
 
@@ -20,7 +21,7 @@ const Header = styled.div`
   border-bottom: 2px solid whitesmoke;
 `;
 
-const IconsContainer = styled.div``; 
+const IconsContainer = styled.div``;
 
 const UserAvatar = styled(Avatar)`
   cursor: pointer;
@@ -70,6 +71,7 @@ const Sidebar = (props) => {
         <SearchInput placeholder="Search in chats" />
       </Search>
       <NewChatButton>START NEW CHAT</NewChatButton>
+      <Button onClick={() => auth.signOut()}>sign out</Button>
     </Container>
   );
 };
