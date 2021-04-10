@@ -5,6 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import Chats from "./Chats";
 
 const Container = styled.div``;
 
@@ -72,6 +73,7 @@ const Sidebar = (props) => {
       </Search>
       <NewChatButton>START NEW CHAT</NewChatButton>
       <Button onClick={() => auth.signOut()}>sign out</Button>
+      <Chats chats={[1, 2, 3, 4]}></Chats>
     </Container>
   );
 };
