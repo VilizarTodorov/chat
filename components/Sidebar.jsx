@@ -17,7 +17,7 @@ const Header = styled.div`
   align-items: center;
   padding: 15px;
   height: 80px;
-  border-bottom: 1px solid whitesmoke;
+  border-bottom: 2px solid whitesmoke;
 `;
 
 const IconsContainer = styled.div``; 
