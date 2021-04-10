@@ -1,11 +1,10 @@
 import { Avatar, Button, IconButton } from "@material-ui/core";
 import ChatIcon from "@material-ui/icons/Chat";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import styled from "styled-components";
-import { auth } from "../firebase";
 import Chats from "./Chats";
+import SidebarMoreVertIconMenu from "./SidebarMoreVertIconMenu";
 
 const Container = styled.div``;
 
@@ -62,9 +61,7 @@ const Sidebar = (props) => {
           <IconButton>
             <ChatIcon />
           </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
+          <SidebarMoreVertIconMenu />
         </IconsContainer>
       </Header>
       <Search>
@@ -72,7 +69,6 @@ const Sidebar = (props) => {
         <SearchInput placeholder="Search in chats" />
       </Search>
       <NewChatButton>START NEW CHAT</NewChatButton>
-      <Button onClick={() => auth.signOut()}>sign out</Button>
       <Chats chats={[1, 2, 3, 4]}></Chats>
     </Container>
   );
