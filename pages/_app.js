@@ -1,15 +1,15 @@
+import firebase from "firebase";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../components/Loading";
+import Login from '../components/Login';
 import "../components/test.css";
-import { DB_COLLECTION_USERS } from "../constants";
+import { DB_COLLECTION_USERS } from "../constants/db-collections";
 import { auth, db } from "../firebase";
 import "../styles/globals.css";
-import firebase from "firebase";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
-  console.log(user);
 
   useEffect(() => {
     if (user) {
@@ -18,8 +18,9 @@ function MyApp({ Component, pageProps }) {
         lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
         photoUrl: user.photoURL,
       });
+      return;
     }
-  });
+  }, [user]);
 
   if (loading) {
     return <Loading></Loading>;
@@ -27,6 +28,9 @@ function MyApp({ Component, pageProps }) {
   if (error) {
     console.log(error);
     return <div>something went wrong </div>;
+  }
+  if (!user) {
+    return <Login></Login>
   }
 
   return <Component {...pageProps} />;
