@@ -6,6 +6,7 @@ import Login from "../components/Login";
 import "../components/test.css";
 import { DB_COLLECTION_USERS } from "../constants/db-collections";
 import { auth, db } from "../firebase";
+import { StylesProvider } from "@material-ui/core/styles";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
@@ -33,7 +34,11 @@ function MyApp({ Component, pageProps }) {
     return <Login></Login>;
   }
 
-  return <Component {...pageProps} />;
+  return (
+    <StylesProvider injectFirst>
+      <Component {...pageProps} />
+    </StylesProvider>
+  );
 }
 
 export default MyApp;

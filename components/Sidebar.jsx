@@ -1,82 +1,34 @@
-import { Avatar, Button, IconButton } from "@material-ui/core";
+import { Avatar, Button, IconButton, Input } from "@material-ui/core";
 import ChatIcon from "@material-ui/icons/Chat";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { useState } from "react";
-import styled from "styled-components";
 import Chats from "./Chats";
 import Profile from "./Profile";
 import SidebarMoreVertIconMenu from "./SidebarMoreVertIconMenu";
-
-const Container = styled.div`
-  position: relative;
-`;
-
-const Header = styled.div`
-  display: flex;
-  position: sticky;
-  top: 0;
-  background-color: white;
-  z-index: 1;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  height: 80px;
-  border-bottom: 2px solid whitesmoke;
-`;
-
-const IconsContainer = styled.div``;
-
-const UserAvatar = styled(Avatar)`
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const Search = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 2px;
-`;
-
-const SearchInput = styled.input`
-  outline: none;
-  border: none;
-  outline-width: 0;
-  flex: 1;
-`;
-
-const NewChatButton = styled(Button)`
-  width: 100%;
-  && {
-    border-top: 1px solid whitesmoke;
-    border-bottom: 1px solid whitesmoke;
-  }
-`;
+import styles from "../styles/Sidebar.module.css";
 
 const Sidebar = (props) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <Container>
-      <Header>
-        <UserAvatar onClick={() => setIsProfileOpen(true)} />
-        <IconsContainer>
+    <div className={styles.container}>
+      <div className={styles.sidebarHeader}>
+        <Avatar className={styles.userAvatar} onClick={() => setIsProfileOpen(true)} />
+        <div>
           <IconButton>
             <ChatIcon />
           </IconButton>
           <SidebarMoreVertIconMenu />
-        </IconsContainer>
-      </Header>
-      <Search>
+        </div>
+      </div>
+      <div className={styles.search}>
         <SearchIcon />
-        <SearchInput placeholder="Search in chats" />
-      </Search>
-      <NewChatButton>START NEW CHAT</NewChatButton>
-      <Chats chats={[1, 2, 3, 4]}></Chats>
+        <input className={styles.searchInput} placeholder="Search in chats" />
+      </div>
+      <Button className={styles.newChatButton}>START NEW CHAT</Button>
+      <Chats chats={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}></Chats>
       <Profile close={() => setIsProfileOpen(false)} isOpen={isProfileOpen}></Profile>
-    </Container>
+    </div>
   );
 };
 

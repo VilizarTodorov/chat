@@ -81,7 +81,7 @@ const Profile = (props) => {
         <TextFieldContainer>
           <TextField margin="normal" fullWidth label="Your Name"></TextField>
         </TextFieldContainer>
-        <Typography style={{ margin: "20px" }} variant="subtitle1">
+        <Typography style={{ margin: "20px", userSelect: "none" }} variant="subtitle1">
           This is not your username or pin. This name will be visible to your WhatsApp contacts.
         </Typography>
         <TextFieldContainer>
