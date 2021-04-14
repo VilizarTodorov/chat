@@ -1,8 +1,8 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../components/Loading";
-import Login from '../components/Login';
+import Login from "../components/Login";
 import "../components/test.css";
 import { DB_COLLECTION_USERS } from "../constants/db-collections";
 import { auth, db } from "../firebase";
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
     return <div>something went wrong </div>;
   }
   if (!user) {
-    return <Login></Login>
+    return <Login></Login>;
   }
 
   return <Component {...pageProps} />;

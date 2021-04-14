@@ -1,12 +1,15 @@
 import { Avatar, Button, IconButton } from "@material-ui/core";
 import ChatIcon from "@material-ui/icons/Chat";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Chats from "./Chats";
+import Profile from "./Profile";
 import SidebarMoreVertIconMenu from "./SidebarMoreVertIconMenu";
 
-const Container = styled.div``;
+const Container = styled.div`
+  position: relative;
+`;
 
 const Header = styled.div`
   display: flex;
@@ -46,17 +49,19 @@ const SearchInput = styled.input`
 
 const NewChatButton = styled(Button)`
   width: 100%;
-  &&& {
+  && {
     border-top: 1px solid whitesmoke;
     border-bottom: 1px solid whitesmoke;
   }
 `;
 
 const Sidebar = (props) => {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   return (
     <Container>
       <Header>
-        <UserAvatar />
+        <UserAvatar onClick={() => setIsProfileOpen(true)} />
         <IconsContainer>
           <IconButton>
             <ChatIcon />
@@ -70,6 +75,7 @@ const Sidebar = (props) => {
       </Search>
       <NewChatButton>START NEW CHAT</NewChatButton>
       <Chats chats={[1, 2, 3, 4]}></Chats>
+      <Profile close={() => setIsProfileOpen(false)} isOpen={isProfileOpen}></Profile>
     </Container>
   );
 };
