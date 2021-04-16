@@ -12,6 +12,8 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
   const [user, loading, error] = useAuthState(auth);
 
+  // console.log(user);
+
   useEffect(() => {
     if (user) {
       db.collection(DB_COLLECTION_USERS).doc(user.uid).set({

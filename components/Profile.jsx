@@ -58,7 +58,7 @@ const Profile = (props) => {
         padding: 0,
         overflow: "hidden",
         width: `${props.isOpen ? "100%" : "0"}`,
-        zIndex: 3,
+        zIndex: 110,
         backgroundColor: "#414141",
         height: "100vh",
         transition: "all 0.4s",
