@@ -3,6 +3,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  border-right: 2px solid whitesmoke;
 }
 
 .sidebarHeader {
@@ -10,13 +11,12 @@
   position: sticky;
   top: 0;
   background-color: white;
-  z-index: 100;
+  z-index: 80;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
   height: 80px;
   border-bottom: 2px solid whitesmoke;
-  border-right: 2px solid whitesmoke;
 }
 
 .userAvatar {

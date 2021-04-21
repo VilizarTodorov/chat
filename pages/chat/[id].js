@@ -1,14 +1,20 @@
 import React from "react";
 import { useRouter } from "next/router";
+import { Container } from "@material-ui/core";
+import Sidebar from "../../components/Sidebar";
+import ChatScreen from "../../components/ChatScreen";
+import styles from "../../styles/Home.module.css";
 
 const Chat = (props) => {
   const router = useRouter();
 
+  console.log(router.query);
+
   return (
-    <div>
-      <h2>chat</h2>
-      <h2>{router.query.id}</h2>
-    </div>
+    <Container className={styles.container}>
+      <Sidebar></Sidebar>
+      <ChatScreen></ChatScreen>
+    </Container>
   );
 };
 

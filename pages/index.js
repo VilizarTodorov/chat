@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <Container className={styles.container}>
         <Sidebar></Sidebar>
-        <ChatScreen></ChatScreen>
+        {/* <ChatScreen></ChatScreen> */}
       </Container>
     </div>
   );

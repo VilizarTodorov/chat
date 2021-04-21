@@ -56,11 +56,13 @@ const SidebarMoreVertIconMenu = (props) => {
       >
         <MoreVertIcon />
       </IconButton>
-      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition placement="bottom-end" disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
-            style={{ transformOrigin: placement === "bottom" ? "center top" : "center bottom" }}
+            style={{
+              transformOrigin: placement === "bottom-end" ? "center top" : "center bottom",
+            }}
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>

@@ -6,7 +6,7 @@
 
 .header {
   position: sticky;
-  z-index: 100;
+  z-index: 80;
   background-color: white;
   top: 0;
   display: flex;

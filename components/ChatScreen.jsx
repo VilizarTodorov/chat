@@ -30,6 +30,7 @@ const ChatScreen = (props) => {
         </div>
       </div>
       <Container className={styles.messagesContainer}>
+        
         <div className={styles.endOfMessage}></div>
       </Container>
       <Container className={styles.inputContainer}>
