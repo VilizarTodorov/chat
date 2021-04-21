@@ -1,48 +1,47 @@
-import { Button, Container, IconButton, Typography } from "@material-ui/core";
+import { Avatar, Box, Button, Container, IconButton, Input, Modal, Typography } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import SearchIcon from "@material-ui/icons/Search";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
-import React from "react";
+import React, { useState } from "react";
 import Contact from "./Contact";
 import { useUser } from "../UserContext";
+import styles from "../styles/Contacts.module.css";
 
 const Contacts = (props) => {
+  const [isAddNeContactOpen, setIsAddNeContactOpen] = useState(false);
   const user = useUser();
 
   return (
-    <Container
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        padding: 0,
-        overflow: "hidden",
-        width: `${props.isOpen ? "100%" : "0"}`,
-        zIndex: 110,
-        backgroundColor: "#414141",
-        height: "100vh",
-        transition: "all 0.4s",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div className="header-container">
-        <div className="header-part">
-          <IconButton onClick={props.close}>
-            <KeyboardBackspaceIcon></KeyboardBackspaceIcon>
+    <Container className={`${styles.container} ${props.isOpen ? styles.active : ""}`}>
+      <div className={styles.headerContainer}>
+        <div className={styles.headerPart}>
+          <IconButton className={styles.padding25px} onClick={props.close}>
+            <KeyboardBackspaceIcon className={styles.icon}></KeyboardBackspaceIcon>
           </IconButton>
           <Typography variant="h5">Contacts</Typography>
         </div>
       </div>
-      <div className="search">
-        <SearchIcon />
-        <input className="searchInput" placeholder="Search in chats" />
+      <div className={styles.searchContainer}>
+        <div className={styles.search}>
+          <SearchIcon className={styles.searchIcon} />
+          <input className={styles.searchInput} placeholder="Search in chats" />
+        </div>
       </div>
-      <Container className="add-new-contact-container">
-        <PersonAddIcon></PersonAddIcon>
-        <Button className="add-new-contact-button">ADD NEW CONTACT</Button>
-      </Container>
+      <div className={styles.addContactContainer}>
+        <Avatar className={styles.m17px}>
+          <PersonAddIcon></PersonAddIcon>
+        </Avatar>
+        <span>ADD NEW CONTACT</span>
+        {/* <Modal open={isAddNeContactOpen} onClose={() => setIsAddNeContactOpen(false)}>
+          <div>
+            <Typography variant="h5">Add new contact</Typography>
+            <Input placeholder="New contact email"></Input>
+            <Button onClick={() => console.log("add")}>Add new contact</Button>
+          </div>
+        </Modal> */}
+      </div>
+
       <List>
         {user.userDbEntry.friendsList.map((friend) => (
           <Contact key={friend} recipient={`test${friend}`}></Contact>

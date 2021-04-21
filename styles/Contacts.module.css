@@ -1,0 +1,100 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  padding: 0;
+  overflow: hidden;
+  z-index: 110;
+  height: 100vh;
+  transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+  background-color: #131c21;
+}
+
+.padding25px {
+  padding: 25px;
+}
+
+.container.active {
+  left: 0;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: flex-end;
+  height: 120px;
+  background-color: #323739;
+  color: #dfdfe1;
+}
+
+.headerPart {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: #dfdfe1;
+}
+
+.searchIconContainer {
+  padding: 12px;
+}
+
+.searchInput {
+  color: #d4d5d7;
+  padding: 5px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+}
+
+.searchContainer {
+  padding: 10px 0;
+  border-bottom: 1px solid #242d32;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background: #242d32;
+  margin: 0 20px;
+  border-radius: 15px;
+  padding: 5px;
+  color: #7e8285;
+}
+
+.searchIcon {
+  margin-right: 25px;
+}
+
+.addContactContainer {
+  display: flex;
+  align-items: center;
+}
+
+.m17px {
+  margin: 17px;
+}
+
+.addNewContactContainer {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.addNewContactIconContainer {
+  padding: 12px;
+  border-radius: 50%;
+  background-color: rebeccapurple;
+}
+
+.addNewContactContainer:hover {
+  background-color: #2d3134;
+}
+
+.addNewContactButton {
+  flex: 1;
+}
