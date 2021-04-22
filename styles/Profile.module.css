@@ -42,6 +42,12 @@
   justify-content: center;
   align-self: center;
   padding: 24px;
+  transform: scale(0);
+  transition: all 0.3s ease-in-out 0.4s;
+}
+
+.inViewAvatar {
+  transform: scale(1);
 }
 
 .profileAvatar {
@@ -54,4 +60,10 @@
   margin-bottom: 40px;
   color: #f1f1f273;
   user-select: none;
+  opacity: 0;
+  transition: all 0.4s ease-in-out 0.44s;
+}
+
+.inViewAdditionalInfo {
+  opacity: 1;
 }

@@ -4,6 +4,14 @@
   padding-left: 25px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
   color: #066e66;
+  transform: translateY(-50px);
+  opacity: 0;
+  transition: all 0.4s ease-in-out 0.44s;
+}
+
+.inView {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .infoInputContainer {

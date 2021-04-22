@@ -17,16 +17,16 @@ const Profile = (props) => {
           <Typography variant="h5">Profile</Typography>
         </div>
       </div>
-      <Container className={styles.profileAvatarContainer}>
+      <Container className={`${styles.profileAvatarContainer} ${props.isOpen ? styles.inViewAvatar : ""}`}>
         <Avatar className={styles.profileAvatar}></Avatar>
       </Container>
-      <ProfileInfoContainer title="Your name"></ProfileInfoContainer>
-      <Container className={styles.additionalInfo}>
+      <ProfileInfoContainer inView={props.isOpen} title="Your name"></ProfileInfoContainer>
+      <Container className={`${styles.additionalInfo} ${props.isOpen ? styles.inViewAdditionalInfo : ""}`}>
         <Box component="span">
           This is not your username or pin. This name will be visible to your WhatsApp contacts.
         </Box>
       </Container>
-      <ProfileInfoContainer title="About"></ProfileInfoContainer>
+      <ProfileInfoContainer inView={props.isOpen} title="About"></ProfileInfoContainer>
     </Container>
   );
 };

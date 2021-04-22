@@ -8,9 +8,6 @@ const ProfileInfoContainer = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const inputEl = useRef(null);
 
-  console.log(isFocused);
-  console.log(inputEl);
-
   const focus = () => {
     setIsFocused(true);
     inputEl.current.focus();
@@ -22,7 +19,7 @@ const ProfileInfoContainer = (props) => {
   };
 
   return (
-    <Container className={styles.infoContainer}>
+    <Container className={`${styles.infoContainer} ${props.inView ? styles.inView : ""}`}>
       <Box component="span">{props.title}</Box>
       <Box className={styles.infoInputContainer}>
         <Input
