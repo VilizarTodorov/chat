@@ -5,3 +5,10 @@
 .m17pxRight {
   margin-right: 17px;
 }
+
+.contactsListItemTextContainer {
+  border-bottom: 1px solid #242d32;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}

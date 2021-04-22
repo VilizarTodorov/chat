@@ -37,22 +37,13 @@
   color: #dfdfe1;
 }
 
-.searchIconContainer {
+/* .searchIconContainer {
   padding: 12px;
-}
-
-.searchInput {
-  color: #d4d5d7;
-  padding: 5px 0;
-  border: none;
-  outline: none;
-  background: transparent;
-  flex: 1;
-}
+} */
 
 .searchContainer {
   padding: 10px 0;
-  border-bottom: 1px solid #242d32;
+  border-bottom: 1px solid #252d32;
 }
 
 .search {
@@ -69,32 +60,42 @@
   margin-right: 25px;
 }
 
+.searchInput {
+  color: #d4d5d7;
+  padding: 5px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+}
+
 .addContactContainer {
   display: flex;
   align-items: center;
+  color: #dfdfe1;
+  padding-right: 16px;
 }
 
 .m17px {
   margin: 17px;
 }
 
-.addNewContactContainer {
-  height: 60px;
+.addContactText {
+  height: 74px;
   display: flex;
   align-items: center;
-  cursor: pointer;
-}
-
-.addNewContactIconContainer {
-  padding: 12px;
-  border-radius: 50%;
-  background-color: rebeccapurple;
-}
-
-.addNewContactContainer:hover {
-  background-color: #2d3134;
-}
-
-.addNewContactButton {
+  border-bottom: 1px solid #252d32;
   flex: 1;
+}
+
+.contactsList {
+  color: #dfdfe1;
+  flex: 1;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.contactsList::-webkit-scrollbar {
+  display: none;
 }

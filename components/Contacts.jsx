@@ -32,7 +32,7 @@ const Contacts = (props) => {
         <Avatar className={styles.m17px}>
           <PersonAddIcon></PersonAddIcon>
         </Avatar>
-        <span>ADD NEW CONTACT</span>
+        <div className={styles.addContactText}>ADD NEW CONTACT</div>
         {/* <Modal open={isAddNeContactOpen} onClose={() => setIsAddNeContactOpen(false)}>
           <div>
             <Typography variant="h5">Add new contact</Typography>
@@ -42,7 +42,7 @@ const Contacts = (props) => {
         </Modal> */}
       </div>
 
-      <List>
+      <List className={styles.contactsList}>
         {user.userDbEntry.friendsList.map((friend) => (
           <Contact key={friend} recipient={`test${friend}`}></Contact>
         ))}
