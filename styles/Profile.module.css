@@ -1,0 +1,57 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  padding: 0;
+  overflow: hidden;
+  z-index: 110;
+  height: 100vh;
+  transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+  background-color: #131c21;
+}
+
+.container.active {
+  left: 0;
+}
+
+.padding25px {
+  padding: 25px;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: flex-end;
+  height: 120px;
+  background-color: #323739;
+  color: #dfdfe1;
+}
+
+.headerPart {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: #dfdfe1;
+}
+
+.profileAvatarContainer {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: 24px;
+}
+
+.profileAvatar {
+  width: 200px;
+  height: 200px;
+}
+
+.additionalInfo {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  color: #f1f1f273;
+  user-select: none;
+}
