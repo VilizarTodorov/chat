@@ -1,4 +1,7 @@
 .list {
+  padding-top: 0;
+  color: #dfdfe1;
+  flex: 1;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

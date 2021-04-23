@@ -1,12 +1,11 @@
-import { Avatar, Box, Button, Container, IconButton, Input, Modal, Typography } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import SearchIcon from "@material-ui/icons/Search";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import { Avatar, Container, IconButton, Typography } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import React, { useState } from "react";
-import Contact from "./Contact";
-import { useUser } from "../UserContext";
 import styles from "../styles/Contacts.module.css";
+import { useUser } from "../UserContext";
+import ListOfPeople from "./ListOfPeople";
+import Search from "./Search";
 
 const Contacts = (props) => {
   const [isAddNeContactOpen, setIsAddNeContactOpen] = useState(false);
@@ -22,12 +21,7 @@ const Contacts = (props) => {
           <Typography variant="h5">Contacts</Typography>
         </div>
       </div>
-      <div className={styles.searchContainer}>
-        <div className={styles.search}>
-          <SearchIcon className={styles.searchIcon} />
-          <input className={styles.searchInput} placeholder="Search in chats" />
-        </div>
-      </div>
+      <Search></Search>
       <div className={styles.addContactContainer}>
         <Avatar className={styles.m17px}>
           <PersonAddIcon></PersonAddIcon>
@@ -42,11 +36,7 @@ const Contacts = (props) => {
         </Modal> */}
       </div>
 
-      <List className={styles.contactsList}>
-        {user.userDbEntry.friendsList.map((friend) => (
-          <Contact key={friend} recipient={`test${friend}`}></Contact>
-        ))}
-      </List>
+      <ListOfPeople list={user.userDbEntry.friendsList}></ListOfPeople>
     </Container>
   );
 };
