@@ -6,7 +6,7 @@ const Person = (props) => {
   return (
     <ListItem className={styles.listItem} button alignItems="center">
       <ListItemAvatar>
-        <Avatar className={styles.m17pxRight}></Avatar>
+        <Avatar className={styles.avatar}></Avatar>
       </ListItemAvatar>
       <ListItemText
         className={styles.contactsListItemTextContainer}

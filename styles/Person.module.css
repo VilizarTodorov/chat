@@ -1,4 +1,4 @@
-.m17pxRight {
+.avatar {
   margin-right: 17px;
 }
 
@@ -7,6 +7,10 @@
   padding-top: 0;
   padding-bottom: 0;
   height: 70px;
+}
+
+.listItem:hover {
+  background-color: #2d3134;
 }
 
 .contactsListItemTextContainer {

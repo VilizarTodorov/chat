@@ -1,4 +1,4 @@
-import { Avatar, Container, IconButton, Typography } from "@material-ui/core";
+import { Avatar, Button, Container, IconButton, Input, Modal, Typography } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import React, { useState } from "react";
@@ -8,7 +8,7 @@ import ListOfPeople from "./ListOfPeople";
 import Search from "./Search";
 
 const Contacts = (props) => {
-  const [isAddNeContactOpen, setIsAddNeContactOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const user = useUser();
 
   return (
@@ -22,21 +22,16 @@ const Contacts = (props) => {
         </div>
       </div>
       <Search></Search>
-      <div className={styles.addContactContainer}>
+      <div onClick={() => setOpen(true)} className={styles.addContactContainer}>
         <Avatar className={styles.m17px}>
           <PersonAddIcon></PersonAddIcon>
         </Avatar>
         <div className={styles.addContactText}>ADD NEW CONTACT</div>
-        {/* <Modal open={isAddNeContactOpen} onClose={() => setIsAddNeContactOpen(false)}>
-          <div>
-            <Typography variant="h5">Add new contact</Typography>
-            <Input placeholder="New contact email"></Input>
-            <Button onClick={() => console.log("add")}>Add new contact</Button>
-          </div>
-        </Modal> */}
       </div>
-
       <ListOfPeople list={user.userDbEntry.friendsList}></ListOfPeople>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Typography>ASDASD</Typography>
+      </Modal>
     </Container>
   );
 };

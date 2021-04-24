@@ -37,15 +37,16 @@
   color: #dfdfe1;
 }
 
-/* .searchIconContainer {
-  padding: 12px;
-} */
-
 .addContactContainer {
   display: flex;
   align-items: center;
   color: #dfdfe1;
   padding-right: 16px;
+  cursor: pointer;
+}
+
+.addContactContainer:hover {
+  background-color: #2d3134;
 }
 
 .m17px {
