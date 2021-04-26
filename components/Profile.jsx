@@ -1,8 +1,8 @@
+import { Avatar, Box, IconButton } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
-import React from "react";
-import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import Typography from "@material-ui/core/Typography";
-import { Avatar, Box, IconButton, Input, TextField } from "@material-ui/core";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import React from "react";
 import styles from "../styles/Profile.module.css";
 import ProfileInfoContainer from "./ProfileInfoContainer";
 

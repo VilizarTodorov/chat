@@ -24,7 +24,7 @@ export default function UserContextComp({ children }) {
               setUserDbEntry({ uid: user.uid, ...doc.data() });
             });
         } else {
-          setUid(user.uid);
+          setUid(null);
           setUserDbEntry(null);
         }
       } catch (error) {
@@ -50,7 +50,7 @@ export default function UserContextComp({ children }) {
     return <Login></Login>;
   }
 
-  return <UserContext.Provider value={{ userDbEntry, loadingUser, error }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ userDbEntry, loadingUser, error, uid }}>{children}</UserContext.Provider>;
 }
 
 export const useUser = () => useContext(UserContext);

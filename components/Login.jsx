@@ -27,6 +27,10 @@ const Login = (props) => {
           friendsList: [],
         });
 
+        await db.collection("contacts").doc(user.uid).set({
+          contacts: [],
+        });
+
         console.log("created");
       }
     });

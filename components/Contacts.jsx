@@ -1,7 +1,8 @@
 import { Avatar, Button, Container, IconButton, Input, Modal, Typography } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase";
 import styles from "../styles/Contacts.module.css";
 import { useUser } from "../UserContext";
 import ListOfPeople from "./ListOfPeople";
@@ -10,6 +11,22 @@ import Search from "./Search";
 const Contacts = (props) => {
   const [open, setOpen] = useState(false);
   const user = useUser();
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const listener = db
+      .collection("contacts")
+      .doc(user.uid)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          setContacts([...doc.data().contacts]);
+        }
+      });
+
+    return () => {
+      listener();
+    };
+  }, []);
 
   return (
     <Container className={`${styles.container} ${props.isOpen ? styles.active : ""}`}>
@@ -28,7 +45,7 @@ const Contacts = (props) => {
         </Avatar>
         <div className={styles.addContactText}>ADD NEW CONTACT</div>
       </div>
-      <ListOfPeople list={user.userDbEntry.friendsList}></ListOfPeople>
+      <ListOfPeople list={contacts}></ListOfPeople>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Typography>ASDASD</Typography>
       </Modal>

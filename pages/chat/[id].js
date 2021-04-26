@@ -1,9 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Container } from "@material-ui/core";
-import Sidebar from "../../components/Sidebar";
 import ChatScreen from "../../components/ChatScreen";
-import styles from "../../styles/Home.module.css";
+import WithSidebar from "../../components/WithSidebar";
 
 const Chat = (props) => {
   const router = useRouter();
@@ -11,10 +9,9 @@ const Chat = (props) => {
   console.log(router.query);
 
   return (
-    <Container className={styles.container}>
-      <Sidebar></Sidebar>
+    <WithSidebar>
       <ChatScreen></ChatScreen>
-    </Container>
+    </WithSidebar>
   );
 };
 

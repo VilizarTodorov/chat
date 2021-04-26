@@ -1,6 +1,5 @@
-import { Container } from "@material-ui/core";
 import Head from "next/head";
-import Sidebar from "../components/Sidebar";
+import WithSidebar from "../components/WithSidebar";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -10,10 +9,9 @@ export default function Home() {
         <title>Chat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container className={styles.container}>
-        <Sidebar></Sidebar>
+      <WithSidebar>
         <div className={styles.chatScreenPlaceHolder}></div>
-      </Container>
+      </WithSidebar>
     </div>
   );
 }
