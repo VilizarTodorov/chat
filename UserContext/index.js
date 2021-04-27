@@ -6,7 +6,6 @@ import { auth, db } from "../firebase";
 export const UserContext = createContext();
 
 export default function UserContextComp({ children }) {
-  const [uid, setUid] = useState(null);
   const [userDbEntry, setUserDbEntry] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const [error, setError] = useState(null);
@@ -15,16 +14,14 @@ export default function UserContextComp({ children }) {
     const listener = auth.onAuthStateChanged(async (user) => {
       try {
         if (user) {
-          setUid(user.uid);
           await db
             .collection("users")
-            .doc(user.uid)
+            .doc(user.email)
             .get()
             .then((doc) => {
               setUserDbEntry({ uid: user.uid, ...doc.data() });
             });
         } else {
-          setUid(null);
           setUserDbEntry(null);
         }
       } catch (error) {
@@ -50,7 +47,7 @@ export default function UserContextComp({ children }) {
     return <Login></Login>;
   }
 
-  return <UserContext.Provider value={{ userDbEntry, loadingUser, error, uid }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ userDbEntry, loadingUser, error }}>{children}</UserContext.Provider>;
 }
 
 export const useUser = () => useContext(UserContext);

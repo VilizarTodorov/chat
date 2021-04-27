@@ -1,15 +1,17 @@
-.message{
-    width:fit-content;
-    border-radius: 8px;
-    min-width: 60px;
-    position: relative;
-    text-align: right;
+.message {
+  width: fit-content;
+  border-radius: 8px;
+  min-width: 60px;
+  position: relative;
+  text-align: right;
 }
 
-.sender{
-    margin-left: auto;
+.sender {
+  background-color: #dcf8c6;
+  margin-left: auto;
 }
 
-.receiver{
- text-align: left;
+.receiver {
+  text-align: left;
+  background-color: whitesmoke;
 }

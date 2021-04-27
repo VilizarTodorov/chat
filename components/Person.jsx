@@ -6,12 +6,12 @@ const Person = (props) => {
   return (
     <ListItem className={styles.listItem} button alignItems="center">
       <ListItemAvatar>
-        <Avatar className={styles.avatar}></Avatar>
+        <Avatar className={styles.avatar} src={props.photoUrl} alt={`${props.email}'s profile picture`}></Avatar>
       </ListItemAvatar>
       <ListItemText
         className={styles.contactsListItemTextContainer}
-        primary="Friend"
-        secondary={<Typography color="inherit">Hi, I am using chat!</Typography>}
+        primary={props.email}
+        secondary={<Typography color="inherit">{props.message}</Typography>}
       ></ListItemText>
     </ListItem>
   );

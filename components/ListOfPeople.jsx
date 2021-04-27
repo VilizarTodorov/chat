@@ -6,8 +6,13 @@ import styles from "../styles/ListOfPeople.module.css";
 const ListOfPeople = (props) => {
   return (
     <List className={styles.list}>
-      {props.list.map((friend) => (
-        <Person key={friend} recipient={`test${friend}`}></Person>
+      {props.list.map((item) => (
+        <Person
+          key={item.email}
+          email={item.email}
+          photoUrl={item.photo}
+          message={`${props.message ? props.message : "Hi,I'm using chat!"}`}
+        ></Person>
       ))}
     </List>
   );

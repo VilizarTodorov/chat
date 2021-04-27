@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, IconButton, Input, Modal, Typography } from "@material-ui/core";
+import { Avatar, Button, Container, IconButton, Input, Modal, TextField, Typography } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import React, { useEffect, useState } from "react";
@@ -12,11 +12,14 @@ const Contacts = (props) => {
   const [open, setOpen] = useState(false);
   const user = useUser();
   const [contacts, setContacts] = useState([]);
+  const [contactEmail, setContactEmail] = useState("");
+
+  console.log(contacts);
 
   useEffect(() => {
     const listener = db
       .collection("contacts")
-      .doc(user.uid)
+      .doc(user.userDbEntry.email)
       .onSnapshot((doc) => {
         if (doc.exists) {
           setContacts([...doc.data().contacts]);
@@ -27,6 +30,34 @@ const Contacts = (props) => {
       listener();
     };
   }, []);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    db.collection("users")
+      .doc(contactEmail)
+      .get()
+      .then(async (doc) => {
+        if (doc.exists) {
+          await db
+            .collection("contacts")
+            .doc(user.userDbEntry.email)
+            .update({
+              contacts: [...contacts, { ...doc.data() }],
+            })
+            .then(() => {
+              console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+              // The document probably doesn't exist.
+              console.error("Error updating document: ", error);
+            });
+
+          setOpen(false);
+        } else {
+          console.log("doc does not exist");
+        }
+      });
+  };
 
   return (
     <Container className={`${styles.container} ${props.isOpen ? styles.active : ""}`}>
@@ -47,7 +78,18 @@ const Contacts = (props) => {
       </div>
       <ListOfPeople list={contacts}></ListOfPeople>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <Typography>ASDASD</Typography>
+        <div className={styles.temp}>
+          <form onSubmit={onSubmit} className={styles.addContactForm}>
+            <Typography>Add new contacts</Typography>
+            <TextField
+              required
+              label="Contact Email"
+              value={contactEmail}
+              onChange={(e) => setContactEmail(e.target.value)}
+            ></TextField>
+            <Button type="submit">Add contact</Button>
+          </form>
+        </div>
       </Modal>
     </Container>
   );

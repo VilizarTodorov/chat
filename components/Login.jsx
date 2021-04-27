@@ -14,20 +14,20 @@ const Login = (props) => {
       console.log("could not login with google for some reason");
     }
 
-    const docRef = db.collection("users").doc(user.uid);
+    const docRef = db.collection("users").doc(user.email);
 
     await docRef.get().then(async (doc) => {
       if (doc.exists) {
         console.log("doc exists");
       } else {
         console.log("doc does not exist");
-        await db.collection("users").doc(user.uid).set({
+        await db.collection("users").doc(user.email).set({
           email: user.email,
           photo: user.photoURL,
           friendsList: [],
         });
 
-        await db.collection("contacts").doc(user.uid).set({
+        await db.collection("contacts").doc(user.email).set({
           contacts: [],
         });
 
