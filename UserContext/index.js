@@ -17,6 +17,7 @@ export default function UserContextComp({ children }) {
     const listener = auth.onAuthStateChanged(async (user) => {
       try {
         if (user) {
+          console.log(user)
           await db
             .collection("users")
             .doc(user.email)

@@ -12,22 +12,20 @@ const Register = (props) => {
 
   const register = async (e) => {
     e.preventDefault();
-    let user = null;
 
     try {
-      const result = await auth.createUserWithEmailAndPassword(email, password);
-      await result.user.updateProfile({ displayName });
-      user = result.user;
-
-      await db.collection("users").doc(user.email).set({
-        email: user.email,
-        photo: user.photoURL,
-        displayName: user.displayName,
+      await db.collection("users").doc(email).set({
+        email: email,
+        photo: null,
+        displayName: displayName,
       });
 
-      await db.collection("contacts").doc(user.email).set({
+      await db.collection("contacts").doc(email).set({
         contacts: [],
       });
+
+      const result = await auth.createUserWithEmailAndPassword(email, password);
+      await result.user.updateProfile({ displayName });
 
       router.push("/");
     } catch (error) {
