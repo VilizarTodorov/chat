@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import { useState, useEffect, createContext, useContext } from "react";
 import Loading from "../components/Loading";
 import Login from "../components/Login";
+import Register from "../components/Register";
 import { auth, db } from "../firebase";
 
 export const UserContext = createContext();
@@ -9,6 +11,7 @@ export default function UserContextComp({ children }) {
   const [userDbEntry, setUserDbEntry] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const listener = auth.onAuthStateChanged(async (user) => {
@@ -42,6 +45,9 @@ export default function UserContextComp({ children }) {
   if (error) {
     console.log(error);
     return <div>something went wrong </div>;
+  }
+  if (!userDbEntry && router.pathname === "/register") {
+    return <Register></Register>;
   }
   if (!userDbEntry) {
     return <Login></Login>;
