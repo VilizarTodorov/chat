@@ -1,10 +1,14 @@
-import { Button } from "@material-ui/core";
-import { auth, db, googleAuthProvider } from "../firebase";
+import { Box, Button, Container, Input, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
+import { auth, db, googleAuthProvider } from "../firebase";
 import { useUser } from "../UserContext";
+import styles from "../styles/Login.module.css";
 
 const Login = (props) => {
   const User = useUser();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const signInWithGoogle = async () => {
     let user = null;
 
@@ -36,14 +40,58 @@ const Login = (props) => {
     });
   };
 
+  const signInWithEmailAndPassword = (e) => {
+    e.preventDefault();
+    auth.signInWithEmailAndPassword(email, password).catch((err) => console.log(err));
+  };
+
   return (
-    <div>
-      <h2>login</h2>
-      <form></form>
-      <Button onClick={signInWithGoogle} variant="contained">
-        Sign in with Google
-      </Button>
-    </div>
+    <Container component="main" className={styles.main}>
+      <Container maxWidth="xs">
+        <Typography color="inherit" variant="h4">Login</Typography>
+        <Container className={`${styles.infoContainer} ${styles.inView}`}>
+          <Box component="span">Email</Box>
+          <Box className={styles.infoInputContainer}>
+            <Input
+              margin="normal"
+              id="email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+              fullWidth
+              autoFocus
+              className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
+            ></Input>
+          </Box>
+        </Container>
+        <Container className={`${styles.infoContainer} ${styles.inView}`}>
+          <Box component="span">Password</Box>
+          <Box className={styles.infoInputContainer}>
+            <Input
+              margin="normal"
+              id="password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              fullWidth
+              required
+              className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
+            ></Input>
+          </Box>
+        </Container>
+        <Button className={styles.button} variant="contained" type="submit" fullWidth>
+          Login
+        </Button>
+        <Button className={styles.button} fullWidth onClick={signInWithGoogle} variant="contained">
+          Sign in with Google
+        </Button>
+      </Container>
+    </Container>
   );
 };
 
