@@ -14,8 +14,6 @@ const Contacts = (props) => {
   const [contacts, setContacts] = useState([]);
   const [contactEmail, setContactEmail] = useState("");
 
-  console.log(contacts);
-
   useEffect(() => {
     const listener = db
       .collection("contacts")
@@ -38,22 +36,6 @@ const Contacts = (props) => {
       .get()
       .then(async (doc) => {
         if (doc.exists) {
-          const res = await db
-            .collection("contacts")
-            .doc(user.userDbEntry.email)
-            .get()
-            .then((doc) => {
-              if (doc.exists) {
-                console.log(doc.data());
-              } else {
-                console.log("no");
-              }
-
-              return doc.exists;
-            });
-
-          console.log(res);
-
           await db
             .collection("contacts")
             .doc(user.userDbEntry.email)

@@ -12,13 +12,14 @@ export default function UserContextComp({ children }) {
     const listener = auth.onAuthStateChanged(async (user) => {
       try {
         if (user) {
-          console.log(user);
           await db
             .collection("users")
             .doc(user.email)
             .get()
             .then((doc) => {
-              setUserDbEntry({ uid: user.uid, ...doc.data() });
+              if (doc.exists) {
+                setUserDbEntry({ ...userDbEntry, uid: user.uid, ...doc.data() });
+              }
             });
         } else {
           setUserDbEntry(null);
