@@ -1,8 +1,9 @@
 import Head from "next/head";
 import WithSidebar from "../components/WithSidebar";
 import styles from "../styles/Home.module.css";
+import withAuthorization from "../UserContext/withAuthorization";
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
       <Head>
@@ -14,4 +15,13 @@ export default function Home() {
       </WithSidebar>
     </div>
   );
-}
+};
+
+const condition = (user) => {
+  if (user.userDbEntry) {
+    return true;
+  }
+  return false;
+};
+
+export default withAuthorization(condition)(Home);

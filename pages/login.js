@@ -1,9 +1,9 @@
 import React from "react";
-import Register from "../components/Register";
+import Login from "../components/Login";
 import withAuthorization from "../UserContext/withAuthorization";
 
-const RegisterPage = (props) => {
-  return <Register></Register>;
+const LoginPage = (props) => {
+  return <Login></Login>;
 };
 
 const condition = (user) => {
@@ -13,4 +13,4 @@ const condition = (user) => {
   return false;
 };
 
-export default withAuthorization(condition)(RegisterPage);
+export default withAuthorization(condition)(LoginPage);
