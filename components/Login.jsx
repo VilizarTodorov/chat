@@ -40,20 +40,20 @@ const Login = (props) => {
     });
   };
 
-  const signInWithEmailAndPassword = (e) => {
-    e.preventDefault();
+  const signInWithEmailAndPassword = () => {
     auth.signInWithEmailAndPassword(email, password).catch((err) => console.log(err));
   };
 
   return (
     <Container component="main" className={styles.main}>
       <Container maxWidth="xs">
-        <Typography color="inherit" variant="h4">Login</Typography>
+        <Typography color="inherit" variant="h4">
+          Login
+        </Typography>
         <Container className={`${styles.infoContainer} ${styles.inView}`}>
           <Box component="span">Email</Box>
           <Box className={styles.infoInputContainer}>
             <Input
-              margin="normal"
               id="email"
               name="email"
               type="email"
@@ -71,7 +71,6 @@ const Login = (props) => {
           <Box component="span">Password</Box>
           <Box className={styles.infoInputContainer}>
             <Input
-              margin="normal"
               id="password"
               name="password"
               type="password"
@@ -84,7 +83,13 @@ const Login = (props) => {
             ></Input>
           </Box>
         </Container>
-        <Button className={styles.button} variant="contained" type="submit" fullWidth>
+        <Button
+          className={styles.button}
+          fullWidth
+          onClick={signInWithEmailAndPassword}
+          variant="contained"
+          type="submit"
+        >
           Login
         </Button>
         <Button className={styles.button} fullWidth onClick={signInWithGoogle} variant="contained">
