@@ -88,7 +88,6 @@ const Login = (props) => {
           fullWidth
           onClick={signInWithEmailAndPassword}
           variant="contained"
-          type="submit"
         >
           Login
         </Button>

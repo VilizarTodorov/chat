@@ -1,7 +1,9 @@
-import { Button, TextField, Typography } from "@material-ui/core";
+import { Box, Button, Container, Input, Typography } from "@material-ui/core";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
-import { useRouter } from "next/router";
+import styles from "../styles/Login.module.css";
+
 
 const Register = (props) => {
   const [displayName, setDisplayName] = useState("");
@@ -11,7 +13,6 @@ const Register = (props) => {
   const router = useRouter();
 
   const register = async (e) => {
-    e.preventDefault();
 
     try {
       await db.collection("users").doc(email).set({
@@ -34,55 +35,87 @@ const Register = (props) => {
   };
 
   return (
-    <form onSubmit={register}>
-      <Typography variant="h2"></Typography>
-      <TextField
-        margin="normal"
-        id="displayName"
-        name="displayName"
-        type="text"
-        label="Display Name"
-        value={displayName}
-        onChange={(e) => setDisplayName(e.target.value)}
-        fullWidth
-        autoFocus
-      ></TextField>
-
-      <TextField
-        margin="normal"
-        id="email"
-        name="email"
-        type="email"
-        label="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        fullWidth
-      ></TextField>
-
-      <TextField
-        margin="normal"
-        id="password"
-        name="password"
-        type="password"
-        label="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        fullWidth
-      ></TextField>
-
-      <TextField
-        margin="normal"
-        id="repeatPassword"
-        name="repeatPassword"
-        type="password"
-        label="Repeat Password"
-        value={repeatPassword}
-        onChange={(e) => setRepeatPassword(e.target.value)}
-        fullWidth
-      ></TextField>
-
-      <Button type="submit">Register</Button>
-    </form>
+    <Container component="main" className={styles.main}>
+      <Container maxWidth="xs">
+        <Typography color="inherit" variant="h4">
+          Register
+        </Typography>
+        <Container className={`${styles.infoContainer} ${styles.inView}`}>
+          <Box component="span">Display Name</Box>
+          <Box className={styles.infoInputContainer}>
+            <Input
+              id="displayName"
+              name="displayName"
+              type="text"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              placeholder="DisplayName"
+              required
+              fullWidth
+              autoFocus
+              className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
+            ></Input>
+          </Box>
+        </Container>
+        <Container className={`${styles.infoContainer} ${styles.inView}`}>
+          <Box component="span">Email</Box>
+          <Box className={styles.infoInputContainer}>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+              fullWidth
+              className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
+            ></Input>
+          </Box>
+        </Container>
+        <Container className={`${styles.infoContainer} ${styles.inView}`}>
+          <Box component="span">Password</Box>
+          <Box className={styles.infoInputContainer}>
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              fullWidth
+              required
+              className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
+            ></Input>
+          </Box>
+        </Container>
+        <Container className={`${styles.infoContainer} ${styles.inView}`}>
+          <Box component="span">Repeat Password</Box>
+          <Box className={styles.infoInputContainer}>
+            <Input
+              id="repeatPassword"
+              name="repeatPassword"
+              type="password"
+              value={repeatPassword}
+              onChange={(e) => setRepeatPassword(e.target.value)}
+              placeholder="Password"
+              fullWidth
+              required
+              className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
+            ></Input>
+          </Box>
+        </Container>
+        <Button
+          className={styles.button}
+          fullWidth
+          onClick={register}
+          variant="contained"
+        >
+          Register
+        </Button>
+      
+      </Container>
+    </Container>
   );
 };
 
