@@ -4,6 +4,8 @@ import { auth, db } from "../firebase";
 export const UserContext = createContext();
 
 export default function UserContextComp({ children }) {
+  const [contacts, setContacts] = useState([]);
+  const [userChats, setUserChats] = useState([]);
   const [userDbEntry, setUserDbEntry] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const [error, setError] = useState(null);
@@ -36,8 +38,40 @@ export default function UserContextComp({ children }) {
     };
   }, []);
 
+  useEffect(() => {
+    const listener = db
+      .collection("contacts")
+      .doc(userDbEntry?.email)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          setContacts([...doc.data().contacts]);
+        }
+      });
+
+    return () => {
+      listener();
+    };
+  }, [userDbEntry]);
+
+  useEffect(() => {
+    const listener = db
+      .collection("userChats")
+      .doc(userDbEntry?.email)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          setUserChats([...doc.data().chats]);
+        }
+      });
+
+    return () => {
+      listener();
+    };
+  }, [userDbEntry]);
+
   return (
-    <UserContext.Provider value={{ userDbEntry, loadingUser, error, setUserDbEntry }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ contacts, userDbEntry, loadingUser, error, setUserDbEntry }}>
+      {children}
+    </UserContext.Provider>
   );
 }
 

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import styles from "../styles/Login.module.css";
 
-
 const Register = (props) => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +12,6 @@ const Register = (props) => {
   const router = useRouter();
 
   const register = async (e) => {
-
     try {
       await db.collection("users").doc(email).set({
         email: email,
@@ -23,6 +21,10 @@ const Register = (props) => {
 
       await db.collection("contacts").doc(email).set({
         contacts: [],
+      });
+
+      await db.collection("userChats").doc(email).set({
+        chats: [],
       });
 
       const result = await auth.createUserWithEmailAndPassword(email, password);
@@ -105,15 +107,9 @@ const Register = (props) => {
             ></Input>
           </Box>
         </Container>
-        <Button
-          className={styles.button}
-          fullWidth
-          onClick={register}
-          variant="contained"
-        >
+        <Button className={styles.button} fullWidth onClick={register} variant="contained">
           Register
         </Button>
-      
       </Container>
     </Container>
   );

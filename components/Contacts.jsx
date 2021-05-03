@@ -11,23 +11,8 @@ import Search from "./Search";
 const Contacts = (props) => {
   const [open, setOpen] = useState(false);
   const user = useUser();
-  const [contacts, setContacts] = useState([]);
   const [contactEmail, setContactEmail] = useState("");
 
-  useEffect(() => {
-    const listener = db
-      .collection("contacts")
-      .doc(user.userDbEntry.email)
-      .onSnapshot((doc) => {
-        if (doc.exists) {
-          setContacts([...doc.data().contacts]);
-        }
-      });
-
-    return () => {
-      listener();
-    };
-  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +25,7 @@ const Contacts = (props) => {
             .collection("contacts")
             .doc(user.userDbEntry.email)
             .update({
-              contacts: [...contacts, { ...doc.data() }],
+              contacts: [...user.contacts, { ...doc.data() }],
             })
             .then(() => {
               console.log("Document successfully updated!");
@@ -56,6 +41,8 @@ const Contacts = (props) => {
         }
       });
   };
+
+  const createChatFunction = () => {};
 
   return (
     <Container className={`${styles.container} ${props.isOpen ? styles.active : ""}`}>
@@ -74,7 +61,7 @@ const Contacts = (props) => {
         </Avatar>
         <div className={styles.addContactText}>ADD NEW CONTACT</div>
       </div>
-      <ListOfPeople list={contacts}></ListOfPeople>
+      <ListOfPeople list={user.contacts}></ListOfPeople>
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={styles.temp}>
           <form onSubmit={onSubmit} className={styles.addContactForm}>

@@ -36,6 +36,10 @@ const Login = (props) => {
         db.collection("contacts").doc(user.email).set({
           contacts: [],
         });
+
+        db.collection("userChats").doc(user.email).set({
+          chats: [],
+        });
       }
     });
   };
@@ -83,12 +87,7 @@ const Login = (props) => {
             ></Input>
           </Box>
         </Container>
-        <Button
-          className={styles.button}
-          fullWidth
-          onClick={signInWithEmailAndPassword}
-          variant="contained"
-        >
+        <Button className={styles.button} fullWidth onClick={signInWithEmailAndPassword} variant="contained">
           Login
         </Button>
         <Button className={styles.button} fullWidth onClick={signInWithGoogle} variant="contained">
