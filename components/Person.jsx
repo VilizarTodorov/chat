@@ -2,16 +2,16 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from "@mat
 import React from "react";
 import styles from "../styles/Person.module.css";
 
-const Person = (props) => {
+const Person = ({ callbackFunction, photoUrl, email, message }) => {
   return (
-    <ListItem onClick={props.function} className={styles.listItem} button alignItems="center">
+    <ListItem onClick={callbackFunction} className={styles.listItem} button alignItems="center">
       <ListItemAvatar>
-        <Avatar className={styles.avatar} src={props.photoUrl} alt={`${props.email}'s profile picture`}></Avatar>
+        <Avatar className={styles.avatar} src={photoUrl} alt={`${email}'s profile picture`}></Avatar>
       </ListItemAvatar>
       <ListItemText
         className={styles.contactsListItemTextContainer}
-        primary={props.email}
-        secondary={<Typography color="inherit">{props.message}</Typography>}
+        primary={email}
+        secondary={<Typography color="inherit">{message}</Typography>}
       ></ListItemText>
     </ListItem>
   );

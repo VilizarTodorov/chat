@@ -1,14 +1,14 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 
 export const UserContext = createContext();
 
 export default function UserContextComp({ children }) {
+  const [userDbEntry, setUserDbEntry] = useState(null);
   const [contacts, setContacts] = useState([]);
   const [userChats, setUserChats] = useState([]);
-  const [userDbEntry, setUserDbEntry] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true);
   const [chats, setChats] = useState([]);
+  const [loadingUser, setLoadingUser] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
