@@ -8,6 +8,7 @@ export default function UserContextComp({ children }) {
   const [userChats, setUserChats] = useState([]);
   const [userDbEntry, setUserDbEntry] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [chats, setChats] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -68,8 +69,21 @@ export default function UserContextComp({ children }) {
     };
   }, [userDbEntry]);
 
+  useEffect(() => {
+    const chatPromises = [];
+    userChats.forEach((chat) => {
+      const promise = db
+        .collection("chats")
+        .doc(chat.id)
+        .get()
+        .then((doc) => doc.data());
+      chatPromises.push(promise);
+    });
+    Promise.all(chatPromises).then((chats) => setChats(chats));
+  }, [userChats]);
+
   return (
-    <UserContext.Provider value={{ contacts, userDbEntry, loadingUser, error, setUserDbEntry }}>
+    <UserContext.Provider value={{ chats, userChats, contacts, userDbEntry, loadingUser, error, setUserDbEntry }}>
       {children}
     </UserContext.Provider>
   );

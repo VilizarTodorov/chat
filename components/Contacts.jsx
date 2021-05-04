@@ -7,12 +7,13 @@ import styles from "../styles/Contacts.module.css";
 import { useUser } from "../UserContext";
 import ListOfPeople from "./ListOfPeople";
 import Search from "./Search";
+import { useRouter } from "next/router";
 
 const Contacts = (props) => {
   const [open, setOpen] = useState(false);
   const user = useUser();
   const [contactEmail, setContactEmail] = useState("");
-
+  const router = useRouter();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +43,36 @@ const Contacts = (props) => {
       });
   };
 
-  const createChatFunction = () => {};
+  const createChatFunction = async (contact) => {
+    const chat = user.userChats.find((chat) => chat.users.includes(contact));
+
+    if (chat) {
+      router.push(`/chat/${chat.id}`);
+      return;
+    }
+
+    let chatRef = await db.collection("chats").add({ users: [contact, user.userDbEntry.email] });
+    await chatRef.update({ id: chatRef.id });
+    const newChat = await chatRef.get();
+
+    let contactPromise = db
+      .collection("userChats")
+      .doc(contact)
+      .get()
+      .then(async (doc) => {
+        await doc.ref.update({ chats: [...doc.data().chats, { ...newChat.data() }] });
+      });
+
+    let userPromise = db
+      .collection("userChats")
+      .doc(user.userDbEntry.email)
+      .get()
+      .then(async (doc) => {
+        await doc.ref.update({ chats: [...doc.data().chats, { ...newChat.data() }] });
+      });
+
+    Promise.all([contactPromise, userPromise]).then(() => router.push(`/chat/${chatRef.id}`));
+  };
 
   return (
     <Container className={`${styles.container} ${props.isOpen ? styles.active : ""}`}>
@@ -61,7 +91,7 @@ const Contacts = (props) => {
         </Avatar>
         <div className={styles.addContactText}>ADD NEW CONTACT</div>
       </div>
-      <ListOfPeople list={user.contacts}></ListOfPeople>
+      <ListOfPeople keyPrefix={"contact"} function={createChatFunction} list={user.contacts}></ListOfPeople>
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className={styles.temp}>
           <form onSubmit={onSubmit} className={styles.addContactForm}>

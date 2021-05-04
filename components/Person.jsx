@@ -4,7 +4,7 @@ import styles from "../styles/Person.module.css";
 
 const Person = (props) => {
   return (
-    <ListItem className={styles.listItem} button alignItems="center">
+    <ListItem onClick={props.function} className={styles.listItem} button alignItems="center">
       <ListItemAvatar>
         <Avatar className={styles.avatar} src={props.photoUrl} alt={`${props.email}'s profile picture`}></Avatar>
       </ListItemAvatar>
