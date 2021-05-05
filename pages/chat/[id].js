@@ -13,7 +13,7 @@ const Chat = (props) => {
     const listener = db
       .collection("chats")
       .doc(router.query.id)
-      .collection("messages")
+      .collection("messages").orderBy('timestamp','desc')
       .onSnapshot((querySnapshot) => {
         let msgs = [];
         querySnapshot.forEach((msg) => msgs.push({ ...msg.data(), id: msg.id }));

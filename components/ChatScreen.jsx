@@ -1,5 +1,5 @@
 import Avatar from "@material-ui/core/Avatar";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../styles/ChatScreen.module.css";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import IconButton from "@material-ui/core/IconButton";
@@ -16,17 +16,32 @@ import Message from "./Message";
 const ChatScreen = (props) => {
   const user = useUser();
   const [message, setMessage] = useState("");
+  const msgContainerRef = useRef(null);
 
   const sendMessage = () => {
     if (!message) {
       return;
     }
-    db.collection("chats").doc(props.chatId).collection("messages").add({
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      message,
-      user: user.userDbEntry.email,
-      photo: user.userDbEntry.photo,
-    });
+    db.collection("chats")
+      .doc(props.chatId)
+      .collection("messages")
+      .add({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        message,
+        user: user.userDbEntry.email,
+        photo: user.userDbEntry.photo,
+      })
+      .then(() => updateScroll());
+  };
+
+  const updateScroll = () => {
+    msgContainerRef.current.scrollTop = msgContainerRef.current.scrollHeight;
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
   };
 
   return (
@@ -48,13 +63,11 @@ const ChatScreen = (props) => {
           </IconButton>
         </div>
       </div>
-      <Container className={styles.messagesContainer}>
-        <ListOfPeople>
-          {props.messages.map((msg) => {
-            const isSender = msg.user === user.userDbEntry.email;
-            return <Message key={msg.id} sender={isSender} message={msg.message}></Message>;
-          })}
-        </ListOfPeople>
+      <Container ref={msgContainerRef} className={styles.messagesContainer}>
+        {props.messages.map((msg) => {
+          const isSender = msg.user === user.userDbEntry.email;
+          return <Message key={msg.id} sender={isSender} message={msg.message}></Message>;
+        })}
         <div className={styles.endOfMessage}></div>
       </Container>
       <Container className={styles.inputContainer}>
@@ -66,7 +79,12 @@ const ChatScreen = (props) => {
             <AttachFile></AttachFile>
           </IconButton>
         </div>
-        <input value={message} onChange={(e) => setMessage(e.target.value)} className={styles.messageInput}></input>
+        <input
+          onKeyDown={onKeyDown}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className={styles.messageInput}
+        ></input>
         <IconButton onClick={sendMessage}>
           <SendIcon></SendIcon>
         </IconButton>

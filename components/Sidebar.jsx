@@ -20,6 +20,7 @@ const Sidebar = (props) => {
   const callbackFunction = (id) => {
     return () => {
       router.push(`/chat/${id}`);
+      return;
     };
   };
 
@@ -45,7 +46,7 @@ const Sidebar = (props) => {
               key={`${email}chat`}
               callbackFunction={callbackFunction(chat.id)}
               email={email}
-              photoUrl={contact.photo}
+              photoUrl={contact?.photo}
               message={"Hi I'm using chat"}
             ></Person>
           );

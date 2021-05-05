@@ -1,9 +1,11 @@
 .message {
+  padding: 5px;
   width: fit-content;
   border-radius: 8px;
-  min-width: 60px;
+  max-width: 300px;
   position: relative;
   text-align: right;
+  word-wrap: break-word;
 }
 
 .sender {

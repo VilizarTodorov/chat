@@ -35,16 +35,18 @@
 }
 
 .messagesContainer {
+  display: flex;
+  flex-direction: column-reverse;
   flex: 1 1;
   background-color: #e5ded8;
   overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* -ms-overflow-style: none;
+  scrollbar-width: none; */
 }
 
-.messagesContainer::-webkit-scrollbar {
+/* .messagesContainer::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .endOfMessage {
 }
