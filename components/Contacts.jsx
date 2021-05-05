@@ -50,10 +50,11 @@ const Contacts = (props) => {
 
       if (chat) {
         router.push(`/chat/${chat.id}`);
+        props.close();
         return;
       }
 
-      let chatRef = await db.collection("chats").add({ users: [contact, user.userDbEntry.email] });
+      let chatRef = await db.collection("chats").add({ users: [contact, user.userDbEntry.email]});
       await chatRef.update({ id: chatRef.id });
       const newChat = await chatRef.get();
 
@@ -73,7 +74,9 @@ const Contacts = (props) => {
           await doc.ref.update({ chats: [...doc.data().chats, { ...newChat.data() }] });
         });
 
-      Promise.all([contactPromise, userPromise]).then(() => router.push(`/chat/${chatRef.id}`));
+      Promise.all([contactPromise, userPromise])
+        .then(() => router.push(`/chat/${chatRef.id}`))
+        .then(() => props.close());
     };
   };
 
@@ -99,7 +102,7 @@ const Contacts = (props) => {
           return (
             <Person
               key={`${contact.email}contact`}
-              callbackFunction={createChatFunction}
+              callbackFunction={createChatFunction(contact.email)}
               email={contact.email}
               message={"Hi I'm using chat"}
               photoUrl={contact.photo}

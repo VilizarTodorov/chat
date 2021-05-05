@@ -9,6 +9,9 @@ const withAuthorization = (condition) => (Component) => {
     const router = useRouter();
 
     useEffect(() => {
+      if (user.loadingUser) {
+        return;
+      }
       if (!condition(user)) {
         if (router.pathname === "/login" || router.pathname === "/register") {
           router.push("/");
@@ -17,7 +20,7 @@ const withAuthorization = (condition) => (Component) => {
         router.push("/login");
         return;
       }
-    }, [user.userDbEntry]);
+    }, [user.userDbEntry, user]);
 
     if (user.loadingUser) {
       return <Loading></Loading>;
