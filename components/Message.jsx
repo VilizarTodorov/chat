@@ -1,13 +1,11 @@
 import { Container } from "@material-ui/core";
 import React from "react";
+import styles from "../styles/Message.module.css";
 
-const Message = ({ user, message }) => {
-  // const [userLoggedIn] = 
-  
-
+const Message = ({ sender, message }) => {
   return (
     <Container>
-      <p>{message}</p>
+      <p className={`${styles.message} ${sender ? styles.sender : styles.receiver}`}>{message}</p>
     </Container>
   );
 };

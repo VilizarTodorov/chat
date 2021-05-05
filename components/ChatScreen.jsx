@@ -11,6 +11,7 @@ import SendIcon from "@material-ui/icons/Send";
 import ListOfPeople from "./List";
 import { useUser } from "../UserContext";
 import { db, firebase } from "../firebase";
+import Message from "./Message";
 
 const ChatScreen = (props) => {
   const user = useUser();
@@ -48,7 +49,12 @@ const ChatScreen = (props) => {
         </div>
       </div>
       <Container className={styles.messagesContainer}>
-        <ListOfPeople></ListOfPeople>
+        <ListOfPeople>
+          {props.messages.map((msg) => {
+            const isSender = msg.user === user.userDbEntry.email;
+            return <Message key={msg.id} sender={isSender} message={msg.message}></Message>;
+          })}
+        </ListOfPeople>
         <div className={styles.endOfMessage}></div>
       </Container>
       <Container className={styles.inputContainer}>

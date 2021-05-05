@@ -7,8 +7,7 @@ import { db } from "../../firebase";
 
 const Chat = (props) => {
   const router = useRouter();
-  const [messages, setMessages] = useState(null);
-  console.log(router.query);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const listener = db
@@ -17,14 +16,14 @@ const Chat = (props) => {
       .collection("messages")
       .onSnapshot((querySnapshot) => {
         let msgs = [];
-        querySnapshot.forEach((msg) => msgs.push({ ...msg.data() }));
+        querySnapshot.forEach((msg) => msgs.push({ ...msg.data(), id: msg.id }));
         setMessages(msgs);
       });
 
     return () => {
       listener();
     };
-  }, []);
+  }, [router.query.id]);
 
   return (
     <WithSidebar>

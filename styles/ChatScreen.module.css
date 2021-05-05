@@ -35,8 +35,15 @@
 }
 
 .messagesContainer {
-  flex: 1;
+  flex: 1 1;
   background-color: #e5ded8;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.messagesContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .endOfMessage {
