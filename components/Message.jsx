@@ -1,11 +1,16 @@
-import { Box, Container } from "@material-ui/core";
-import React from "react";
+import { Box, Container, IconButton } from "@material-ui/core";
+import React, { Fragment, useState } from "react";
 import styles from "../styles/Message.module.css";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import MessageOptionsMenu from "./MessageOptionsMenu";
 import { db } from "../firebase";
+import CheckIcon from "@material-ui/icons/Check";
+import CloseIcon from "@material-ui/icons/Close";
 
 const Message = ({ sender, message, timestamp, messageId, chatId }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newMessage, setNewMessage] = useState(message);
+
   const deleteMessage = () => {
     db.collection("chats")
       .doc(chatId)
@@ -21,15 +26,43 @@ const Message = ({ sender, message, timestamp, messageId, chatId }) => {
   };
 
   const editMessage = () => {
-    console.log("edit", id);
+    db.collection("chats")
+      .doc(chatId)
+      .collection("messages")
+      .doc(messageId)
+      .update({ message: newMessage })
+      .then(() => {
+        console.log("Document successfully updated!");
+      })
+      .then(() => setIsEditing(false))
+      .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
   };
   return (
     <Container className={styles.messageContainer}>
       <div component="p" className={`${styles.message} ${sender ? styles.sender : styles.receiver}`}>
-        <p className={styles.messageText}>{message}</p>
+        {!isEditing ? (
+          <p className={styles.messageText}>{message}</p>
+        ) : (
+          <Fragment>
+            <textarea
+              className={styles.messageText}
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            ></textarea>
+            <IconButton onClick={editMessage}>
+              <CheckIcon></CheckIcon>
+            </IconButton>
+            <IconButton onClick={() => setIsEditing(false)}>
+              <CloseIcon></CloseIcon>
+            </IconButton>
+          </Fragment>
+        )}
         <MessageOptionsMenu
+          setIsEditing={setIsEditing}
           deleteMessage={deleteMessage}
-          editMessage={editMessage}
           className={styles.messageOptionsIcon}
         ></MessageOptionsMenu>
       </div>

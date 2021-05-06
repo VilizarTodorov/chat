@@ -17,6 +17,7 @@ const MessageOptionsMenu = (props) => {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -30,26 +31,10 @@ const MessageOptionsMenu = (props) => {
     handleClose(event);
   };
 
-  const editMessage = (event) => {
-    props.editMessage();
+  const startEdit = (event) => {
+    props.setIsEditing(true);
     handleClose(event);
   };
-  //   function handleListKeyDown(event) {
-  //     if (event.key === "Tab") {
-  //       event.preventDefault();
-  //       setOpen(false);
-  //     }
-  //   }
-
-  // return focus to the button when we transitioned from !open -> open
-  //   const prevOpen = React.useRef(open);
-  //   useEffect(() => {
-  //     if (prevOpen.current === true && open === false) {
-  //       anchorRef.current.focus();
-  //     }
-
-  //     prevOpen.current = open;
-  //   }, [open]);
 
   return (
     <Fragment>
@@ -82,7 +67,7 @@ const MessageOptionsMenu = (props) => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id="menu-list-grow">
-                  <MenuItem onClick={editMessage}>Edit</MenuItem>
+                  <MenuItem onClick={startEdit}>Edit</MenuItem>
                   <MenuItem onClick={deleteMessage}>Delete</MenuItem>
                 </MenuList>
               </ClickAwayListener>
