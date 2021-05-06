@@ -12,35 +12,44 @@ import ListOfPeople from "./List";
 import { useUser } from "../UserContext";
 import { db, firebase } from "../firebase";
 import Message from "./Message";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const ChatScreen = (props) => {
   const user = useUser();
   const [message, setMessage] = useState("");
   const msgContainerRef = useRef(null);
+  const [scrollDownButtonVisible, setScrollDownButtonVisible] = useState(false);
 
   const sendMessage = () => {
     if (!message) {
       return;
     }
-    db.collection("chats")
-      .doc(props.chatId)
-      .collection("messages")
-      .add({
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        message,
-        user: user.userDbEntry.email,
-        photo: user.userDbEntry.photo,
-      })
-      .then(() => updateScroll());
+    db.collection("chats").doc(props.chatId).collection("messages").add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message,
+      user: user.userDbEntry.email,
+      photo: user.userDbEntry.photo,
+    });
   };
 
   const updateScroll = () => {
     msgContainerRef.current.scrollTop = msgContainerRef.current.scrollHeight;
+    setScrollDownButtonVisible(false);
   };
 
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
       sendMessage();
+    }
+  };
+
+  const onScroll = () => {
+    if (scrollDownButtonVisible) {
+      return;
+    }
+
+    if (msgContainerRef.current.scrollTop <= -130) {
+      setScrollDownButtonVisible(true);
     }
   };
 
@@ -63,12 +72,18 @@ const ChatScreen = (props) => {
           </IconButton>
         </div>
       </div>
-      <Container ref={msgContainerRef} className={styles.messagesContainer}>
+      <Container onScroll={onScroll} ref={msgContainerRef} className={styles.messagesContainer}>
         {props.messages.map((msg) => {
           const isSender = msg.user === user.userDbEntry.email;
           return <Message key={msg.id} sender={isSender} message={msg.message}></Message>;
         })}
         <div className={styles.endOfMessage}></div>
+        <IconButton
+          className={`${styles.scrollDownButton} ${scrollDownButtonVisible ? styles.visible : ""}`}
+          onClick={updateScroll}
+        >
+          <KeyboardArrowDownIcon></KeyboardArrowDownIcon>
+        </IconButton>
       </Container>
       <Container className={styles.inputContainer}>
         <div>

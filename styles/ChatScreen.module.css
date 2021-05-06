@@ -35,6 +35,7 @@
 }
 
 .messagesContainer {
+  position: relative;
   display: flex;
   flex-direction: column-reverse;
   flex: 1 1;
@@ -48,7 +49,24 @@
   display: none;
 } */
 
-.endOfMessage {
+.scrollDownButton {
+  position: fixed;
+  background-color: #262d31;
+  color: #797c7e;
+  right: 24px;
+  bottom: 70px;
+  transform: scale(0);
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+}
+
+.scrollDownButton.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.scrollDownButton:hover {
+  background-color: #262d31;
 }
 
 .inputContainer {

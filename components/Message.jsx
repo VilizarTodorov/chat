@@ -4,7 +4,7 @@ import styles from "../styles/Message.module.css";
 
 const Message = ({ sender, message }) => {
   return (
-    <Container>
+    <Container className={styles.messageContainer}>
       <p className={`${styles.message} ${sender ? styles.sender : styles.receiver}`}>{message}</p>
     </Container>
   );

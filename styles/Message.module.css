@@ -1,3 +1,8 @@
+.messageContainer {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
 .message {
   padding: 5px;
   width: fit-content;
