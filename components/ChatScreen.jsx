@@ -75,7 +75,16 @@ const ChatScreen = (props) => {
       <Container onScroll={onScroll} ref={msgContainerRef} className={styles.messagesContainer}>
         {props.messages.map((msg) => {
           const isSender = msg.user === user.userDbEntry.email;
-          return <Message key={msg.id} sender={isSender} message={msg.message}></Message>;
+          return (
+            <Message
+              key={msg.id}
+              sender={isSender}
+              message={msg.message}
+              timestamp={msg.timestamp}
+              chatId={props.chatId}
+              messageId={msg.id}
+            ></Message>
+          );
         })}
         <div className={styles.endOfMessage}></div>
         <IconButton

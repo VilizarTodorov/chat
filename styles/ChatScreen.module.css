@@ -41,19 +41,19 @@
   flex: 1 1;
   background-color: #e5ded8;
   overflow-y: scroll;
-  /* -ms-overflow-style: none;
-  scrollbar-width: none; */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* .messagesContainer::-webkit-scrollbar {
+.messagesContainer::-webkit-scrollbar {
   display: none;
-} */
+}
 
 .scrollDownButton {
   position: fixed;
   background-color: #262d31;
   color: #797c7e;
-  right: 24px;
+  right: 8px;
   bottom: 70px;
   transform: scale(0);
   opacity: 0;

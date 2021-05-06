@@ -4,13 +4,22 @@
 }
 
 .message {
-  padding: 5px;
+  position: relative;
+  padding: 10px;
   width: fit-content;
   border-radius: 8px;
+  min-width: 30px;
   max-width: 300px;
-  position: relative;
-  text-align: right;
   word-wrap: break-word;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.message:hover .messageOptionsIcon {
+  width: 30px;
+  padding: 12px;
 }
 
 .sender {
@@ -19,6 +28,22 @@
 }
 
 .receiver {
-  text-align: left;
   background-color: whitesmoke;
+}
+
+.messageText {
+  margin: 0;
+}
+
+.messageOptionsIcon {
+  padding: 0;
+  width: 0px;
+  height: 30px;
+  position: absolute;
+  right: 0px;
+  top: 0;
+  background-color: #dcf8c6;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
 }
