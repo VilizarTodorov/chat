@@ -85,52 +85,6 @@ const Login = (props) => {
         </Button>
       </Form>
     </FormContainer>
-    // <Container component="main" className={styles.main}>
-    //   <Container maxWidth="xs">
-    //     <Typography color="inherit" variant="h4">
-    //       Login
-    //     </Typography>
-    //     <Container className={`${styles.infoContainer} ${styles.inView}`}>
-    //       <Box component="span">Email</Box>
-    //       <Box className={styles.infoInputContainer}>
-    //         <Input
-    //           id="email"
-    //           name="email"
-    //           type="email"
-    //           value={email}
-    //           onChange={(e) => setEmail(e.target.value)}
-    //           placeholder="Email"
-    //           required
-    //           fullWidth
-    //           autoFocus
-    //           className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
-    //         ></Input>
-    //       </Box>
-    //     </Container>
-    //     <Container className={`${styles.infoContainer} ${styles.inView}`}>
-    //       <Box component="span">Password</Box>
-    //       <Box className={styles.infoInputContainer}>
-    //         <Input
-    //           id="password"
-    //           name="password"
-    //           type="password"
-    //           value={password}
-    //           onChange={(e) => setPassword(e.target.value)}
-    //           placeholder="Password"
-    //           fullWidth
-    //           required
-    //           className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
-    //         ></Input>
-    //       </Box>
-    //     </Container>
-    //     <Button className={styles.button} fullWidth onClick={signInWithEmailAndPassword} variant="contained">
-    //       Login
-    //     </Button>
-    //     <Button className={styles.button} fullWidth onClick={signInWithGoogle} variant="contained">
-    //       Sign in with Google
-    //     </Button>
-    //   </Container>
-    // </Container>
   );
 };
 

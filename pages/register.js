@@ -1,9 +1,14 @@
 import React from "react";
 import Register from "../components/Register";
 import withAuthorization from "../UserContext/withAuthorization";
+import MainContainer from "../components/Layout/MainContainer";
 
 const RegisterPage = (props) => {
-  return <Register></Register>;
+  return (
+    <MainContainer>
+      <Register></Register>
+    </MainContainer>
+  );
 };
 
 const condition = (user) => {
