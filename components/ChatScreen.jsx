@@ -44,12 +44,18 @@ const ChatScreen = (props) => {
   };
 
   const onScroll = () => {
+    if (msgContainerRef.current.scrollTop > -130) {
+      setScrollDownButtonVisible(false);
+      return;
+    }
+
     if (scrollDownButtonVisible) {
       return;
     }
 
     if (msgContainerRef.current.scrollTop <= -130) {
       setScrollDownButtonVisible(true);
+      return;
     }
   };
 

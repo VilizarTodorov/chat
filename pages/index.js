@@ -1,11 +1,12 @@
 import Head from "next/head";
+import MainLayout from "../components/Layout/MainLayout";
 import WithSidebar from "../components/WithSidebar";
 import styles from "../styles/Home.module.css";
 import withAuthorization from "../UserContext/withAuthorization";
 
 const Home = () => {
   return (
-    <div>
+    <MainLayout>
       <Head>
         <title>Chat</title>
         <link rel="icon" href="/favicon.ico" />
@@ -13,7 +14,7 @@ const Home = () => {
       <WithSidebar>
         <div className={styles.chatScreenPlaceHolder}></div>
       </WithSidebar>
-    </div>
+    </MainLayout>
   );
 };
 
