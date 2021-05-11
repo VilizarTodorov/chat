@@ -80,5 +80,5 @@ select:-webkit-autofill:focus {
   border: none;
   outline: none;
   -webkit-text-fill-color: #dfdfe1;
-  -webkit-box-shadow: 0 0 0px 1000px #131c21 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #424242 inset;
 }

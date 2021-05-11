@@ -1,9 +1,14 @@
 import React from "react";
 import Login from "../components/Login";
 import withAuthorization from "../UserContext/withAuthorization";
+import MainContainer from "../components/Layout/MainContainer";
 
 const LoginPage = (props) => {
-  return <Login></Login>;
+  return (
+    <MainContainer>
+      <Login></Login>
+    </MainContainer>
+  );
 };
 
 const condition = (user) => {

@@ -7,13 +7,13 @@ const useStyles = makeStyles({
   },
 });
 
-const MainLayout = ({ children }) => {
+const MainContainer = ({ children }) => {
   const classes = useStyles();
   return (
-    <Paper square component="main" className={classes.root}>
+    <Paper color="default" square component="main" className={classes.root}>
       {children}
     </Paper>
   );
 };
 
-export default MainLayout;
+export default MainContainer;
