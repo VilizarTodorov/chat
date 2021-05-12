@@ -4,7 +4,8 @@ import React from "react";
 const useStyles = makeStyles({
   root: {
     padding: 0,
-    flexBasis: "40%",
+    margin: 0,
+    flex: "0.4",
     position: "relative",
     display: "flex",
     flexDirection: "column",
