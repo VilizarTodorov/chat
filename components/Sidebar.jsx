@@ -9,6 +9,7 @@ import ListOfPeople from "./List";
 import Person from "./Person";
 import Profile from "./Profile";
 import Search from "./Search";
+import SidebarHeader from "./SidebarComponents/SidebarHeader";
 import SidebarMoreVertIconMenu from "./SidebarMoreVertIconMenu";
 
 const Sidebar = (props) => {
@@ -26,15 +27,10 @@ const Sidebar = (props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sidebarHeader}>
-        <Avatar className={styles.userAvatar} onClick={() => setIsProfileOpen(true)} />
-        <div>
-          <IconButton onClick={() => setIsContactsOpen(true)}>
-            <ChatIcon />
-          </IconButton>
-          <SidebarMoreVertIconMenu />
-        </div>
-      </div>
+      <SidebarHeader
+        openProfile={() => setIsProfileOpen(true)}
+        openContacts={() => setIsContactsOpen(true)}
+      ></SidebarHeader>
       <Search></Search>
       <Button className={styles.newChatButton}>START NEW CHAT</Button>
       <ListOfPeople>
