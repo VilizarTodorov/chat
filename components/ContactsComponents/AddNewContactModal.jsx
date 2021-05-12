@@ -5,8 +5,9 @@ import { Form, FormButton, FormContainer, FormInput, FormTitle } from "../Form";
 
 const useStyles = makeStyles({
   container: {
-    width: "100%",
-    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
@@ -43,8 +44,8 @@ const AddNewContactModal = ({ isOpen, close, user }) => {
   };
 
   return (
-    <Modal open={isOpen} onClose={close}>
-      <Container className={classes.container}>
+    <Modal className={classes.container} open={isOpen} onClose={close}>
+      <Container>
         <FormContainer>
           <Form onSubmit={onSubmit}>
             <FormTitle>Add new contact</FormTitle>

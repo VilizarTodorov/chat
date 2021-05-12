@@ -1,4 +1,4 @@
-import { Avatar, Container, makeStyles, Typography } from "@material-ui/core";
+import { Avatar, Button, Container, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
@@ -26,12 +26,12 @@ const AddNewContact = ({ openForm }) => {
   const classes = useStyles();
 
   return (
-    <Container className={classes.container} onClick={openForm}>
+    <Button className={classes.container} onClick={openForm}>
       <Avatar className={classes.avatar}>
         <PersonAddIcon></PersonAddIcon>
       </Avatar>
       <Typography className={classes.typography}>ADD NEW CONTACT</Typography>
-    </Container>
+    </Button>
   );
 };
 

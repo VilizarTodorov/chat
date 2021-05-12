@@ -9,6 +9,7 @@ import Search from "./Search";
 import Chats from "./SidebarComponents/Chats";
 import SidebarHeader from "./SidebarComponents/SidebarHeader";
 import SidebarContainer from "./SidebarComponents/SidebarContainer";
+import NewChatButton from "./SidebarComponents/NewChatButton";
 
 const Sidebar = (props) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -30,7 +31,7 @@ const Sidebar = (props) => {
         openContacts={() => setIsContactsOpen(true)}
       ></SidebarHeader>
       <Search></Search>
-      <Button className={styles.newChatButton}>START NEW CHAT</Button>
+      <NewChatButton onClick={() => setIsContactsOpen(true)}></NewChatButton>
       <Chats chats={user.chats} user={user} redirectFunction={callbackFunction}></Chats>
       <Profile close={() => setIsProfileOpen(false)} isOpen={isProfileOpen}></Profile>
       <Contacts close={() => setIsContactsOpen(false)} isOpen={isContactsOpen}></Contacts>
