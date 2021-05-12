@@ -9,6 +9,11 @@ import ListOfPeople from "./List";
 import Search from "./Search";
 import { useRouter } from "next/router";
 import Person from "./Person";
+import ContactsContainer from "./ContactsComponents/ContactsContainer";
+import ContactsHeader from "./ContactsComponents/ContactsHeader";
+import AddNewContact from "./ContactsComponents/AddNewContact";
+import ContactsList from "./ContactsComponents/ContactsList";
+import AddNewContactModal from "./ContactsComponents/AddNewContactModal";
 
 const Contacts = (props) => {
   const [open, setOpen] = useState(false);
@@ -16,33 +21,33 @@ const Contacts = (props) => {
   const [contactEmail, setContactEmail] = useState("");
   const router = useRouter();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    db.collection("users")
-      .doc(contactEmail)
-      .get()
-      .then(async (doc) => {
-        if (doc.exists) {
-          await db
-            .collection("contacts")
-            .doc(user.userDbEntry.email)
-            .update({
-              contacts: [...user.contacts, { ...doc.data() }],
-            })
-            .then(() => {
-              console.log("Document successfully updated!");
-            })
-            .catch((error) => {
-              // The document probably doesn't exist.
-              console.error("Error updating document: ", error);
-            });
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   db.collection("users")
+  //     .doc(contactEmail)
+  //     .get()
+  //     .then(async (doc) => {
+  //       if (doc.exists) {
+  //         await db
+  //           .collection("contacts")
+  //           .doc(user.userDbEntry.email)
+  //           .update({
+  //             contacts: [...user.contacts, { ...doc.data() }],
+  //           })
+  //           .then(() => {
+  //             console.log("Document successfully updated!");
+  //           })
+  //           .catch((error) => {
+  //             // The document probably doesn't exist.
+  //             console.error("Error updating document: ", error);
+  //           });
 
-          setOpen(false);
-        } else {
-          console.log("doc does not exist");
-        }
-      });
-  };
+  //         setOpen(false);
+  //       } else {
+  //         console.log("doc does not exist");
+  //       }
+  //     });
+  // };
 
   const createChatFunction = (contact) => {
     return async () => {
@@ -54,7 +59,7 @@ const Contacts = (props) => {
         return;
       }
 
-      let chatRef = await db.collection("chats").add({ users: [contact, user.userDbEntry.email]});
+      let chatRef = await db.collection("chats").add({ users: [contact, user.userDbEntry.email] });
       await chatRef.update({ id: chatRef.id });
       const newChat = await chatRef.get();
 
@@ -81,36 +86,12 @@ const Contacts = (props) => {
   };
 
   return (
-    <Container className={`${styles.container} ${props.isOpen ? styles.active : ""}`}>
-      <div className={styles.headerContainer}>
-        <div className={styles.headerPart}>
-          <IconButton className={styles.padding25px} onClick={props.close}>
-            <KeyboardBackspaceIcon className={styles.icon}></KeyboardBackspaceIcon>
-          </IconButton>
-          <Typography variant="h5">Contacts</Typography>
-        </div>
-      </div>
+    <ContactsContainer isOpen={props.isOpen}>
+      <ContactsHeader close={props.close}></ContactsHeader>
       <Search></Search>
-      <div onClick={() => setOpen(true)} className={styles.addContactContainer}>
-        <Avatar className={styles.m17px}>
-          <PersonAddIcon></PersonAddIcon>
-        </Avatar>
-        <div className={styles.addContactText}>ADD NEW CONTACT</div>
-      </div>
-      <ListOfPeople>
-        {user.contacts.map((contact) => {
-          return (
-            <Person
-              key={`${contact.email}contact`}
-              callbackFunction={createChatFunction(contact.email)}
-              email={contact.email}
-              message={"Hi I'm using chat"}
-              photoUrl={contact.photo}
-            ></Person>
-          );
-        })}
-      </ListOfPeople>
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <AddNewContact openForm={() => setOpen(true)}></AddNewContact>
+      <ContactsList contacts={user.contacts} createChatFunction={createChatFunction}></ContactsList>
+      {/* <Modal open={open} onClose={() => setOpen(false)}>
         <div className={styles.temp}>
           <form onSubmit={onSubmit} className={styles.addContactForm}>
             <Typography>Add new contacts</Typography>
@@ -123,8 +104,9 @@ const Contacts = (props) => {
             <Button type="submit">Add contact</Button>
           </form>
         </div>
-      </Modal>
-    </Container>
+      </Modal> */}
+      <AddNewContactModal isOpen={open} close={() => setOpen(false)} user={user}></AddNewContactModal>
+    </ContactsContainer>
   );
 };
 
