@@ -1,15 +1,13 @@
-import { Button } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import styles from "../styles/Sidebar.module.css";
 import { useUser } from "../UserContext";
 import Contacts from "./Contacts";
 import Profile from "./Profile";
 import Search from "./Search";
 import Chats from "./SidebarComponents/Chats";
-import SidebarHeader from "./SidebarComponents/SidebarHeader";
-import SidebarContainer from "./SidebarComponents/SidebarContainer";
 import NewChatButton from "./SidebarComponents/NewChatButton";
+import SidebarContainer from "./SidebarComponents/SidebarContainer";
+import SidebarHeader from "./SidebarComponents/SidebarHeader";
 
 const Sidebar = (props) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);

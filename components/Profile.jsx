@@ -4,19 +4,14 @@ import Typography from "@material-ui/core/Typography";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import React from "react";
 import styles from "../styles/Profile.module.css";
+import ProfileContainer from "./ProfileComponents/ProfileContainer";
+import ProfileHeader from "./ProfileComponents/ProfileHeader";
 import ProfileInfoContainer from "./ProfileInfoContainer";
 
 const Profile = (props) => {
   return (
-    <Container className={`${styles.container} ${props.isOpen ? styles.active : ""}`}>
-      <div className={styles.headerContainer}>
-        <div className={styles.headerPart}>
-          <IconButton className={styles.padding25px} onClick={props.close}>
-            <KeyboardBackspaceIcon className={styles.icon}></KeyboardBackspaceIcon>
-          </IconButton>
-          <Typography variant="h5">Profile</Typography>
-        </div>
-      </div>
+    <ProfileContainer isOpen={props.isOpen}>
+      <ProfileHeader close={props.close}></ProfileHeader>
       <Container className={`${styles.profileAvatarContainer} ${props.isOpen ? styles.inViewAvatar : ""}`}>
         <Avatar className={styles.profileAvatar}></Avatar>
       </Container>
@@ -27,7 +22,7 @@ const Profile = (props) => {
         </Box>
       </Container>
       <ProfileInfoContainer inView={props.isOpen} title="About"></ProfileInfoContainer>
-    </Container>
+    </ProfileContainer>
   );
 };
 
