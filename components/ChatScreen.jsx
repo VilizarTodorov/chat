@@ -15,12 +15,13 @@ import Message from "./Message";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ChatScreenContainer from "./ChatScreenComponents/ChatScreenContainer";
 import ChatScreenHeader from "./ChatScreenComponents/ChatScreenHeader";
+import Messages from "./ChatScreenComponents/Messages";
 
 const ChatScreen = (props) => {
   const user = useUser();
   const [message, setMessage] = useState("");
-  const msgContainerRef = useRef(null);
-  const [scrollDownButtonVisible, setScrollDownButtonVisible] = useState(false);
+  // const msgContainerRef = useRef(null);
+  // const [scrollDownButtonVisible, setScrollDownButtonVisible] = useState(false);
 
   const sendMessage = () => {
     if (!message) {
@@ -34,10 +35,10 @@ const ChatScreen = (props) => {
     });
   };
 
-  const updateScroll = () => {
-    msgContainerRef.current.scrollTop = msgContainerRef.current.scrollHeight;
-    setScrollDownButtonVisible(false);
-  };
+  // const updateScroll = () => {
+  //   msgContainerRef.current.scrollTop = msgContainerRef.current.scrollHeight;
+  //   setScrollDownButtonVisible(false);
+  // };
 
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -45,43 +46,26 @@ const ChatScreen = (props) => {
     }
   };
 
-  const onScroll = () => {
-    if (msgContainerRef.current.scrollTop > -130) {
-      setScrollDownButtonVisible(false);
-      return;
-    }
+  // const onScroll = () => {
+  //   if (msgContainerRef.current.scrollTop > -130) {
+  //     setScrollDownButtonVisible(false);
+  //     return;
+  //   }
 
-    if (scrollDownButtonVisible) {
-      return;
-    }
+  //   if (scrollDownButtonVisible) {
+  //     return;
+  //   }
 
-    if (msgContainerRef.current.scrollTop <= -130) {
-      setScrollDownButtonVisible(true);
-      return;
-    }
-  };
+  //   if (msgContainerRef.current.scrollTop <= -130) {
+  //     setScrollDownButtonVisible(true);
+  //     return;
+  //   }
+  // };
 
   return (
     <ChatScreenContainer>
-      {/* <div className={styles.header}>
-        <div className={styles.user}>
-          <Avatar></Avatar>
-          <div className={styles.userInformation}>
-            <h3 className={styles.info}>recipient email</h3>
-            <p className={styles.info}>last seen:</p>
-          </div>
-        </div>
-        <div className={styles.headerIcons}>
-          <IconButton>
-            <Search></Search>
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon></MoreVertIcon>
-          </IconButton>
-        </div>
-      </div> */}
       <ChatScreenHeader></ChatScreenHeader>
-      <Container onScroll={onScroll} ref={msgContainerRef} className={styles.messagesContainer}>
+      {/* <Container onScroll={onScroll} ref={msgContainerRef} className={styles.messagesContainer}>
         {props.messages.map((msg) => {
           const isSender = msg.user === user.userDbEntry.email;
           return (
@@ -102,7 +86,8 @@ const ChatScreen = (props) => {
         >
           <KeyboardArrowDownIcon></KeyboardArrowDownIcon>
         </IconButton>
-      </Container>
+      </Container> */}
+      <Messages messages={props.messages} userEmail={user.userDbEntry.email} chatId={props.chatId}></Messages>
       <Container className={styles.inputContainer}>
         <div>
           <IconButton>

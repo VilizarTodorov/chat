@@ -1,4 +1,4 @@
-import { Avatar, IconButton, makeStyles } from "@material-ui/core";
+import { Avatar, Box, IconButton, makeStyles } from "@material-ui/core";
 import React from "react";
 import BaseHeader from "../BaseHeader";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -18,12 +18,12 @@ const SidebarHeader = ({ openProfile, openContacts }) => {
   return (
     <BaseHeader>
       <Avatar className={classes.avatar} onClick={openProfile}></Avatar>
-      <div>
+      <Box>
         <IconButton onClick={openContacts}>
           <ChatIcon />
         </IconButton>
         <SidebarMoreVertIconMenu />
-      </div>
+      </Box>
     </BaseHeader>
   );
 };
