@@ -71,12 +71,9 @@
 
 .inputContainer {
   padding: 5px;
-  background-color: #f0f0f0;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  position: static;
-  bottom: 0;
 }
 
 .messageInput {
