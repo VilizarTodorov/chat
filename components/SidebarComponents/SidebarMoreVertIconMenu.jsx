@@ -6,7 +6,7 @@ import MenuList from "@material-ui/core/MenuList";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import React, { Fragment, useRef, useState } from "react";
 
 const SidebarMoreVertIconMenu = (props) => {

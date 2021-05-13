@@ -2,7 +2,7 @@ import { Avatar, IconButton, makeStyles } from "@material-ui/core";
 import React from "react";
 import BaseHeader from "../BaseHeader";
 import ChatIcon from "@material-ui/icons/Chat";
-import SidebarMoreVertIconMenu from "../SidebarMoreVertIconMenu";
+import SidebarMoreVertIconMenu from "./SidebarMoreVertIconMenu";
 
 const useStyles = makeStyles({
   avatar: {
