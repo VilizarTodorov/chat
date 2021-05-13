@@ -1,10 +1,28 @@
-import { Container, IconButton, Typography } from "@material-ui/core";
+import { Container, IconButton, makeStyles, Typography } from "@material-ui/core";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import React from "react";
-import useHeaderStyles from "../commonStyles/header";
+
+const useStyles = makeStyles({
+  header: {
+    display: "flex",
+    alignItems: "flex-end",
+    height: "120px",
+  },
+  container: {
+    padding: 0,
+    display: "flex",
+    alignItems: "center",
+  },
+  iconButton: {
+    margin: "13px",
+  },
+  title: {
+    textTransform: "capitalize",
+  },
+});
 
 const ContactsHeader = ({ close, title }) => {
-  const classes = useHeaderStyles();
+  const classes = useStyles();
   return (
     <header className={classes.header}>
       <Container className={classes.container}>

@@ -13,6 +13,8 @@ import { useUser } from "../UserContext";
 import { db, firebase } from "../firebase";
 import Message from "./Message";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import ChatScreenContainer from "./ChatScreenComponents/ChatScreenContainer";
+import ChatScreenHeader from "./ChatScreenComponents/ChatScreenHeader";
 
 const ChatScreen = (props) => {
   const user = useUser();
@@ -60,8 +62,8 @@ const ChatScreen = (props) => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <ChatScreenContainer>
+      {/* <div className={styles.header}>
         <div className={styles.user}>
           <Avatar></Avatar>
           <div className={styles.userInformation}>
@@ -77,7 +79,8 @@ const ChatScreen = (props) => {
             <MoreVertIcon></MoreVertIcon>
           </IconButton>
         </div>
-      </div>
+      </div> */}
+      <ChatScreenHeader></ChatScreenHeader>
       <Container onScroll={onScroll} ref={msgContainerRef} className={styles.messagesContainer}>
         {props.messages.map((msg) => {
           const isSender = msg.user === user.userDbEntry.email;
@@ -119,7 +122,7 @@ const ChatScreen = (props) => {
           <SendIcon></SendIcon>
         </IconButton>
       </Container>
-    </div>
+    </ChatScreenContainer>
   );
 };
 

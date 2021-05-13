@@ -1,17 +1,14 @@
-import { Box } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
 import React from "react";
-import styles from "../styles/Profile.module.css";
+import BaseSecondaryContainer from "./BaseSecondaryContainer";
 import ProfileAdditionalInfo from "./ProfileComponents/ProfileAdditionalInfo";
 import ProfileAvatar from "./ProfileComponents/ProfileAvatar";
-import ProfileContainer from "./ProfileComponents/ProfileContainer";
 import ProfileHeader from "./ProfileComponents/ProfileHeader";
 import ProfileInfoContainer from "./ProfileComponents/ProfileInfoContainer";
 import ProfileInfoInput from "./ProfileComponents/ProfileInfoInput";
 
 const Profile = (props) => {
   return (
-    <ProfileContainer isOpen={props.isOpen}>
+    <BaseSecondaryContainer isOpen={props.isOpen}>
       <ProfileHeader close={props.close}></ProfileHeader>
       <ProfileAvatar isOpen={props.isOpen}></ProfileAvatar>
       <ProfileInfoContainer isOpen={props.isOpen}>
@@ -19,7 +16,7 @@ const Profile = (props) => {
         <ProfileAdditionalInfo></ProfileAdditionalInfo>
         <ProfileInfoInput isOpen={props.isOpen} title="About"></ProfileInfoInput>
       </ProfileInfoContainer>
-    </ProfileContainer>
+    </BaseSecondaryContainer>
   );
 };
 
