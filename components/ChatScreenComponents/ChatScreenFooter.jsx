@@ -35,8 +35,8 @@ const ChatScreenFooter = ({ chatId, user }) => {
     db.collection("chats").doc(chatId).collection("messages").add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       message,
-      user: user.userDbEntry.email,
-      photo: user.userDbEntry.photo,
+      user: user.user.email,
+      photoURL: user.user.photoURL,
     });
   };
 

@@ -11,7 +11,7 @@ const ChatScreen = (props) => {
   return (
     <ChatScreenContainer>
       <ChatScreenHeader></ChatScreenHeader>
-      <Messages messages={props.messages} userEmail={user.userDbEntry.email} chatId={props.chatId}></Messages>
+      <Messages messages={props.messages} userEmail={user.user.email} chatId={props.chatId}></Messages>
       <ChatScreenFooter chatId={props.chatId} user={user}></ChatScreenFooter>
     </ChatScreenContainer>
   );

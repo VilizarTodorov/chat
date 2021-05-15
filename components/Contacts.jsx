@@ -25,7 +25,7 @@ const Contacts = (props) => {
         return;
       }
 
-      let chatRef = await db.collection("chats").add({ users: [contact, user.userDbEntry.email] });
+      let chatRef = await db.collection("chats").add({ users: [contact, user.user.email] });
       await chatRef.update({ id: chatRef.id });
       const newChat = await chatRef.get();
 
@@ -39,7 +39,7 @@ const Contacts = (props) => {
 
       let userPromise = db
         .collection("userChats")
-        .doc(user.userDbEntry.email)
+        .doc(user.user.email)
         .get()
         .then(async (doc) => {
           await doc.ref.update({ chats: [...doc.data().chats, { ...newChat.data() }] });

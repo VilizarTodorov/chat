@@ -24,7 +24,7 @@ const AddNewContactModal = ({ isOpen, close, user }) => {
         if (doc.exists) {
           await db
             .collection("contacts")
-            .doc(user.userDbEntry.email)
+            .doc(user.user.email)
             .update({
               contacts: [...user.contacts, { ...doc.data() }],
             })

@@ -24,7 +24,7 @@ export default function UserContextComp({ children }) {
       } catch (error) {
         setError(error);
       } finally {
-        setLoadingUser(false);
+        // setLoadingUser(false);
       }
     });
 
@@ -41,6 +41,7 @@ export default function UserContextComp({ children }) {
         if (doc.exists) {
           setUser({ ...user, uid: authUser.uid, ...doc.data() });
         }
+        setLoadingUser(false);
       });
 
     return () => {
