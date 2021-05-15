@@ -1,9 +1,8 @@
-import { Box, Container, makeStyles } from "@material-ui/core";
+import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles({
   container: {
-    height: "100%",
     flexBasis: "60%",
     display: "flex",
     flexDirection: "column",

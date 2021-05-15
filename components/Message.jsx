@@ -42,7 +42,7 @@ const Message = ({ sender, message, timestamp, messageId, chatId }) => {
   };
   return (
     <Container className={styles.messageContainer}>
-      <div component="p" className={`${styles.message} ${sender ? styles.sender : styles.receiver}`}>
+      <div className={`${styles.message} ${sender ? styles.sender : styles.receiver}`}>
         {!isEditing ? (
           <p className={styles.messageText}>{message}</p>
         ) : (

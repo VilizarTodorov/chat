@@ -13,23 +13,24 @@ const Register = (props) => {
   const router = useRouter();
 
   const register = async (e) => {
+    e.preventDefault();
     try {
-      await db.collection("users").doc(email).set({
+      const result = await auth.createUserWithEmailAndPassword(email, password);
+      await result.user.updateProfile({ displayName });
+
+      db.collection("users").doc(email).set({
         email: email,
         photo: null,
         displayName: displayName,
       });
 
-      await db.collection("contacts").doc(email).set({
+      db.collection("contacts").doc(email).set({
         contacts: [],
       });
 
-      await db.collection("userChats").doc(email).set({
+      db.collection("userChats").doc(email).set({
         chats: [],
       });
-
-      const result = await auth.createUserWithEmailAndPassword(email, password);
-      await result.user.updateProfile({ displayName });
 
       router.push("/");
     } catch (error) {
@@ -88,7 +89,6 @@ const Register = (props) => {
         <FormButton>Register</FormButton>
       </Form>
     </FormContainer>
-    
   );
 };
 
