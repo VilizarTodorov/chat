@@ -3,7 +3,7 @@ import React from "react";
 
 const useStyles = makeStyles({
   button: {
-    borderTop: "1px solid whitesmoke",
+    borderRadius:0,
     borderBottom: "1px solid whitesmoke",
   },
 });

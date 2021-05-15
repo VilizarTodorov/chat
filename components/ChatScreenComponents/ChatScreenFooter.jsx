@@ -1,4 +1,4 @@
-import { Box, IconButton, makeStyles } from "@material-ui/core";
+import { Box, IconButton, makeStyles, TextareaAutosize } from "@material-ui/core";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import SendIcon from "@material-ui/icons/Send";
@@ -20,10 +20,11 @@ const useStyles = makeStyles({
     border: "none",
     padding: "5px",
     paddingLeft: "15px",
+    resize: "none",
   },
 });
 
-const ChatScreenFooter = ({chatId,user}) => {
+const ChatScreenFooter = ({ chatId, user }) => {
   const classes = useStyles();
   const [message, setMessage] = useState("");
 
@@ -55,12 +56,13 @@ const ChatScreenFooter = ({chatId,user}) => {
           <AttachFileIcon></AttachFileIcon>
         </IconButton>
       </Box>
-      <input
+      <TextareaAutosize
+        rowsMax={5}
         onKeyDown={onKeyDown}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         className={classes.messageInput}
-      ></input>
+      ></TextareaAutosize>
       <IconButton onClick={sendMessage}>
         <SendIcon></SendIcon>
       </IconButton>
