@@ -1,11 +1,11 @@
-import { Box, Button, Container, Input, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
-import styles from "../styles/Login.module.css";
 import { Form, FormButton, FormContainer, FormInput, FormTitle } from "./Form";
+import { useUser } from "../UserContext/index";
 
 const Register = (props) => {
+  const user = useUser();
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,12 +16,22 @@ const Register = (props) => {
     e.preventDefault();
     try {
       const result = await auth.createUserWithEmailAndPassword(email, password);
-      await result.user.updateProfile({ displayName });
+
+      user.setUser({
+        uid: result.user.uid,
+        email,
+        displayName,
+        photoURL: null,
+        about: "Hi I am using Chat!",
+      });
+
+      result.user.updateProfile({ displayName });
 
       db.collection("users").doc(email).set({
         email: email,
-        photo: null,
         displayName: displayName,
+        photoURL: null,
+        about: "Hi I am using Chat!",
       });
 
       db.collection("contacts").doc(email).set({

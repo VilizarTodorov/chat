@@ -19,11 +19,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ProfileAvatar = ({ isOpen }) => {
+const ProfileAvatar = ({ isOpen, photoURL, email }) => {
   const classes = useStyles();
   return (
     <Container className={`${classes.container} ${isOpen && classes.active}`}>
-      <Avatar className={classes.avatar}></Avatar>
+      <Avatar className={classes.avatar} src={photoURL && photoURL} alt={`${email}'s profile picture`}></Avatar>
     </Container>
   );
 };

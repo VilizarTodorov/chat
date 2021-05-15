@@ -33,7 +33,7 @@ const Chat = (props) => {
 };
 
 const condition = (user) => {
-  if (user.userDbEntry) {
+  if (user) {
     return true;
   }
   return false;

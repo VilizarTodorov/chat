@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ProfileInfoInput = ({ title }) => {
+const ProfileInfoInput = ({ id, name, type, value, onChange, placeholder, label }) => {
   const classes = useStyles();
   const [isFocused, setIsFocused] = useState(false);
   const inputElement = useRef(null);
@@ -50,11 +50,17 @@ const ProfileInfoInput = ({ title }) => {
 
   return (
     <Container>
-      <Typography variant="subtitle2">{title}</Typography>
+      <Typography variant="subtitle2">{label}</Typography>
       <Box className={classes.inputContainer}>
         <Input
+          id={id}
+          name={name}
+          type={type}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          required
           inputRef={inputElement}
-          placeholder={title}
           className={`${classes.input} ${isFocused && classes.inputActive}`}
         ></Input>
         <CreateIcon onClick={focus} className={`${classes.icon} ${!isFocused && classes.iconActive}`}></CreateIcon>

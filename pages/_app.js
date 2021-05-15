@@ -30,9 +30,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import Head from "next/head";
 import React, { Fragment, useEffect } from "react";
-import "../components/test.css";
 import theme from "../src/theme";
 import "../styles/globals.css";
+import "../styles/test.css";
 import UserProvider from "../UserContext";
 
 export default function MyApp(props) {

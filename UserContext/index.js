@@ -4,28 +4,30 @@ import { auth, db } from "../firebase";
 export const UserContext = createContext();
 
 export default function UserContextComp({ children }) {
-  const [userDbEntry, setUserDbEntry] = useState(null);
+  const [user, setUser] = useState(null);
   const [contacts, setContacts] = useState([]);
   const [userChats, setUserChats] = useState([]);
   const [chats, setChats] = useState([]);
   const [loadingUser, setLoadingUser] = useState(true);
   const [error, setError] = useState(null);
 
+  console.log(auth.currentUser)
+
   useEffect(() => {
-    const listener = auth.onAuthStateChanged(async (user) => {
+    const listener = auth.onAuthStateChanged(async (u) => {
       try {
-        if (user) {
+        if (u) {
           await db
             .collection("users")
-            .doc(user.email)
+            .doc(u.email)
             .get()
             .then((doc) => {
               if (doc.exists) {
-                setUserDbEntry({ ...userDbEntry, uid: user.uid, ...doc.data() });
+                setUser({ ...user, uid: u.uid, ...doc.data() });
               }
             });
         } else {
-          setUserDbEntry(null);
+          setUser(null);
         }
       } catch (error) {
         setError(error);
@@ -42,7 +44,7 @@ export default function UserContextComp({ children }) {
   useEffect(() => {
     const listener = db
       .collection("contacts")
-      .doc(userDbEntry?.email)
+      .doc(user?.email)
       .onSnapshot((doc) => {
         if (doc.exists) {
           setContacts([...doc.data().contacts]);
@@ -52,12 +54,12 @@ export default function UserContextComp({ children }) {
     return () => {
       listener();
     };
-  }, [userDbEntry]);
+  }, [user]);
 
   useEffect(() => {
     const listener = db
       .collection("userChats")
-      .doc(userDbEntry?.email)
+      .doc(user?.email)
       .onSnapshot((doc) => {
         if (doc.exists) {
           setUserChats([...doc.data().chats]);
@@ -67,7 +69,7 @@ export default function UserContextComp({ children }) {
     return () => {
       listener();
     };
-  }, [userDbEntry]);
+  }, [user]);
 
   useEffect(() => {
     const chatPromises = [];
@@ -83,7 +85,7 @@ export default function UserContextComp({ children }) {
   }, [userChats]);
 
   return (
-    <UserContext.Provider value={{ chats, userChats, contacts, userDbEntry, loadingUser, error, setUserDbEntry }}>
+    <UserContext.Provider value={{ user, setUser, contacts, userChats, chats, loadingUser, error }}>
       {children}
     </UserContext.Provider>
   );

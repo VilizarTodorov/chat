@@ -12,7 +12,7 @@ const withAuthorization = (condition) => (Component) => {
       if (user.loadingUser) {
         return;
       }
-      if (!condition(user)) {
+      if (!condition(user.user)) {
         if (router.pathname === "/login" || router.pathname === "/register") {
           router.push("/");
           return;
@@ -20,13 +20,13 @@ const withAuthorization = (condition) => (Component) => {
         router.push("/login");
         return;
       }
-    }, [user.userDbEntry, user]);
+    }, [user.user, user]);
 
     if (user.loadingUser) {
       return <Loading></Loading>;
     }
 
-    return <Fragment>{condition(user) ? <Component {...props}></Component> : <Loading></Loading>}</Fragment>;
+    return <Fragment>{condition(user.user) ? <Component {...props}></Component> : <Loading></Loading>}</Fragment>;
   };
 
   return WithAuthorization;
