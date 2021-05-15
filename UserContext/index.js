@@ -4,6 +4,7 @@ import { auth, db } from "../firebase";
 export const UserContext = createContext();
 
 export default function UserContextComp({ children }) {
+  const [authUser, setAuthUser] = useState(null);
   const [user, setUser] = useState(null);
   const [contacts, setContacts] = useState([]);
   const [userChats, setUserChats] = useState([]);
@@ -11,22 +12,13 @@ export default function UserContextComp({ children }) {
   const [loadingUser, setLoadingUser] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(auth.currentUser)
-
   useEffect(() => {
     const listener = auth.onAuthStateChanged(async (u) => {
       try {
         if (u) {
-          await db
-            .collection("users")
-            .doc(u.email)
-            .get()
-            .then((doc) => {
-              if (doc.exists) {
-                setUser({ ...user, uid: u.uid, ...doc.data() });
-              }
-            });
+          setAuthUser(u);
         } else {
+          setAuthUser(null);
           setUser(null);
         }
       } catch (error) {
@@ -40,6 +32,21 @@ export default function UserContextComp({ children }) {
       listener();
     };
   }, []);
+
+  useEffect(() => {
+    const listener = db
+      .collection("users")
+      .doc(authUser?.email)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          setUser({ ...user, uid: authUser.uid, ...doc.data() });
+        }
+      });
+
+    return () => {
+      listener();
+    };
+  }, [authUser]);
 
   useEffect(() => {
     const listener = db

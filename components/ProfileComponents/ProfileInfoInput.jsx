@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ProfileInfoInput = ({ id, name, type, value, onChange, placeholder, label }) => {
+const ProfileInfoInput = ({ id, name, type, value, onChange, placeholder, label, onSubmit }) => {
   const classes = useStyles();
   const [isFocused, setIsFocused] = useState(false);
   const inputElement = useRef(null);
@@ -43,9 +43,14 @@ const ProfileInfoInput = ({ id, name, type, value, onChange, placeholder, label 
     inputElement.current.focus();
   };
 
-  const blur = () => {
-    setIsFocused(false);
-    inputElement.current.blur();
+  const changeDisplayName = () => {
+    onSubmit()
+      .then((res) => {
+        console.log(res);
+        setIsFocused(false);
+        inputElement.current.blur();
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -64,7 +69,10 @@ const ProfileInfoInput = ({ id, name, type, value, onChange, placeholder, label 
           className={`${classes.input} ${isFocused && classes.inputActive}`}
         ></Input>
         <CreateIcon onClick={focus} className={`${classes.icon} ${!isFocused && classes.iconActive}`}></CreateIcon>
-        <CheckIcon onClick={blur} className={`${classes.icon} ${isFocused && classes.iconActive}`}></CheckIcon>
+        <CheckIcon
+          onClick={changeDisplayName}
+          className={`${classes.icon} ${isFocused && classes.iconActive}`}
+        ></CheckIcon>
       </Box>
     </Container>
   );

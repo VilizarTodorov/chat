@@ -6,6 +6,7 @@ import ProfileHeader from "./ProfileComponents/ProfileHeader";
 import ProfileInfoContainer from "./ProfileComponents/ProfileInfoContainer";
 import ProfileInfoInput from "./ProfileComponents/ProfileInfoInput";
 import { useUser } from "../UserContext";
+import { editProfileInfo } from "../firebase/functions";
 
 const Profile = (props) => {
   const user = useUser();
@@ -26,6 +27,7 @@ const Profile = (props) => {
           onChange={(e) => setDisplayName(e.target.value)}
           placeholder="Your Name"
           label="Your Name"
+          onSubmit={() => editProfileInfo(user.user.email, displayName, user.user.displayName, "displayName")}
         ></ProfileInfoInput>
         <ProfileAdditionalInfo></ProfileAdditionalInfo>
         <ProfileInfoInput
@@ -36,6 +38,7 @@ const Profile = (props) => {
           onChange={(e) => setAbout(e.target.value)}
           placeholder="About"
           label="About"
+          onSubmit={() => editProfileInfo(user.user.email, about, user.user.about, "about")}
         ></ProfileInfoInput>
       </ProfileInfoContainer>
     </BaseSecondaryContainer>
