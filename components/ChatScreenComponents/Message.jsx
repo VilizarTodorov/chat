@@ -1,13 +1,52 @@
-import { Box, Container, IconButton } from "@material-ui/core";
-import React, { Fragment, useState } from "react";
-import styles from "../styles/Message.module.css";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import MessageOptionsMenu from "./MessageOptionsMenu";
-import { db } from "../firebase";
+import { Box, Container, IconButton, makeStyles, TextareaAutosize, Typography } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
+import React, { Fragment, useState } from "react";
+import { db } from "../../firebase";
+import MessageOptionsMenu from "./MessageOptionsMenu";
+
+const useStyles = makeStyles({
+  message: {
+    position: "relative",
+    padding: "10px",
+    width: "fit-content",
+    borderRadius: "8px",
+    minWidth: "30px",
+    maxWidth: "300px",
+    wordWrap: "break-word",
+    marginBlockStart: "1em",
+    marginBlockEnd: "1em",
+    marginInlineStart: "0px",
+    marginInlineEnd: "0px",
+
+    "&:hover $messageOptions": {
+      width: "30px",
+      padding: "12px",
+    },
+  },
+  sender: {
+    marginLeft: "auto",
+    backgroundColor: "#104a19",
+  },
+  receiver: {
+    backgroundColor: "#103b4a",
+  },
+  messageOptions: {
+    padding: 0,
+    width: 0,
+    height: "30px",
+    position: "absolute",
+    right: 0,
+    top: 0,
+    backgroundColor: "#dcf8c6",
+    borderRadius: "8px",
+    transition: "all 0.2s ease-in-out",
+    overflow: "hidden",
+  },
+});
 
 const Message = ({ sender, message, timestamp, messageId, chatId }) => {
+  const classes = useStyles();
   const [isEditing, setIsEditing] = useState(false);
   const [newMessage, setNewMessage] = useState(message);
 
@@ -41,17 +80,16 @@ const Message = ({ sender, message, timestamp, messageId, chatId }) => {
       });
   };
   return (
-    <Container className={styles.messageContainer}>
-      <div className={`${styles.message} ${sender ? styles.sender : styles.receiver}`}>
+    <Container>
+      <Box className={`${classes.message} ${sender ? classes.sender : classes.receiver}`}>
         {!isEditing ? (
-          <p className={styles.messageText}>{message}</p>
+          <Typography>{message}</Typography>
         ) : (
           <Fragment>
-            <textarea
-              className={styles.messageText}
+            <TextareaAutosize
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-            ></textarea>
+            ></TextareaAutosize>
             <IconButton onClick={editMessage}>
               <CheckIcon></CheckIcon>
             </IconButton>
@@ -63,9 +101,9 @@ const Message = ({ sender, message, timestamp, messageId, chatId }) => {
         <MessageOptionsMenu
           setIsEditing={setIsEditing}
           deleteMessage={deleteMessage}
-          className={styles.messageOptionsIcon}
+          className={classes.messageOptions}
         ></MessageOptionsMenu>
-      </div>
+      </Box>
     </Container>
   );
 };

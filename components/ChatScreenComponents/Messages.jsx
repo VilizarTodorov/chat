@@ -1,10 +1,12 @@
 import { Container, makeStyles } from "@material-ui/core";
 import React, { Fragment, useRef, useState } from "react";
-import Message from "../Message";
+import Message from "./Message";
 import ScrollDownButton from "./ScrollDownButton";
 
 const useStyles = makeStyles({
   container: {
+    paddingLeft:"64px",
+    paddingRight:"64px",
     display: "flex",
     flexDirection: "column-reverse",
     flex: 1,

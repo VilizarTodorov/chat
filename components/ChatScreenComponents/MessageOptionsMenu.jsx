@@ -5,10 +5,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { auth } from "../firebase";
-import React, { Fragment, useRef, useState } from "react";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import React, { Fragment, useRef, useState } from "react";
 
 const MessageOptionsMenu = (props) => {
   const [open, setOpen] = useState(false);
