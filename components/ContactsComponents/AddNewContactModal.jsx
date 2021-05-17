@@ -1,6 +1,5 @@
 import { Container, makeStyles, Modal } from "@material-ui/core";
 import React, { useState } from "react";
-import { db } from "../../firebase";
 import { addContact } from "../../firebase/functions";
 import { Form, FormButton, FormContainer, FormInput, FormTitle } from "../Form";
 

@@ -9,7 +9,6 @@ import ContactsHeader from "./ContactsComponents/ContactsHeader";
 import ContactsList from "./ContactsComponents/ContactsList";
 import Search from "./Search";
 
-
 const Contacts = (props) => {
   const [open, setOpen] = useState(false);
   const user = useUser();
@@ -20,8 +19,8 @@ const Contacts = (props) => {
       const chat = user.userChats.find((chat) => chat.users.includes(contact));
 
       if (chat) {
-        router.push(`/chat/${chat.id}`);
         props.close();
+        router.push(`/chat/${chat.id}`);
         return;
       }
 
@@ -46,8 +45,8 @@ const Contacts = (props) => {
         });
 
       Promise.all([contactPromise, userPromise])
-        .then(() => router.push(`/chat/${chatRef.id}`))
-        .then(() => props.close());
+        .then(() => props.close())
+        .then(() => router.push(`/chat/${chatRef.id}`));
     };
   };
 
