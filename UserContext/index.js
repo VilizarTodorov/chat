@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { auth, db } from "../firebase";
-import { useContacts, useUserChats, useChats, useUserDB, useAuthUser } from "./hooks";
+import { createContext, useContext, useState } from "react";
+import { useAuthUser, useChats, useContacts, useUserChats, useUserDB } from "./hooks";
 
 export const UserContext = createContext();
 
