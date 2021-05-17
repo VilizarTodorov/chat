@@ -1,6 +1,7 @@
 import { Container, makeStyles, Modal } from "@material-ui/core";
 import React, { useState } from "react";
 import { db } from "../../firebase";
+import { addContact } from "../../firebase/functions";
 import { Form, FormButton, FormContainer, FormInput, FormTitle } from "../Form";
 
 const useStyles = makeStyles({
@@ -17,30 +18,13 @@ const AddNewContactModal = ({ isOpen, close, user }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    db.collection("users")
-      .doc(email)
-      .get()
-      .then(async (doc) => {
-        if (doc.exists) {
-          await db
-            .collection("contacts")
-            .doc(user.user.email)
-            .update({
-              contacts: [...user.contacts, { ...doc.data() }],
-            })
-            .then(() => {
-              console.log("Document successfully updated!");
-            })
-            .catch((error) => {
-              // The document probably doesn't exist.
-              console.error("Error updating document: ", error);
-            });
 
-          close();
-        } else {
-          console.log("doc does not exist");
-        }
-      });
+    addContact(email, user.user.email, user.contacts)
+      .then((x) => {
+        console.log(x);
+        close();
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

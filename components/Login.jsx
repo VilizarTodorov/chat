@@ -18,7 +18,14 @@ const Login = (props) => {
     try {
       const result = await auth.signInWithPopup(googleAuthProvider);
       user = result.user;
-      User.setUserDbEntry({ email: user.email, photo: user.photoURL, displayName: user.displayName });
+      console.log(result);
+      User.setUser({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        about: "",
+      });
     } catch (err) {
       console.log(err.message);
       console.log("could not login with google for some reason");
@@ -32,8 +39,9 @@ const Login = (props) => {
         console.log("doc does not exist");
         db.collection("users").doc(user.email).set({
           email: user.email,
-          photo: user.photoURL,
           displayName: user.displayName,
+          photoURL: user.photoURL,
+          about: "Hi I am using Chat!",
         });
 
         db.collection("contacts").doc(user.email).set({
