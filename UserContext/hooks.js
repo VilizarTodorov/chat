@@ -1,5 +1,55 @@
 import { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
+
+const useAuthUser = (setError) => {
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    const listener = auth.onAuthStateChanged(async (u) => {
+      try {
+        if (u) {
+          setAuthUser(u);
+        } else {
+          setAuthUser(null);
+        }
+      } catch (error) {
+        setError(error);
+      }
+    });
+
+    return () => {
+      listener();
+    };
+  }, []);
+
+  return authUser;
+};
+
+const useUserDB = (authUser, setLoadingUser) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (!authUser) {
+      setUser(null);
+    }
+
+    const listener = db
+      .collection("users")
+      .doc(authUser?.email)
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          setUser({ ...user, uid: authUser.uid, ...doc.data() });
+        }
+        setLoadingUser(false);
+      });
+
+    return () => {
+      listener();
+    };
+  }, [authUser]);
+
+  return [user, setUser];
+};
 
 const useContacts = (user) => {
   const [contacts, setContacts] = useState([]);
@@ -49,7 +99,26 @@ const useUserChats = (user) => {
   return userChats;
 };
 
-export { useContacts, useUserChats };
+const useChats = (userChats) => {
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    const chatPromises = [];
+    userChats.forEach((chat) => {
+      const promise = db
+        .collection("chats")
+        .doc(chat.id)
+        .get()
+        .then((doc) => doc.data());
+      chatPromises.push(promise);
+    });
+    Promise.all(chatPromises).then((chats) => setChats(chats));
+  }, [userChats]);
+
+  return chats;
+};
+
+export { useContacts, useUserChats, useChats, useUserDB, useAuthUser };
 
 const useSubCollection = (collection, docId, subCollection, setFunc, user) => {
   useEffect(() => {
