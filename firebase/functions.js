@@ -33,4 +33,40 @@ const addContact = async (email, userEmail, contacts) => {
   }
 };
 
-export { editProfileInfo, addContact };
+const createChat = async (contact, user, callback, router) => {
+  const chat = user.userChats.find((c) => c.users.includes(contact));
+
+  if (chat) {
+    callback();
+    router.push(`/chat/${chat.id}`);
+    return;
+  }
+
+  let chatDoc = await (await db.collection("chats").add({ users: [contact, user.user.email] })).get();
+
+  let contactPromise = db
+    .collection("userChats")
+    .doc(contact)
+    .collection("chats")
+    .doc(chatDoc.id)
+    .set({
+      id: chatDoc.id,
+      ...chatDoc.data(),
+    });
+
+  let userPromise = db
+    .collection("userChats")
+    .doc(user.user.email)
+    .collection("chats")
+    .doc(chatDoc.id)
+    .set({
+      id: chatDoc.id,
+      ...chatDoc.data(),
+    });
+
+  Promise.all([contactPromise, userPromise])
+    .then(() => callback())
+    .then(() => router.push(`/chat/${chatDoc.id}`));
+};
+
+export { editProfileInfo, addContact, createChat };

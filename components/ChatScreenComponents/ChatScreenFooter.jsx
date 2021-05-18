@@ -52,8 +52,9 @@ const ChatScreenFooter = ({ chatId, user }) => {
         <IconButton>
           <InsertEmoticonIcon></InsertEmoticonIcon>
         </IconButton>
-        <IconButton>
+        <IconButton component="label">
           <AttachFileIcon></AttachFileIcon>
+          <input type="file" hidden />
         </IconButton>
       </Box>
       <TextareaAutosize

@@ -77,7 +77,9 @@ const useChats = (userChats) => {
         .collection("chats")
         .doc(chat.id)
         .get()
-        .then((doc) => doc.data());
+        .then((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
       chatPromises.push(promise);
     });
     Promise.all(chatPromises).then((chats) => setChats(chats));
