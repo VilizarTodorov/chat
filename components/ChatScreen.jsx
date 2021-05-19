@@ -5,14 +5,14 @@ import ChatScreenFooter from "./ChatScreenComponents/ChatScreenFooter";
 import ChatScreenHeader from "./ChatScreenComponents/ChatScreenHeader";
 import Messages from "./ChatScreenComponents/Messages";
 
-const ChatScreen = (props) => {
-  const user = useUser();
+const ChatScreen = ({ messages, chatId }) => {
+  const context = useUser();
 
   return (
     <ChatScreenContainer>
       <ChatScreenHeader></ChatScreenHeader>
-      <Messages messages={props.messages} userEmail={user.user.email} chatId={props.chatId}></Messages>
-      <ChatScreenFooter chatId={props.chatId} user={user}></ChatScreenFooter>
+      <Messages messages={messages} userEmail={context.user.email} chatId={chatId}></Messages>
+      <ChatScreenFooter chatId={chatId} user={context.user}></ChatScreenFooter>
     </ChatScreenContainer>
   );
 };

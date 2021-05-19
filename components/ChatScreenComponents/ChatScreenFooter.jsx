@@ -3,7 +3,7 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import SendIcon from "@material-ui/icons/Send";
 import React, { useState } from "react";
-import { db, firebase } from "../../firebase";
+import { sendMessage } from "../../firebase/functions";
 
 const useStyles = makeStyles({
   footer: {
@@ -28,21 +28,17 @@ const ChatScreenFooter = ({ chatId, user }) => {
   const classes = useStyles();
   const [message, setMessage] = useState("");
 
-  const sendMessage = () => {
-    if (!message) {
-      return;
-    }
-    db.collection("chats").doc(chatId).collection("messages").add({
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      message,
-      user: user.user.email,
-      photoURL: user.user.photoURL,
-    });
-  };
-
   const onKeyDown = (e) => {
-    if (e.key === "Enter") {
-      sendMessage();
+    const keyCode = e.which || e.keyCode;
+
+    // 13 represents the Enter key
+    if (keyCode === 13 && !e.shiftKey) {
+      // Don't generate a new line
+      e.preventDefault();
+
+      // Do something else such as send the message to back-end
+      // ...
+      sendMessage(message, chatId, user);
     }
   };
 
@@ -64,7 +60,7 @@ const ChatScreenFooter = ({ chatId, user }) => {
         onChange={(e) => setMessage(e.target.value)}
         className={classes.messageInput}
       ></TextareaAutosize>
-      <IconButton onClick={sendMessage}>
+      <IconButton onClick={() => sendMessage(message, chatId, user)}>
         <SendIcon></SendIcon>
       </IconButton>
     </footer>

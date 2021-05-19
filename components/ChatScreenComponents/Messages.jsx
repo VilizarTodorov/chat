@@ -5,8 +5,8 @@ import ScrollDownButton from "./ScrollDownButton";
 
 const useStyles = makeStyles({
   container: {
-    paddingLeft:"64px",
-    paddingRight:"64px",
+    paddingLeft: "64px",
+    paddingRight: "64px",
     display: "flex",
     flexDirection: "column-reverse",
     flex: 1,
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Messages = ({ messages,userEmail,chatId }) => {
+const Messages = ({ messages, userEmail, chatId }) => {
   const classes = useStyles();
   const ref = useRef(null);
   const [scrollDownButtonVisible, setScrollDownButtonVisible] = useState(false);

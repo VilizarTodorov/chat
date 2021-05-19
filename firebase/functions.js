@@ -1,4 +1,4 @@
-import { db } from ".";
+import { db, firebase } from ".";
 
 const editProfileInfo = (email, newPropValue, currentPropValue, prop) => {
   if (newPropValue === currentPropValue) {
@@ -69,4 +69,17 @@ const createChat = async (contact, user, callback, router) => {
     .then(() => router.push(`/chat/${chatDoc.id}`));
 };
 
-export { editProfileInfo, addContact, createChat };
+const sendMessage = (message, chatId, user) => {
+  if (!message) {
+    return;
+  }
+
+  db.collection("chats").doc(chatId).collection("messages").add({
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    message,
+    user: user.email,
+    photoURL: user.photoURL,
+  });
+};
+
+export { editProfileInfo, addContact, createChat, sendMessage };

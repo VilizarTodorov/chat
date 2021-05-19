@@ -88,7 +88,30 @@ const useChats = (userChats) => {
   return chats;
 };
 
-export { useContacts, useUserChats, useChats, useUserDB, useAuthUser };
+const useMessages = (chatId) => {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const listener = db
+      .collection("chats")
+      .doc(chatId)
+      .collection("messages")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((querySnapshot) => {
+        let msgs = [];
+        querySnapshot.forEach((msg) => msgs.push({ ...msg.data(), id: msg.id }));
+        setMessages(msgs);
+      });
+
+    return () => {
+      listener();
+    };
+  }, [chatId]);
+
+  return messages;
+};
+
+export { useContacts, useUserChats, useChats, useUserDB, useAuthUser, useMessages };
 
 const useSubCollection = (collection, subCollection, setFunc, user) => {
   useEffect(() => {

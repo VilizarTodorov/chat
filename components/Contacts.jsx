@@ -17,40 +17,6 @@ const Contacts = (props) => {
 
   const createChatFunction = (contact) => {
     return () =>  createChat(contact, user, props.close, router);
-
-    // return async () => {
-    //   const chat = user.userChats.find((chat) => chat.users.includes(contact));
-
-    //   if (chat) {
-    //     props.close();
-    //     router.push(`/chat/${chat.id}`);
-    //     return;
-    //   }
-
-    //   let chatRef = await db.collection("chats").add({ users: [contact, user.user.email] });
-    //   await chatRef.update({ id: chatRef.id });
-    //   const newChat = await chatRef.get();
-
-    //   let contactPromise = db
-    //     .collection("userChats")
-    //     .doc(contact)
-    //     .get()
-    //     .then(async (doc) => {
-    //       await doc.ref.update({ chats: [...doc.data().chats, { ...newChat.data() }] });
-    //     });
-
-    //   let userPromise = db
-    //     .collection("userChats")
-    //     .doc(user.user.email)
-    //     .get()
-    //     .then(async (doc) => {
-    //       await doc.ref.update({ chats: [...doc.data().chats, { ...newChat.data() }] });
-    //     });
-
-    //   Promise.all([contactPromise, userPromise])
-    //     .then(() => props.close())
-    //     .then(() => router.push(`/chat/${chatRef.id}`));
-    // };
   };
 
   return (

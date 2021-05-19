@@ -4,26 +4,11 @@ import ChatScreen from "../../components/ChatScreen";
 import WithSidebar from "../../components/WithSidebar";
 import withAuthorization from "../../UserContext/withAuthorization";
 import { db } from "../../firebase";
+import { useMessages } from "../../UserContext/hooks";
 
-const Chat = (props) => {
+const Chat = () => {
   const router = useRouter();
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const listener = db
-      .collection("chats")
-      .doc(router.query.id)
-      .collection("messages").orderBy('timestamp','desc')
-      .onSnapshot((querySnapshot) => {
-        let msgs = [];
-        querySnapshot.forEach((msg) => msgs.push({ ...msg.data(), id: msg.id }));
-        setMessages(msgs);
-      });
-
-    return () => {
-      listener();
-    };
-  }, [router.query.id]);
+  const messages = useMessages(router.query.id);
 
   return (
     <WithSidebar>

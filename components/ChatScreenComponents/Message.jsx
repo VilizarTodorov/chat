@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Message = ({ sender, message, timestamp, messageId, chatId }) => {
+const Message = ({ sender, message, messageId, chatId }) => {
   const classes = useStyles();
   const [isEditing, setIsEditing] = useState(false);
   const [newMessage, setNewMessage] = useState(message);
