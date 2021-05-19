@@ -33,8 +33,8 @@ const addContact = async (email, userEmail, contacts) => {
   }
 };
 
-const createChat = async (contact, user, callback, router) => {
-  const chat = user.userChats.find((c) => c.users.includes(contact));
+const createChat = async (contact, user,userChats, callback, router) => {
+  const chat = userChats.find((c) => c.users.includes(contact));
 
   if (chat) {
     callback();
@@ -42,7 +42,9 @@ const createChat = async (contact, user, callback, router) => {
     return;
   }
 
-  let chatDoc = await (await db.collection("chats").add({ users: [contact, user.user.email] })).get();
+  let contactUser = (await db.collection("users").doc(contact).get()).data();
+
+  let chatDoc = await (await db.collection("chats").add({ users: [contactUser, user] })).get();
 
   let contactPromise = db
     .collection("userChats")
@@ -56,7 +58,7 @@ const createChat = async (contact, user, callback, router) => {
 
   let userPromise = db
     .collection("userChats")
-    .doc(user.user.email)
+    .doc(user.email)
     .collection("chats")
     .doc(chatDoc.id)
     .set({
@@ -82,4 +84,32 @@ const sendMessage = (message, chatId, user) => {
   });
 };
 
-export { editProfileInfo, addContact, createChat, sendMessage };
+const editMessage = (chatId, messageId, message, callBack) => {
+  getMessage(chatId, messageId)
+    .update({ message })
+    .then(() => callBack())
+    .then(() => {
+      console.log("Document successfully updated!");
+    })
+    .catch((error) => {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+    });
+};
+
+const deleteMessage = (chatId, messageId) => {
+  getMessage(chatId, messageId)
+    .delete()
+    .then(() => {
+      console.log("Document successfully deleted!");
+    })
+    .catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+};
+
+export { editProfileInfo, addContact, createChat, sendMessage, editMessage, deleteMessage };
+
+const getMessage = (chatId, messageId) => {
+  return db.collection("chats").doc(chatId).collection("messages").doc(messageId);
+};

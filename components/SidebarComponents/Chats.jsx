@@ -2,19 +2,18 @@ import React from "react";
 import List from "../List";
 import Person from "../Person";
 
-const Chats = ({ chats, user, redirectFunction }) => {
+const Chats = ({ chats, userEmail, redirectFunction }) => {
   return (
     <List>
       {chats.map((chat) => {
-        const email = chat.users.filter((x) => x !== user.user.email)[0];
-        const contact = user.contacts.find((contact) => contact.email === email);
+        const contact = chat.users.filter((x) => x !== userEmail)[0];
         return (
           <Person
-            key={`${email}chat`}
+            key={`${contact}chat`}
             callbackFunction={redirectFunction(chat.id)}
-            email={email}
+            email={contact?.email}
             photoUrl={contact?.photo}
-            message={"Hi I'm using chat"}
+            message={contact?.about}
           ></Person>
         );
       })}

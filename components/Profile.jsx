@@ -8,17 +8,17 @@ import ProfileInfoInput from "./ProfileComponents/ProfileInfoInput";
 import { useUser } from "../UserContext";
 import { editProfileInfo } from "../firebase/functions";
 
-const Profile = (props) => {
-  const user = useUser();
+const Profile = ({ close, isOpen }) => {
+  const context = useUser();
 
-  const [displayName, setDisplayName] = useState(user.user.displayName);
-  const [about, setAbout] = useState(user.user.about);
+  const [displayName, setDisplayName] = useState(context.user.displayName);
+  const [about, setAbout] = useState(context.user.about);
 
   return (
-    <BaseSecondaryContainer isOpen={props.isOpen}>
-      <ProfileHeader close={props.close}></ProfileHeader>
-      <ProfileAvatar isOpen={props.isOpen} photoURL={user.user.photoURL} email={user.user.email}></ProfileAvatar>
-      <ProfileInfoContainer isOpen={props.isOpen}>
+    <BaseSecondaryContainer isOpen={isOpen}>
+      <ProfileHeader close={close}></ProfileHeader>
+      <ProfileAvatar isOpen={isOpen} photoURL={context.user.photoURL} email={context.user.email}></ProfileAvatar>
+      <ProfileInfoContainer isOpen={isOpen}>
         <ProfileInfoInput
           id="displayName"
           name="displayName"
@@ -27,7 +27,7 @@ const Profile = (props) => {
           onChange={(e) => setDisplayName(e.target.value)}
           placeholder="Your Name"
           label="Your Name"
-          onSubmit={() => editProfileInfo(user.user.email, displayName, user.user.displayName, "displayName")}
+          onSubmit={() => editProfileInfo(context.user.email, displayName, context.user.displayName, "displayName")}
         ></ProfileInfoInput>
         <ProfileAdditionalInfo></ProfileAdditionalInfo>
         <ProfileInfoInput
@@ -38,7 +38,7 @@ const Profile = (props) => {
           onChange={(e) => setAbout(e.target.value)}
           placeholder="About"
           label="About"
-          onSubmit={() => editProfileInfo(user.user.email, about, user.user.about, "about")}
+          onSubmit={() => editProfileInfo(context.user.email, about, context.user.about, "about")}
         ></ProfileInfoInput>
       </ProfileInfoContainer>
     </BaseSecondaryContainer>

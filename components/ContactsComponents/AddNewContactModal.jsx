@@ -11,14 +11,14 @@ const useStyles = makeStyles({
   },
 });
 
-const AddNewContactModal = ({ isOpen, close, user }) => {
+const AddNewContactModal = ({ isOpen, close, userEmail, contacts }) => {
   const [email, setEmail] = useState("");
   const classes = useStyles();
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    addContact(email, user.user.email, user.contacts)
+    addContact(email, userEmail, contacts)
       .then((x) => {
         console.log(x);
         close();

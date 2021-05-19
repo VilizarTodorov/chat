@@ -2,7 +2,7 @@ import { Box, Container, IconButton, makeStyles, TextareaAutosize, Typography } 
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import React, { Fragment, useState } from "react";
-import { db } from "../../firebase";
+import { deleteMessage, editMessage } from "../../firebase/functions";
 import MessageOptionsMenu from "./MessageOptionsMenu";
 
 const useStyles = makeStyles({
@@ -50,35 +50,6 @@ const Message = ({ sender, message, messageId, chatId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newMessage, setNewMessage] = useState(message);
 
-  const deleteMessage = () => {
-    db.collection("chats")
-      .doc(chatId)
-      .collection("messages")
-      .doc(messageId)
-      .delete()
-      .then(() => {
-        console.log("Document successfully deleted!");
-      })
-      .catch((error) => {
-        console.error("Error removing document: ", error);
-      });
-  };
-
-  const editMessage = () => {
-    db.collection("chats")
-      .doc(chatId)
-      .collection("messages")
-      .doc(messageId)
-      .update({ message: newMessage })
-      .then(() => {
-        console.log("Document successfully updated!");
-      })
-      .then(() => setIsEditing(false))
-      .catch((error) => {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-      });
-  };
   return (
     <Container>
       <Box className={`${classes.message} ${sender ? classes.sender : classes.receiver}`}>
@@ -86,11 +57,8 @@ const Message = ({ sender, message, messageId, chatId }) => {
           <Typography>{message}</Typography>
         ) : (
           <Fragment>
-            <TextareaAutosize
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-            ></TextareaAutosize>
-            <IconButton onClick={editMessage}>
+            <TextareaAutosize value={newMessage} onChange={(e) => setNewMessage(e.target.value)}></TextareaAutosize>
+            <IconButton onClick={() => editMessage(chatId, messageId, newMessage, () => setIsEditing(false))}>
               <CheckIcon></CheckIcon>
             </IconButton>
             <IconButton onClick={() => setIsEditing(false)}>
@@ -100,7 +68,7 @@ const Message = ({ sender, message, messageId, chatId }) => {
         )}
         <MessageOptionsMenu
           setIsEditing={setIsEditing}
-          deleteMessage={deleteMessage}
+          deleteMessage={() => deleteMessage(chatId, messageId)}
           className={classes.messageOptions}
         ></MessageOptionsMenu>
       </Box>

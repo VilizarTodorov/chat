@@ -10,22 +10,27 @@ import ContactsHeader from "./ContactsComponents/ContactsHeader";
 import ContactsList from "./ContactsComponents/ContactsList";
 import Search from "./Search";
 
-const Contacts = (props) => {
+const Contacts = ({ close, isOpen }) => {
   const [open, setOpen] = useState(false);
-  const user = useUser();
+  const context = useUser();
   const router = useRouter();
 
   const createChatFunction = (contact) => {
-    return () =>  createChat(contact, user, props.close, router);
+    return () => createChat(contact, context.user, context.userChats, close, router);
   };
 
   return (
-    <BaseSecondaryContainer isOpen={props.isOpen}>
-      <ContactsHeader close={props.close}></ContactsHeader>
+    <BaseSecondaryContainer isOpen={isOpen}>
+      <ContactsHeader close={close}></ContactsHeader>
       <Search></Search>
       <AddNewContact openForm={() => setOpen(true)}></AddNewContact>
-      <ContactsList contacts={user.contacts} createChatFunction={createChatFunction}></ContactsList>
-      <AddNewContactModal isOpen={open} close={() => setOpen(false)} user={user}></AddNewContactModal>
+      <ContactsList contacts={context.contacts} createChatFunction={createChatFunction}></ContactsList>
+      <AddNewContactModal
+        isOpen={open}
+        close={() => setOpen(false)}
+        userEmail={context.user.email}
+        contacts={context.contacts}
+      ></AddNewContactModal>
     </BaseSecondaryContainer>
   );
 };
