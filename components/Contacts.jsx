@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { db } from "../firebase";
 import { createChat } from "../firebase/functions";
 import { useUser } from "../UserContext";
 import BaseSecondaryContainer from "./BaseSecondaryContainer";
