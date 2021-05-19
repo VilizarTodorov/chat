@@ -12,7 +12,7 @@ const ContactsList = ({ contacts, createChatFunction }) => {
             callbackFunction={createChatFunction(contact.email)}
             email={contact.email}
             message={"Hi I'm using chat"}
-            photoUrl={contact.photo}
+            photoUrl={contact.photoURL}
           ></Person>
         );
       })}

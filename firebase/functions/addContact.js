@@ -1,6 +1,10 @@
 import { db } from "../";
 
 const addContact = async (email, userEmail, contacts) => {
+  if (email === userEmail) {
+    return Promise.resolve(true);
+  }
+
   const isInContactsAlready = contacts.find((c) => c.email === email);
   if (isInContactsAlready) {
     return Promise.resolve(true);

@@ -12,7 +12,7 @@ const Chats = ({ chats, userEmail, redirectFunction }) => {
             key={`${contact}chat`}
             callbackFunction={redirectFunction(chat.id)}
             email={contact?.email}
-            photoUrl={contact?.photo}
+            photoUrl={contact?.photoURL}
             message={contact?.about}
           ></Person>
         );
