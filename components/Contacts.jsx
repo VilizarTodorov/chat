@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { createChat } from "../firebase/functions";
 import { useUser } from "../UserContext";
+import Alert from "./Alert";
 import BaseSecondaryContainer from "./BaseSecondaryContainer";
 import AddNewContact from "./ContactsComponents/AddNewContact";
 import AddNewContactModal from "./ContactsComponents/AddNewContactModal";
@@ -20,6 +21,7 @@ const Contacts = ({ close, isOpen }) => {
 
   return (
     <BaseSecondaryContainer isOpen={isOpen}>
+      <Alert></Alert>
       <ContactsHeader close={close}></ContactsHeader>
       <Search></Search>
       <AddNewContact openForm={() => setOpen(true)}></AddNewContact>

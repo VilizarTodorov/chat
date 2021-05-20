@@ -14,7 +14,9 @@ const Login = (props) => {
 
   const signInWithEmailAndPassword = (e) => {
     e.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).catch((err) => console.log(err));
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => context.setAlert({ open: true, severity: "error", title: "Error", message: error.message }));
   };
 
   return (

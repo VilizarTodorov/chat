@@ -1,9 +1,8 @@
 import { Avatar, Box, IconButton, makeStyles, Typography } from "@material-ui/core";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import BaseHeader from "../BaseHeader";
-import SearchIcon from "@material-ui/icons/Search";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import useCountRenders from "../../hooks/useCountRenders";
 
 const useStyles = makeStyles({
   container: {
@@ -16,7 +15,6 @@ const useStyles = makeStyles({
 });
 
 const ChatScreenHeader = ({ recipient, photoURL }) => {
-  useCountRenders();
   const classes = useStyles();
   return (
     <BaseHeader>
@@ -36,4 +34,4 @@ const ChatScreenHeader = ({ recipient, photoURL }) => {
   );
 };
 
-export default React.memo(ChatScreenHeader);
+export default ChatScreenHeader;
