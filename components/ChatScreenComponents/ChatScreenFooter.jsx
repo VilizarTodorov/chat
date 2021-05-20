@@ -28,6 +28,12 @@ const ChatScreenFooter = ({ chatId, user }) => {
   const classes = useStyles();
   const [message, setMessage] = useState("");
 
+  const submitMessage = () => {
+    sendMessage(message, chatId, user)
+      .then(() => setMessage(""))
+      .catch((err) => console.log(err));
+  };
+
   const onKeyDown = (e) => {
     const keyCode = e.which || e.keyCode;
 
@@ -38,7 +44,7 @@ const ChatScreenFooter = ({ chatId, user }) => {
 
       // Do something else such as send the message to back-end
       // ...
-      sendMessage(message, chatId, user);
+      submitMessage();
     }
   };
 
@@ -60,7 +66,7 @@ const ChatScreenFooter = ({ chatId, user }) => {
         onChange={(e) => setMessage(e.target.value)}
         className={classes.messageInput}
       ></TextareaAutosize>
-      <IconButton onClick={() => sendMessage(message, chatId, user)}>
+      <IconButton onClick={submitMessage}>
         <SendIcon></SendIcon>
       </IconButton>
     </footer>

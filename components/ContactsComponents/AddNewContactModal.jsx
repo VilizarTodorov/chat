@@ -20,7 +20,7 @@ const AddNewContactModal = ({ isOpen, close, userEmail, contacts }) => {
 
     addContact(email, userEmail, contacts)
       .then((x) => {
-        console.log(x);
+        setEmail("");
         close();
       })
       .catch((err) => console.log(err));

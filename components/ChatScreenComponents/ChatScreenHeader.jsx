@@ -3,21 +3,26 @@ import React from "react";
 import BaseHeader from "../BaseHeader";
 import SearchIcon from "@material-ui/icons/Search";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import useCountRenders from "../../hooks/useCountRenders";
 
 const useStyles = makeStyles({
   container: {
     display: "flex",
     alignItems: "center",
   },
+  avatar: {
+    marginRight: "15px",
+  },
 });
 
-const ChatScreenHeader = () => {
+const ChatScreenHeader = ({ recipient, photoURL }) => {
+  useCountRenders();
   const classes = useStyles();
   return (
     <BaseHeader>
       <Box className={classes.container}>
-        <Avatar></Avatar>
-        <Typography>recipient email</Typography>
+        <Avatar className={classes.avatar} src={photoURL} alt={`${recipient}'s profile picture`}></Avatar>
+        <Typography>{recipient}</Typography>
       </Box>
       <Box className={classes.container}>
         <IconButton>
@@ -31,4 +36,4 @@ const ChatScreenHeader = () => {
   );
 };
 
-export default ChatScreenHeader;
+export default React.memo(ChatScreenHeader);

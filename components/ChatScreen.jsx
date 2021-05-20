@@ -10,7 +10,7 @@ const ChatScreen = ({ messages, chatId }) => {
 
   return (
     <ChatScreenContainer>
-      <ChatScreenHeader></ChatScreenHeader>
+      <ChatScreenHeader recipient={context.user.email} photoURL={context.user.photoURL}></ChatScreenHeader>
       <Messages messages={messages} userEmail={context.user.email} chatId={chatId}></Messages>
       <ChatScreenFooter chatId={chatId} user={context.user}></ChatScreenFooter>
     </ChatScreenContainer>

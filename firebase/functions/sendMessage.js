@@ -5,7 +5,7 @@ const sendMessage = (message, chatId, user) => {
     return;
   }
 
-  db.collection("chats").doc(chatId).collection("messages").add({
+  return db.collection("chats").doc(chatId).collection("messages").add({
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     message,
     user: user.email,
