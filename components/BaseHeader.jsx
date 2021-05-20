@@ -4,6 +4,7 @@ import React from "react";
 const useStyles = makeStyles({
   root: {
     zIndex: 10,
+    boxShadow: "none",
   },
   toolbar: {
     height: "80px",

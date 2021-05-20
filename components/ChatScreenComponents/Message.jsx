@@ -6,7 +6,12 @@ import { deleteMessage, editMessage } from "../../firebase/functions";
 import MessageOptionsMenu from "./MessageOptionsMenu";
 
 const useStyles = makeStyles({
+  container: {
+    padding: 0,
+  },
   message: {
+    display: "flex",
+    alignItems: "center",
     position: "relative",
     padding: "10px",
     width: "fit-content",
@@ -18,10 +23,12 @@ const useStyles = makeStyles({
     marginBlockEnd: "1em",
     marginInlineStart: "0px",
     marginInlineEnd: "0px",
-
+  },
+  messageHover: {
     "&:hover $messageOptions": {
       width: "30px",
       padding: "12px",
+      opacity: 1,
     },
   },
   sender: {
@@ -34,6 +41,7 @@ const useStyles = makeStyles({
   messageOptions: {
     padding: 0,
     width: 0,
+    opacity: 0,
     height: "30px",
     position: "absolute",
     right: 0,
@@ -43,21 +51,42 @@ const useStyles = makeStyles({
     transition: "all 0.2s ease-in-out",
     overflow: "hidden",
   },
+  textarea: {
+    resize: "none",
+    padding: "10px",
+    outline: "none",
+    border: "none",
+    borderRadius: "8px",
+  },
+  menuOpen: {
+    width: "30px",
+    padding: "12px",
+    opacity: 1,
+  },
 });
 
 const Message = ({ isSender, message, messageId, chatId }) => {
   const classes = useStyles();
   const [isEditing, setIsEditing] = useState(false);
   const [newMessage, setNewMessage] = useState(message);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <Container>
-      <Box className={`${classes.message} ${isSender ? classes.sender : classes.receiver}`}>
+    <Container className={classes.container}>
+      <Box
+        className={`${classes.message} ${isSender ? classes.sender : classes.receiver} ${
+          !isEditing && classes.messageHover
+        }`}
+      >
         {!isEditing ? (
           <Typography>{message}</Typography>
         ) : (
           <Fragment>
-            <TextareaAutosize value={newMessage} onChange={(e) => setNewMessage(e.target.value)}></TextareaAutosize>
+            <TextareaAutosize
+              className={classes.textarea}
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            ></TextareaAutosize>
             <IconButton onClick={() => editMessage(chatId, messageId, newMessage, () => setIsEditing(false))}>
               <CheckIcon></CheckIcon>
             </IconButton>
@@ -68,9 +97,11 @@ const Message = ({ isSender, message, messageId, chatId }) => {
         )}
         {isSender && (
           <MessageOptionsMenu
+            setIsMenuOpen={setIsMenuOpen}
+            isMenuOpen={isMenuOpen}
             setIsEditing={setIsEditing}
             deleteMessage={() => deleteMessage(chatId, messageId)}
-            className={classes.messageOptions}
+            classes={{ messageOptions: classes.messageOptions, menuOpen: classes.menuOpen }}
           ></MessageOptionsMenu>
         )}
       </Box>

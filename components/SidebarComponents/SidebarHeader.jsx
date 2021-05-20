@@ -22,7 +22,7 @@ const SidebarHeader = ({ openProfile, openContacts }) => {
         <IconButton onClick={openContacts}>
           <ChatIcon />
         </IconButton>
-        <SidebarMoreVertIconMenu />
+        <SidebarMoreVertIconMenu openProfile={openProfile} />
       </Box>
     </BaseHeader>
   );

@@ -9,7 +9,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { auth } from "../../firebase";
 import React, { Fragment, useRef, useState } from "react";
 
-const SidebarMoreVertIconMenu = (props) => {
+const SidebarMoreVertIconMenu = ({ openProfile }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -22,6 +22,11 @@ const SidebarMoreVertIconMenu = (props) => {
     }
 
     setOpen(false);
+  };
+
+  const profile = (event) => {
+    openProfile();
+    handleClose(event);
   };
 
   const logout = (event) => {
@@ -67,7 +72,7 @@ const SidebarMoreVertIconMenu = (props) => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow">
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={profile}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>Archive</MenuItem>
                   <MenuItem onClick={handleClose}>Settings</MenuItem>
                   <MenuItem onClick={logout}>Logout</MenuItem>

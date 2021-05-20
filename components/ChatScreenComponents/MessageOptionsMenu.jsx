@@ -14,6 +14,7 @@ const MessageOptionsMenu = (props) => {
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
+    props.setIsMenuOpen((prev) => !prev);
   };
 
   const handleClose = (event) => {
@@ -22,6 +23,7 @@ const MessageOptionsMenu = (props) => {
     }
 
     setOpen(false);
+    props.setIsMenuOpen(false);
   };
 
   const deleteMessage = (event) => {
@@ -37,7 +39,7 @@ const MessageOptionsMenu = (props) => {
   return (
     <Fragment>
       <IconButton
-        className={props.className}
+        className={`${props.classes.messageOptions} ${props.isMenuOpen && props.classes.menuOpen}`}
         ref={anchorRef}
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"

@@ -22,7 +22,6 @@ const FormInput = ({ id, name, type, value, onChange, placeholder, required, aut
           placeholder={placeholder}
           required={required}
           autoFocus={autoFocus}
-          // className={`${styles.infoInput} ${styles[`MuiInput-underline`]} ${styles.active}`}
         ></Input>
       </FormControl>
     </Container>
