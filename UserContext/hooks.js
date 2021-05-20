@@ -88,6 +88,23 @@ const useChats = (userChats) => {
   return chats;
 };
 
+const useChat = (chatId) => {
+  const [chat, setChat] = useState({});
+
+  useEffect(() => {
+    const listener = db
+      .collection("chats")
+      .doc(chatId)
+      .onSnapshot((doc) => setChat({ id: doc.id, ...doc.data() }));
+
+    return () => {
+      listener;
+    };
+  }, [chatId]);
+
+  return chat;
+};
+
 const useMessages = (chatId) => {
   const [messages, setMessages] = useState([]);
 
@@ -111,7 +128,7 @@ const useMessages = (chatId) => {
   return messages;
 };
 
-export { useContacts, useUserChats, useChats, useUserDB, useAuthUser, useMessages };
+export { useContacts, useUserChats, useChats, useUserDB, useAuthUser, useMessages, useChat };
 
 const useSubCollection = (collection, subCollection, setFunc, user) => {
   useEffect(() => {

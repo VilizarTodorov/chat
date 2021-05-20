@@ -45,14 +45,14 @@ const useStyles = makeStyles({
   },
 });
 
-const Message = ({ sender, message, messageId, chatId }) => {
+const Message = ({ isSender, message, messageId, chatId }) => {
   const classes = useStyles();
   const [isEditing, setIsEditing] = useState(false);
   const [newMessage, setNewMessage] = useState(message);
 
   return (
     <Container>
-      <Box className={`${classes.message} ${sender ? classes.sender : classes.receiver}`}>
+      <Box className={`${classes.message} ${isSender ? classes.sender : classes.receiver}`}>
         {!isEditing ? (
           <Typography>{message}</Typography>
         ) : (
@@ -66,11 +66,13 @@ const Message = ({ sender, message, messageId, chatId }) => {
             </IconButton>
           </Fragment>
         )}
-        <MessageOptionsMenu
-          setIsEditing={setIsEditing}
-          deleteMessage={() => deleteMessage(chatId, messageId)}
-          className={classes.messageOptions}
-        ></MessageOptionsMenu>
+        {isSender && (
+          <MessageOptionsMenu
+            setIsEditing={setIsEditing}
+            deleteMessage={() => deleteMessage(chatId, messageId)}
+            className={classes.messageOptions}
+          ></MessageOptionsMenu>
+        )}
       </Box>
     </Container>
   );

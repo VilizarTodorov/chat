@@ -1,12 +1,13 @@
 import React from "react";
 import List from "../List";
 import Person from "../Person";
+import getUser from "../../helpers/functions/getUser";
 
 const Chats = ({ chats, userEmail, redirectFunction }) => {
   return (
     <List>
       {chats.map((chat) => {
-        const contact = chat.users.filter((x) => x !== userEmail)[0];
+        const contact = getUser(chat.users, userEmail);
         return (
           <Person
             key={`${contact}chat`}

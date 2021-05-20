@@ -53,7 +53,7 @@ const Messages = ({ messages, userEmail, chatId }) => {
           return (
             <Message
               key={msg.id}
-              sender={isSender}
+              isSender={isSender}
               message={msg.message}
               timestamp={msg.timestamp}
               chatId={chatId}
