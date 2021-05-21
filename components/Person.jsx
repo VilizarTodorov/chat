@@ -31,9 +31,10 @@ const Person = ({ callbackFunction, photoUrl, email, message }) => {
       <ListItemAvatar>
         <Avatar className={classes.avatar} src={photoUrl} alt={`${email}'s profile picture`}></Avatar>
       </ListItemAvatar>
+
       <ListItemText
         className={classes.listItemText}
-        primary={email}
+        primary={<span dangerouslySetInnerHTML={{ __html: email }}></span>}
         secondary={<Typography color="textSecondary">{message}</Typography>}
       />
     </ListItem>

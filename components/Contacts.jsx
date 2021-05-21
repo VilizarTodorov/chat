@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { createChat } from "../firebase/functions";
@@ -8,8 +9,21 @@ import AddNewContactModal from "./ContactsComponents/AddNewContactModal";
 import ContactsHeader from "./ContactsComponents/ContactsHeader";
 import ContactsList from "./ContactsComponents/ContactsList";
 import Search from "./Search";
+import sanitizeHtml from "sanitize-html";
+
+const useStyles = makeStyles({
+  span: {
+    color: "#4da6ff",
+  },
+});
+
+const HighLight = ({ value }) => {
+  const classes = useStyles();
+  return <span className={classes.span}>{value}</span>;
+};
 
 const Contacts = ({ close, isOpen }) => {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const context = useUser();
   const router = useRouter();
@@ -24,7 +38,17 @@ const Contacts = ({ close, isOpen }) => {
   };
 
   const searchFunction = (searchValue, setList, initialList) => {
-    const filtered = initialList.filter((contact) => contact.email.includes(searchValue));
+    const regex = new RegExp(searchValue, "gi");
+    let filtered = initialList.filter((contact) => contact.email.includes(searchValue));
+
+    filtered = filtered.map((contact) => {
+      const newEmail = contact.email.replaceAll(regex, `<span class='${classes.span}'>${searchValue}</span>`);
+      const cleanEmail = sanitizeHtml(newEmail, {
+        allowedAttributes: false,
+        allowedTags: false,
+      });
+      return { ...contact, email: cleanEmail };
+    });
     setList(filtered);
   };
 
