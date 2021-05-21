@@ -14,6 +14,7 @@ const Sidebar = () => {
   const [isContactsOpen, setIsContactsOpen] = useState(false);
   const context = useUser();
   const router = useRouter();
+  const [filteredChats, setFilteredChats] = useState([]);
 
   const callbackFunction = (id) => {
     return () => {
@@ -28,7 +29,11 @@ const Sidebar = () => {
         openProfile={() => setIsProfileOpen(true)}
         openContacts={() => setIsContactsOpen(true)}
       ></SidebarHeader>
-      <Search></Search>
+      <Search
+        setList={setFilteredChats}
+        initialList={context.chats}
+        searchFunction={() => console.log("sidebarSearch")}
+      ></Search>
       <NewChatButton onClick={() => setIsContactsOpen(true)}></NewChatButton>
       <Chats chats={context.chats} userEmail={context.user.email} redirectFunction={callbackFunction}></Chats>
       <Profile close={() => setIsProfileOpen(false)} isOpen={isProfileOpen}></Profile>

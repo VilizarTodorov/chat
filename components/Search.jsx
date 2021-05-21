@@ -1,6 +1,6 @@
-import { Box, makeStyles } from "@material-ui/core";
+import { Box, debounce, makeStyles } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 const useStyles = makeStyles({
   container: {
@@ -27,13 +27,25 @@ const useStyles = makeStyles({
   },
 });
 
-const Search = (props) => {
+const Search = ({ setList, initialList, searchFunction }) => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const debouncedFen = useCallback(
+    debounce((searchValue, setList, initialList) => searchFunction(searchValue, setList, initialList), 150),
+    [] // will be created only once initially
+  );
+
+  const onChange = (e) => {
+    setSearchValue(e.target.value);
+    debouncedFen(e.target.value, setList, initialList);
+  };
+
   const classes = useStyles();
   return (
     <Box className={classes.container}>
       <Box className={classes.search}>
         <SearchIcon className={classes.icon} />
-        <input className={classes.input} placeholder="Search in chats" />
+        <input value={searchValue} onChange={onChange} className={classes.input} placeholder="Search in chats" />
       </Box>
     </Box>
   );
