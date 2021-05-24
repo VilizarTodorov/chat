@@ -10,7 +10,7 @@ const Chats = ({ chats, userEmail, redirectFunction }) => {
         const contact = getUser(chat.users, userEmail);
         return (
           <Person
-            key={`${contact}chat`}
+            key={`${contact.email}chat`}
             callbackFunction={redirectFunction(chat.id)}
             email={contact?.email}
             photoUrl={contact?.photoURL}

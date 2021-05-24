@@ -10,7 +10,7 @@ const ContactsList = ({ contacts, createChatFunction }) => {
           <Person
             key={`${contact.email}contact`}
             callbackFunction={createChatFunction(contact.email)}
-            email={contact.email}
+            email={contact.displayEmail}
             message={"Hi I'm using chat"}
             photoUrl={contact.photoURL}
           ></Person>

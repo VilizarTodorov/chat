@@ -54,7 +54,15 @@ const useUserDB = (authUser, setLoadingUser) => {
 const useContacts = (user) => {
   const [contacts, setContacts] = useState([]);
 
-  useSubCollection("contacts", "contacts", setContacts, user);
+  const callback = (querySnapshot, setFunc) => {
+    const arr = [];
+    querySnapshot.forEach((item) => {
+      arr.push({ ...item.data(), displayEmail: item.data().email });
+    });
+    setFunc(arr);
+  };
+
+  useSubCollection("contacts", "contacts", setContacts, user, callback);
 
   return contacts;
 };
@@ -62,7 +70,15 @@ const useContacts = (user) => {
 const useUserChats = (user) => {
   const [userChats, setUserChats] = useState([]);
 
-  useSubCollection("userChats", "chats", setUserChats, user);
+  const callback = (querySnapshot, setFunc) => {
+    const arr = [];
+    querySnapshot.forEach((item) => {
+      arr.push(item.data());
+    });
+    setFunc(arr);
+  };
+
+  useSubCollection("userChats", "chats", setUserChats, user, callback);
 
   return userChats;
 };
@@ -130,19 +146,13 @@ const useMessages = (chatId) => {
 
 export { useContacts, useUserChats, useChats, useUserDB, useAuthUser, useMessages, useChat };
 
-const useSubCollection = (collection, subCollection, setFunc, user) => {
+const useSubCollection = (collection, subCollection, setFunc, user, callback) => {
   useEffect(() => {
     const listener = db
       .collection(collection)
       .doc(user?.email)
       .collection(subCollection)
-      .onSnapshot((querySnapshot) => {
-        const arr = [];
-        querySnapshot.forEach((item) => {
-          arr.push(item.data());
-        });
-        setFunc(arr);
-      });
+      .onSnapshot((querySnapshot) => callback(querySnapshot, setFunc));
 
     return () => {
       listener();

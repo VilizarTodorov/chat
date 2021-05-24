@@ -17,11 +17,6 @@ const useStyles = makeStyles({
   },
 });
 
-const HighLight = ({ value }) => {
-  const classes = useStyles();
-  return <span className={classes.span}>{value}</span>;
-};
-
 const Contacts = ({ close, isOpen }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -38,6 +33,11 @@ const Contacts = ({ close, isOpen }) => {
   };
 
   const searchFunction = (searchValue, setList, initialList) => {
+    if (!searchValue) {
+      setList(initialList);
+      return;
+    }
+
     const regex = new RegExp(searchValue, "gi");
     let filtered = initialList.filter((contact) => contact.email.includes(searchValue));
 
@@ -47,7 +47,7 @@ const Contacts = ({ close, isOpen }) => {
         allowedAttributes: false,
         allowedTags: false,
       });
-      return { ...contact, email: cleanEmail };
+      return { ...contact, displayEmail: cleanEmail };
     });
     setList(filtered);
   };

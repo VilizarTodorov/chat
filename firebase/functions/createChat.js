@@ -1,7 +1,15 @@
 import { db } from "../";
+import getUser from "../../helpers/functions/getUser";
 
 const createChat = async (contact, user, userChats, callback, router) => {
-  const chat = userChats.find((c) => c.users.includes(contact));
+  const chat = userChats.find((c) => {
+    const hasContact = getUser(c.users, contact);
+
+    if (hasContact.email) {
+      return true;
+    }
+    return false;
+  });
 
   if (chat) {
     callback();
