@@ -1,31 +1,3 @@
-// import CssBaseline from "@material-ui/core/CssBaseline";
-// import { ThemeProvider } from "styled-components";
-// import theme from "../src/theme";
-
-// function MyApp({ Component, pageProps }) {
-//   console.log(theme);
-//   useEffect(() => {
-//     // Remove the server-side injected CSS.
-//     const jssStyles = document.querySelector("#jss-server-side");
-//     if (jssStyles) {
-//       jssStyles.parentElement.removeChild(jssStyles);
-//     }
-//   }, []);
-
-//   return (
-//     <StylesProvider injectFirst>
-//       <ThemeProvider theme={theme}>
-//         <CssBaseline />
-//         <UserProvider>
-//           <Component {...pageProps} />
-//         </UserProvider>
-//       </ThemeProvider>
-//     </StylesProvider>
-//   );
-// }
-
-// export default MyApp;
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import Head from "next/head";

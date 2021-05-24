@@ -4,14 +4,9 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import SendIcon from "@material-ui/icons/Send";
 import React, { useState } from "react";
 import { sendMessage } from "../../firebase/functions";
+import EmojiPicker from "./EmojiPicker";
 
 const useStyles = makeStyles({
-  footer: {
-    padding: "5px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-  },
   messageInput: {
     margin: "12px",
     flex: 1,
@@ -22,11 +17,19 @@ const useStyles = makeStyles({
     paddingLeft: "15px",
     resize: "none",
   },
+  container: {
+    padding: "5px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    position: "relative",
+  },
 });
 
 const ChatScreenFooter = ({ chatId, user }) => {
   const classes = useStyles();
   const [message, setMessage] = useState("");
+  const [isEmojiOpen, setIsEmojiOpen] = useState(false);
 
   const submitMessage = () => {
     sendMessage(message, chatId, user)
@@ -49,26 +52,29 @@ const ChatScreenFooter = ({ chatId, user }) => {
   };
 
   return (
-    <footer className={classes.footer}>
-      <Box>
-        <IconButton>
-          <InsertEmoticonIcon></InsertEmoticonIcon>
-        </IconButton>
-        <IconButton component="label">
-          <AttachFileIcon></AttachFileIcon>
-          <input type="file" hidden />
+    <footer>
+      {isEmojiOpen && <EmojiPicker isOpen={isEmojiOpen} setMessage={setMessage}></EmojiPicker>}
+      <Box className={classes.container}>
+        <Box>
+          <IconButton onClick={() => setIsEmojiOpen((v) => !v)}>
+            <InsertEmoticonIcon></InsertEmoticonIcon>
+          </IconButton>
+          <IconButton component="label">
+            <AttachFileIcon></AttachFileIcon>
+            <input type="file" hidden />
+          </IconButton>
+        </Box>
+        <TextareaAutosize
+          rowsMax={5}
+          onKeyDown={onKeyDown}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className={classes.messageInput}
+        ></TextareaAutosize>
+        <IconButton onClick={submitMessage}>
+          <SendIcon></SendIcon>
         </IconButton>
       </Box>
-      <TextareaAutosize
-        rowsMax={5}
-        onKeyDown={onKeyDown}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        className={classes.messageInput}
-      ></TextareaAutosize>
-      <IconButton onClick={submitMessage}>
-        <SendIcon></SendIcon>
-      </IconButton>
     </footer>
   );
 };

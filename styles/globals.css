@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
 }
 
 a {
@@ -13,4 +13,23 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.emoji-mart.emoji-mart-dark {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+}
+
+.emoji-mart-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.emoji-mart-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.emoji-mart-bar:last-child {
+  display: none;
 }
