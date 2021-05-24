@@ -22,6 +22,7 @@ const EmojiPicker = ({ isOpen, setMessage }) => {
   return (
     <Container className={`${classes.container} ${isOpen && classes.active}`}>
       <NimblePicker
+        enableFrequentEmojiSort={true}
         title="Pick your emoji…"
         emoji="point_up"
         style={{ width: "auto", height: "100%" }}
