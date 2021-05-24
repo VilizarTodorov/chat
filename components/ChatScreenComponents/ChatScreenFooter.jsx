@@ -53,7 +53,7 @@ const ChatScreenFooter = ({ chatId, user }) => {
 
   return (
     <footer>
-      {isEmojiOpen && <EmojiPicker isOpen={isEmojiOpen} setMessage={setMessage}></EmojiPicker>}
+      <EmojiPicker isOpen={isEmojiOpen} setMessage={setMessage}></EmojiPicker>
       <Box className={classes.container}>
         <Box>
           <IconButton onClick={() => setIsEmojiOpen((v) => !v)}>
