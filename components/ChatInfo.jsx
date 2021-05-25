@@ -2,10 +2,10 @@ import React from "react";
 import ChatInfoContainer from "./ChatInfoComponents/ChatInfoContainer";
 import ChatInfoHeader from "./ChatInfoComponents/ChatInfoHeader";
 
-const ChatInfo = () => {
+const ChatInfo = ({ isOpen, close }) => {
   return (
-    <ChatInfoContainer>
-      <ChatInfoHeader></ChatInfoHeader>
+    <ChatInfoContainer isOpen={isOpen}>
+      <ChatInfoHeader close={close}></ChatInfoHeader>
     </ChatInfoContainer>
   );
 };

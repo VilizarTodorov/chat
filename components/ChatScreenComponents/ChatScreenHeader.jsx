@@ -14,11 +14,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ChatScreenHeader = ({ recipient, photoURL }) => {
+const ChatScreenHeader = ({ openChatInfo, recipient, photoURL }) => {
   const classes = useStyles();
   return (
     <BaseHeader>
-      <Box className={classes.container}>
+      <Box onClick={openChatInfo} className={classes.container}>
         <Avatar className={classes.avatar} src={photoURL} alt={`${recipient}'s profile picture`}></Avatar>
         <Typography>{recipient}</Typography>
       </Box>
