@@ -25,6 +25,7 @@ const useStyles = makeStyles({
     outline: "none",
     backgroundColor: "transparent",
     color: "white",
+    flex: 1,
   },
   clear: {
     marginLeft: "auto",

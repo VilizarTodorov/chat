@@ -1,5 +1,4 @@
 import { db } from "../";
-import getUser from "../../helpers/functions/getUser";
 
 const createChat = async (contact, user, userChats, callback, router) => {
   const chat = userChats.find((c) => {
