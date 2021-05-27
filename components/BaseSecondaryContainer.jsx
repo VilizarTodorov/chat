@@ -19,9 +19,13 @@ const useStyles = makeStyles({
   },
 });
 
-const BaseSecondaryContainer = ({ isOpen, children }) => {
+const BaseSecondaryContainer = ({ isOpen, children, className }) => {
   const classes = useStyles();
-  return <Container className={`${classes.container} ${isOpen && classes.active}`}>{children}</Container>;
+  return (
+    <Container className={`${classes.container} ${isOpen && classes.active} ${className && className}`}>
+      {children}
+    </Container>
+  );
 };
 
 export default BaseSecondaryContainer;

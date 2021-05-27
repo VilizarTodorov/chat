@@ -28,7 +28,7 @@ const ChatScreen = () => {
         <Messages messages={messages} userEmail={context.user.email} chatId={chat.id}></Messages>
         <ChatScreenFooter chatId={chat.id} user={context.user}></ChatScreenFooter>
       </ChatScreenContainer>
-      <ChatInfo isOpen={chatInfoOpen} close={() => setChatInfoOpen(false)}></ChatInfo>
+      <ChatInfo recipient={recipient} isOpen={chatInfoOpen} close={() => setChatInfoOpen(false)}></ChatInfo>
     </Fragment>
   );
 };
