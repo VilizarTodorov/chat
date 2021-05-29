@@ -1,6 +1,6 @@
-import { Box } from "@material-ui/core";
 import React from "react";
 import ChatInfoAbout from "./ChatInfoComponents/ChatInfoAbout";
+import ChatInfoActions from "./ChatInfoComponents/ChatInfoActions";
 import ChatInfoAvatar from "./ChatInfoComponents/ChatInfoAvatar";
 import ChatInfoContainer from "./ChatInfoComponents/ChatInfoContainer";
 import ChatInfoHeader from "./ChatInfoComponents/ChatInfoHeader";
@@ -22,6 +22,7 @@ const ChatInfo = ({ recipient, isOpen, close }) => {
         <ChatInfoMediaLinksDocs></ChatInfoMediaLinksDocs>
         <ChatInfoOptions></ChatInfoOptions>
         <ChatInfoAbout recipientAbout={recipient.about}></ChatInfoAbout>
+        <ChatInfoActions></ChatInfoActions>
       </Container>
     </ChatInfoContainer>
   );
