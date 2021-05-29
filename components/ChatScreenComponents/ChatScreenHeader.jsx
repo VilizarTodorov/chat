@@ -3,11 +3,13 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
 import BaseHeader from "../BaseHeader";
+import ChatScreenMoreVertIconMenu from "./ChatScreenMoreVertIconMenu";
 
 const useStyles = makeStyles({
   container: {
     display: "flex",
     alignItems: "center",
+    cursor: "pointer",
   },
   avatar: {
     marginRight: "15px",
@@ -26,9 +28,7 @@ const ChatScreenHeader = ({ openChatInfo, recipient, photoURL }) => {
         <IconButton>
           <SearchIcon></SearchIcon>
         </IconButton>
-        <IconButton>
-          <MoreVertIcon></MoreVertIcon>
-        </IconButton>
+        <ChatScreenMoreVertIconMenu openChatInfo={openChatInfo}></ChatScreenMoreVertIconMenu>
       </Box>
     </BaseHeader>
   );
