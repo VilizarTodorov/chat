@@ -8,7 +8,7 @@ import ChatInfoMediaLinksDocs from "./ChatInfoComponents/ChatInfoMediaLinksDocs"
 import ChatInfoOptions from "./ChatInfoComponents/ChatInfoOptions";
 import Container from "./ChatInfoComponents/Container";
 
-const ChatInfo = ({ recipient, isOpen, close }) => {
+const ChatInfo = ({ chatId, user, recipient, isOpen, close }) => {
   return (
     <ChatInfoContainer isOpen={isOpen}>
       <ChatInfoHeader close={close}></ChatInfoHeader>
@@ -22,7 +22,7 @@ const ChatInfo = ({ recipient, isOpen, close }) => {
         <ChatInfoMediaLinksDocs></ChatInfoMediaLinksDocs>
         <ChatInfoOptions></ChatInfoOptions>
         <ChatInfoAbout recipientAbout={recipient.about}></ChatInfoAbout>
-        <ChatInfoActions></ChatInfoActions>
+        <ChatInfoActions chatId={chatId} recipientEmail={recipient.email} userEmail={user.email}></ChatInfoActions>
       </Container>
     </ChatInfoContainer>
   );
