@@ -1,16 +1,22 @@
-import { Container, Typography } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { Fragment } from "react";
 import ProfileAvatar from "../ProfileComponents/ProfileAvatar";
+import GeneralContainer from "./GeneralContainer";
 
-const ChatInfoAvatar = ({ email, isOpen, photoURL }) => {
+const useStyles = makeStyles({
+  info: {
+    padding: "5px 0",
+  },
+});
+
+const ChatInfoAvatar = ({ displayName, email, isOpen, photoURL }) => {
+  const classes = useStyles();
   return (
-    <Fragment>
+    <GeneralContainer>
       <ProfileAvatar email={email} isOpen={isOpen} photoURL={photoURL}></ProfileAvatar>
-      <Container>
-        <Typography>{email}</Typography>
-      </Container>
-    </Fragment>
+      <Typography className={classes.info}>{displayName}</Typography>
+      <Typography className={classes.info}>{email}</Typography>
+    </GeneralContainer>
   );
 };
 
