@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     opacity: 0,
   },
   active: {
-    flex: "40%",
+    flexBasis: "43%",
     opacity: 1,
     borderLeft: "1px solid whitesmoke",
   },
@@ -21,6 +21,16 @@ const useStyles = makeStyles({
   },
   secondaryActive: {
     left: 0,
+  },
+
+  [`@media (max-width: 1020px)`]: {
+    container: {
+      position: "absolute",
+      right: 0,
+      top: 0,
+      width: "100%",
+      height: "100%",
+    },
   },
 });
 

@@ -3,7 +3,9 @@ import React from "react";
 
 const useStyles = makeStyles({
   container: {
-    flexBasis: "60%",
+    position: "relative",
+    // flexBasis: "60%",
+    flex: 1,
     display: "flex",
     flexDirection: "column",
     borderLeft: "1px solid whitesmoke",

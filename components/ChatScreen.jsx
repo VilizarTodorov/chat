@@ -8,8 +8,19 @@ import getUser from "../helpers/functions/getUser";
 import { useRouter } from "next/router";
 import { useChat, useMessages } from "../UserContext/hooks";
 import ChatInfo from "./ChatInfo";
+import { Box, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  box: {
+    position: "relative",
+    // flexBasis: "60%",
+    flex: 1,
+    display: "flex",
+  },
+});
 
 const ChatScreen = () => {
+  const classes = useStyles();
   const context = useUser();
   const router = useRouter();
   const messages = useMessages(router.query.id);
@@ -18,7 +29,8 @@ const ChatScreen = () => {
   const [chatInfoOpen, setChatInfoOpen] = useState(false);
 
   return (
-    <Fragment>
+    <Box className={classes.box}>
+      {/* <Fragment> */}
       <ChatScreenContainer>
         <ChatScreenHeader
           openChatInfo={() => setChatInfoOpen(true)}
@@ -35,7 +47,8 @@ const ChatScreen = () => {
         isOpen={chatInfoOpen}
         close={() => setChatInfoOpen(false)}
       ></ChatInfo>
-    </Fragment>
+      {/* </Fragment> */}
+    </Box>
   );
 };
 

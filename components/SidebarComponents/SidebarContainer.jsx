@@ -5,7 +5,7 @@ const useStyles = makeStyles({
   root: {
     padding: 0,
     margin: 0,
-    flexBasis: "40%",
+    flexBasis: "35%",
     position: "relative",
     display: "flex",
     flexDirection: "column",
