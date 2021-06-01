@@ -7,7 +7,8 @@ const useStyles = makeStyles({
     height: "100vh",
     display: "flex",
     padding: 0,
-    overflow:'hidden',
+    overflow: "hidden",
+    backgroundColor: "#807272",
   },
 });
 

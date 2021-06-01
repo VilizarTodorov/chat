@@ -2,6 +2,7 @@ import { Box, debounce, makeStyles } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { useCallback, useState } from "react";
 import ClearIcon from "@material-ui/icons/Clear";
+import useDebounce from "../hooks/useDebounce";
 
 const useStyles = makeStyles({
   container: {
@@ -42,20 +43,16 @@ const useStyles = makeStyles({
 
 const Search = ({ setList, initialList, searchFunction }) => {
   const [searchValue, setSearchValue] = useState("");
-
-  const debouncedFen = useCallback(
-    debounce((searchValue, setList, initialList) => searchFunction(searchValue, setList, initialList), 150),
-    [] // will be created only once initially
-  );
+  const filter = useDebounce(searchFunction);
 
   const onChange = (e) => {
     setSearchValue(e.target.value);
-    debouncedFen(e.target.value, setList, initialList);
+    filter(e.target.value, setList, initialList);
   };
 
   const onClick = () => {
     setSearchValue("");
-    debouncedFen("", setList, initialList);
+    filter("", setList, initialList);
   };
 
   const classes = useStyles();
