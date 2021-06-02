@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     position: "relative",
     display: "flex",
     flexDirection: "column",
+    borderRight: "1px solid whitesmoke",
   },
 });
 

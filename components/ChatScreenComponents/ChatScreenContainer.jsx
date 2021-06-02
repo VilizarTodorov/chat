@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    borderLeft: "1px solid whitesmoke",
+    // borderLeft: "1px solid whitesmoke",
   },
 });
 
