@@ -6,6 +6,7 @@ import { auth } from "../firebase";
 import { useUser } from "../UserContext";
 import { signInWithGoogle } from "../firebase/functions";
 import useForm from "../hooks/useForm";
+import RegisterLink from "./RegisterComponents/RegisterLink";
 
 const Login = (props) => {
   const classes = useButtonStyles();
@@ -16,7 +17,7 @@ const Login = (props) => {
   const signInWithEmailAndPassword = (e) => {
     e.preventDefault();
 
-    const {email,password} = values
+    const { email, password } = values;
 
     auth
       .signInWithEmailAndPassword(email, password)
@@ -59,6 +60,7 @@ const Login = (props) => {
         >
           Sign in with Google
         </Button>
+        <RegisterLink></RegisterLink>
       </Form>
     </FormContainer>
   );

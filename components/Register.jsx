@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import { auth, db } from "../firebase";
-import { Form, FormButton, FormContainer, FormInput, FormTitle } from "./Form";
-import { useUser } from "../UserContext/index";
-import useForm from "../hooks/useForm";
 import useDebounce from "../hooks/useDebounce";
-import passwordValidations from "../validations/passwordValidations";
+import useForm from "../hooks/useForm";
+import { useUser } from "../UserContext/index";
 import emailValidations from "../validations/emailValidations";
+import passwordValidations from "../validations/passwordValidations";
+import { Form, FormButton, FormContainer, FormInput, FormTitle } from "./Form";
+import LoginLink from "./LoginComponents/LoginLink";
 
 const Register = (props) => {
   const validatePassword = useDebounce(passwordValidations);
@@ -32,6 +33,15 @@ const Register = (props) => {
   const register = async (e) => {
     e.preventDefault();
     const { email, displayName, password } = values;
+
+    if (
+      errors.email.hasError ||
+      errors.password.hasError ||
+      errors.repeatPassword.hasError ||
+      errors.displayName.hasError
+    ) {
+      return;
+    }
 
     try {
       const result = await auth.createUserWithEmailAndPassword(email, password);
@@ -120,6 +130,7 @@ const Register = (props) => {
           label="Repeat Password"
         ></FormInput>
         <FormButton>Register</FormButton>
+        <LoginLink></LoginLink>
       </Form>
     </FormContainer>
   );
