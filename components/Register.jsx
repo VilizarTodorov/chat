@@ -3,17 +3,22 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, FormButton, FormContainer, FormInput, FormTitle } from "./Form";
 import { useUser } from "../UserContext/index";
+import useForm from "../hooks/useForm";
 
 const Register = (props) => {
   const user = useUser();
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
   const router = useRouter();
+  const [values, onChange] = useForm({
+    displayName: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  });
 
   const register = async (e) => {
     e.preventDefault();
+    const { email, displayName, password } = values;
+
     try {
       const result = await auth.createUserWithEmailAndPassword(email, password);
 
@@ -56,8 +61,8 @@ const Register = (props) => {
           id="displayName"
           name="displayName"
           type="text"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
+          value={values.displayName}
+          onChange={onChange}
           placeholder="Display Name"
           required={true}
           autoFocus={true}
@@ -67,8 +72,8 @@ const Register = (props) => {
           id="email"
           name="email"
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email}
+          onChange={onChange}
           placeholder="Email"
           required={true}
           autoFocus={false}
@@ -78,8 +83,8 @@ const Register = (props) => {
           id="password"
           name="password"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={values.password}
+          onChange={onChange}
           placeholder="Password"
           required={true}
           autoFocus={false}
@@ -89,8 +94,8 @@ const Register = (props) => {
           id="repeatPassword"
           name="repeatPassword"
           type="password"
-          value={repeatPassword}
-          onChange={(e) => setRepeatPassword(e.target.value)}
+          value={values.repeatPassword}
+          onChange={onChange}
           placeholder="Repeat Password"
           required={true}
           autoFocus={false}

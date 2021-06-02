@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     display: "flex",
     padding: 0,
     overflow: "hidden",
-    backgroundColor: "#807272",
+    backgroundColor: "#504d4d",
   },
 });
 
