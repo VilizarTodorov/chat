@@ -5,15 +5,19 @@ import { Form, FormButton, FormContainer, FormInput, FormTitle } from "../compon
 import { auth } from "../firebase";
 import { useUser } from "../UserContext";
 import { signInWithGoogle } from "../firebase/functions";
+import useForm from "../hooks/useForm";
 
 const Login = (props) => {
   const classes = useButtonStyles();
   const context = useUser();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [values, onChange] = useForm({ email: "", password: "" });
 
   const signInWithEmailAndPassword = (e) => {
     e.preventDefault();
+
+    const {email,password} = values
+
     auth
       .signInWithEmailAndPassword(email, password)
       .catch((error) => context.setAlert({ open: true, severity: "error", title: "Error", message: error.message }));
@@ -27,8 +31,8 @@ const Login = (props) => {
           id="email"
           name="email"
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email}
+          onChange={onChange}
           placeholder="Email"
           required={true}
           autoFocus={true}
@@ -38,8 +42,8 @@ const Login = (props) => {
           id="password"
           name="password"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={values.password}
+          onChange={onChange}
           placeholder="Password"
           required={true}
           autoFocus={false}

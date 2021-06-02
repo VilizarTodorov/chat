@@ -4,9 +4,14 @@ import { auth, db } from "../firebase";
 import { Form, FormButton, FormContainer, FormInput, FormTitle } from "./Form";
 import { useUser } from "../UserContext/index";
 import useForm from "../hooks/useForm";
+import useDebounce from "../hooks/useDebounce";
+import passwordValidations from "../validations/passwordValidations";
+import emailValidations from "../validations/emailValidations";
 
 const Register = (props) => {
-  const user = useUser();
+  const validatePassword = useDebounce(passwordValidations);
+  const validateEmail = useDebounce(emailValidations);
+  const context = useUser();
   const router = useRouter();
   const [values, onChange] = useForm({
     displayName: "",
@@ -15,6 +20,15 @@ const Register = (props) => {
     repeatPassword: "",
   });
 
+  const [errors, _, setValue] = useForm({ displayName: "", email: "", password: "", repeatPassword: "" });
+
+  const onChangeWithValidation = (validationFn) => {
+    return (e) => {
+      onChange(e);
+      validationFn(e.target.value, setValue, e.target.name);
+    };
+  };
+
   const register = async (e) => {
     e.preventDefault();
     const { email, displayName, password } = values;
@@ -22,7 +36,7 @@ const Register = (props) => {
     try {
       const result = await auth.createUserWithEmailAndPassword(email, password);
 
-      user.setUser({
+      context.setUser({
         uid: result.user.uid,
         email,
         displayName,
@@ -73,22 +87,26 @@ const Register = (props) => {
           name="email"
           type="email"
           value={values.email}
-          onChange={onChange}
+          onChange={onChangeWithValidation(validateEmail)}
           placeholder="Email"
           required={true}
           autoFocus={false}
           label="Email"
+          hasError={errors.email.hasError}
+          errorMessage={errors.email.message}
         ></FormInput>
         <FormInput
           id="password"
           name="password"
           type="password"
           value={values.password}
-          onChange={onChange}
+          onChange={onChangeWithValidation(validatePassword)}
           placeholder="Password"
           required={true}
           autoFocus={false}
           label="Password"
+          hasError={errors.password.hasError}
+          errorMessage={errors.password.message}
         ></FormInput>
         <FormInput
           id="repeatPassword"

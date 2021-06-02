@@ -1,4 +1,4 @@
-import { Box, Container, FormControl, Input, makeStyles } from "@material-ui/core";
+import { Box, Container, FormControl, FormHelperText, Input, makeStyles } from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles({
@@ -7,12 +7,24 @@ const useStyles = makeStyles({
   },
 });
 
-const FormInput = ({ id, name, type, value, onChange, placeholder, required, autoFocus, label }) => {
+const FormInput = ({
+  id,
+  name,
+  type,
+  value,
+  onChange,
+  placeholder,
+  required,
+  autoFocus,
+  label,
+  hasError,
+  errorMessage,
+}) => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
       <Box component="span">{label}</Box>
-      <FormControl margin="normal" fullWidth>
+      <FormControl error={hasError} margin="normal" fullWidth>
         <Input
           id={id}
           name={name}
@@ -23,6 +35,7 @@ const FormInput = ({ id, name, type, value, onChange, placeholder, required, aut
           required={required}
           autoFocus={autoFocus}
         ></Input>
+        <FormHelperText>{errorMessage}</FormHelperText>
       </FormControl>
     </Container>
   );

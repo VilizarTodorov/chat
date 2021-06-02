@@ -7,7 +7,11 @@ const useForm = (initialValues) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  return [values, onChange, setValues];
+  const setValue = (name, value) => {
+    setValues({ ...values, [name]: value });
+  };
+
+  return [values, onChange, setValue];
 };
 
 export default useForm;

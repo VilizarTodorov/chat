@@ -25,7 +25,7 @@ const hasMinLength = (password) => {
   return validate(password, regex);
 };
 
-const validatePassword = (password, setError) => {
+const validatePassword = (password, setError, name) => {
   const error = {
     message: "",
     hasError: false,
@@ -51,7 +51,7 @@ const validatePassword = (password, setError) => {
     error.hasError = false;
   }
 
-  setError(error);
+  setError(name, error);
   return error;
 };
 
