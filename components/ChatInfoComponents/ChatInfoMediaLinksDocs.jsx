@@ -16,11 +16,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ChatInfoMediaLinksDocs = () => {
+const ChatInfoMediaLinksDocs = ({ open }) => {
   const classes = useStyles();
   return (
     <GeneralContainer>
-      <Box className={classes.box}>
+      <Box onClick={open} className={classes.box}>
         <Typography>Media, Links and Docs</Typography>
         <ArrowForwardIosIcon fontSize="small"></ArrowForwardIosIcon>
       </Box>

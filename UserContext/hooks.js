@@ -144,7 +144,30 @@ const useMessages = (chatId) => {
   return messages;
 };
 
-export { useContacts, useUserChats, useChats, useUserDB, useAuthUser, useMessages, useChat };
+const useChatLinks = (chatId) => {
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    const listener = db
+      .collection("chats")
+      .doc(chatId)
+      .collection("links")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((querySnapshot) => {
+        let links = [];
+        querySnapshot.forEach((link) => links.push({ ...link.data(), id: link.id }));
+        setLinks(links);
+      });
+
+    return () => {
+      listener();
+    };
+  }, [chatId]);
+
+  return links;
+};
+
+export { useContacts, useUserChats, useChats, useUserDB, useAuthUser, useMessages, useChat, useChatLinks };
 
 const useSubCollection = (collection, subCollection, setFunc, user, callback) => {
   useEffect(() => {
