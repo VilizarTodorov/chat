@@ -1,5 +1,6 @@
-import { List, makeStyles, Tab, Tabs } from "@material-ui/core";
+import { makeStyles, Tab, Tabs } from "@material-ui/core";
 import React, { useState } from "react";
+import getUrlFromLink from "../../../helpers/functions/getUrlFromLink";
 import BaseSecondaryContainer from "../../BaseSecondaryContainer";
 import BaseSecondaryHeader from "../../BaseSecondaryHeader";
 import LinkItem from "./LinkItem";
@@ -47,7 +48,15 @@ const LinksMediaDocs = ({ isOpen, close, links, media, docs }) => {
         2
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <LinkItem></LinkItem>
+        {links.map((link) => {
+          console.log(link);
+          const url = getUrlFromLink(link.url);
+          return (
+            <LinkItem key={link.id} url={url}>
+              {url}
+            </LinkItem>
+          );
+        })}
       </TabPanel>
     </BaseSecondaryContainer>
   );

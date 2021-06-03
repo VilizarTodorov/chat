@@ -29,6 +29,8 @@ const ChatScreen = () => {
   const recipient = getUser(chat.users, context.user.email);
   const [chatInfoOpen, setChatInfoOpen] = useState(false);
 
+  console.log(links);
+
   return (
     <Box className={classes.box}>
       <ChatScreenContainer>

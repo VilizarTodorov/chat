@@ -6,9 +6,22 @@ const sendMessage = (message, chatId, user) => {
     return;
   }
 
-  getUrls(message);
+  const ulrArr = getUrls(message);
+  if (ulrArr) {
+    const promises = [];
+    ulrArr.forEach((url) => {
+      const promise = db.collection("chats").doc(chatId).collection("links").add({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        url,
+        user: user.email,
+      });
 
-  db.collection("chats").doc(chatId).collection("links").add
+      promises.push(promise);
+    });
+    Promise.all(promises)
+      .then((x) => console.log("yes", x))
+      .catch((err) => console.log(err));
+  }
 
   return db.collection("chats").doc(chatId).collection("messages").add({
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),

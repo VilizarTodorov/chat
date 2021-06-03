@@ -71,7 +71,7 @@ const useStyles = makeStyles({
   },
 });
 
-const LinkItem = () => {
+const LinkItem = ({ url }) => {
   const classes = useStyles();
   return (
     <Box className={classes.linkItem}>
@@ -92,8 +92,8 @@ const LinkItem = () => {
             </Box>
           </Box>
           <Typography>
-            <a className={classes.link} target="_blank" href="google.com" rel="noopener noreferrer">
-              google.com
+            <a className={classes.link} target="_blank" href={url} rel="noopener noreferrer">
+              {url}
             </a>
           </Typography>
         </Box>
