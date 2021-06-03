@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     backgroundColor: "#065051",
   },
   linkIcon: {
-    positions: "relative",
+    position: "relative",
     fontSize: "90px",
     backgroundColor: "#1e2429",
     zIndex: 20,
@@ -49,8 +49,10 @@ const useStyles = makeStyles({
     overflow: "hidden",
     textOverflow: "ellipsis",
     padding: "4px",
+    wordBreak: "break-all",
   },
   link: {
+    wordBreak: "break-all",
     "&:hover": {
       textDecoration: "underline",
     },
@@ -69,6 +71,12 @@ const useStyles = makeStyles({
   typography: {
     fontWeight: 100,
   },
+  urlContainer: {
+    height: "20px",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    wordBreak: "normal",
+  },
 });
 
 const LinkItem = ({ url }) => {
@@ -85,17 +93,15 @@ const LinkItem = ({ url }) => {
             <LinkIcon className={classes.linkIcon}></LinkIcon>
             <Box className={classes.textContainer}>
               <Typography className={classes.typography} variant="subtitle2">
-                It is a long established fact that a reader will be distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                of letters, as opposed to using 'Content here, content here', making it look like readable English.
+                {url}
               </Typography>
             </Box>
           </Box>
-          <Typography>
+          <Box className={classes.urlContainer}>
             <a className={classes.link} target="_blank" href={url} rel="noopener noreferrer">
               {url}
             </a>
-          </Typography>
+          </Box>
         </Box>
       </Box>
     </Box>

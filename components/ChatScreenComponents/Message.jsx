@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     marginBlockEnd: "1em",
     marginInlineStart: "0px",
     marginInlineEnd: "0px",
+    wordBreak:"break-all"
   },
   messageHover: {
     "&:hover $messageOptions": {
