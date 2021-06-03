@@ -1,7 +1,8 @@
-import { makeStyles, Tab, Tabs } from "@material-ui/core";
+import { List, makeStyles, Tab, Tabs } from "@material-ui/core";
 import React, { useState } from "react";
 import BaseSecondaryContainer from "../../BaseSecondaryContainer";
 import BaseSecondaryHeader from "../../BaseSecondaryHeader";
+import LinkItem from "./LinkItem";
 import TabPanel from "./TabPanel";
 
 function a11yProps(index) {
@@ -17,6 +18,9 @@ const useStyles = makeStyles({
   },
   tab: {
     minWidth: 0,
+  },
+  flexContainer: {
+    justifyContent: "space-between",
   },
 });
 
@@ -43,7 +47,7 @@ const LinksMediaDocs = ({ isOpen, close, links, media, docs }) => {
         2
       </TabPanel>
       <TabPanel value={value} index={2}>
-        3
+        <LinkItem></LinkItem>
       </TabPanel>
     </BaseSecondaryContainer>
   );

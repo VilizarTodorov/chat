@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     opacity: 0,
   },
   active: {
-    flexBasis: "43%",
+    flexBasis: "50%",
     opacity: 1,
     // borderLeft: "1px solid whitesmoke",
   },
