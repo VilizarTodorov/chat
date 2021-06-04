@@ -5,6 +5,7 @@ import React from "react";
 const useStyles = makeStyles({
   linkItem: {
     position: "relative",
+    padding: "1px",
   },
   container: {
     padding: "5px",
@@ -64,7 +65,7 @@ const useStyles = makeStyles({
     borderRight: "16px solid #056162",
     borderBottom: "10px solid transparent",
     position: "absolute",
-    top: "2px",
+    top: "3.9px",
     left: "36px",
     transform: "rotate(15deg)",
   },
