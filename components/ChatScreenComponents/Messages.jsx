@@ -5,6 +5,7 @@ import ScrollDownButton from "./ScrollDownButton";
 
 const useStyles = makeStyles({
   container: {
+    positions: "relative",
     paddingLeft: "64px",
     paddingRight: "64px",
     display: "flex",

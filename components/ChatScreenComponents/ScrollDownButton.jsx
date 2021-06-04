@@ -4,7 +4,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const useStyles = makeStyles({
   scrollDownButton: {
-    position: "fixed",
+    position: "absolute",
     right: "8px",
     bottom: "70px",
     transform: "scale(0)",

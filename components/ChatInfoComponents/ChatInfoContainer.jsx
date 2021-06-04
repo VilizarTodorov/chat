@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   active: {
     flexBasis: "50%",
     opacity: 1,
-    // borderLeft: "1px solid whitesmoke",
+    borderLeft: "1px solid whitesmoke",
   },
   secondaryContainer: {
     left: "100%",
