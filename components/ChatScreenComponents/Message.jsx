@@ -4,6 +4,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import React, { Fragment, useState } from "react";
 import { deleteMessage, editMessage } from "../../firebase/functions";
 import MessageOptionsMenu from "./MessageOptionsMenu";
+import getUrls from "../../helpers/functions/checkIfContainsUrl";
+import getUrlFromLink from "../../helpers/functions/getUrlFromLink";
 
 const useStyles = makeStyles({
   container: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles({
     marginBlockEnd: "1em",
     marginInlineStart: "0px",
     marginInlineEnd: "0px",
-    wordBreak:"break-all"
+    wordBreak: "break-all",
   },
   messageHover: {
     "&:hover $messageOptions": {
@@ -72,6 +74,17 @@ const Message = ({ isSender, message, messageId, chatId }) => {
   const [newMessage, setNewMessage] = useState(message);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  let msg = message;
+  const urls = getUrls(message);
+  if (urls) {
+    urls.forEach((url) => {
+      console.log(url);
+      const URL = getUrlFromLink(url);
+      msg = msg.replaceAll(url, `<a target="_blank" href=${URL} rel="noopener noreferrer">${url}</a>`);
+    });
+    console.log(msg);
+  }
+
   return (
     <Container className={classes.container}>
       <Box
@@ -80,7 +93,7 @@ const Message = ({ isSender, message, messageId, chatId }) => {
         }`}
       >
         {!isEditing ? (
-          <Typography>{message}</Typography>
+          <Typography dangerouslySetInnerHTML={{ __html: msg }}></Typography>
         ) : (
           <Fragment>
             <TextareaAutosize
