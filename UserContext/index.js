@@ -1,6 +1,10 @@
 import { createContext, useContext, useState } from "react";
 import Alert from "../components/Alert";
-import { useAuthUser, useChats, useContacts, useUserChats, useUserDB } from "./hooks";
+import useAuthUser from "../hooks/useAuthUser";
+import useChats from "../hooks/useChats";
+import useContacts from "../hooks/useContacts";
+import useUserChats from "../hooks/useUserChats";
+import useUserDB from "../hooks/useUserDB";
 
 export const UserContext = createContext();
 
