@@ -1,6 +1,7 @@
 import { Box, Checkbox, makeStyles, Typography } from "@material-ui/core";
 import LinkIcon from "@material-ui/icons/Link";
 import React from "react";
+import BaseHyperLink from "../../../BaseComponents/BaseHyperLink";
 
 const useStyles = makeStyles({
   linkItem: {
@@ -52,12 +53,6 @@ const useStyles = makeStyles({
     padding: "4px",
     wordBreak: "break-all",
   },
-  link: {
-    wordBreak: "break-all",
-    "&:hover": {
-      textDecoration: "underline",
-    },
-  },
   triangle: {
     width: 0,
     height: 0,
@@ -99,9 +94,7 @@ const LinkItem = ({ url }) => {
             </Box>
           </Box>
           <Box className={classes.urlContainer}>
-            <a className={classes.link} target="_blank" href={url} rel="noopener noreferrer">
-              {url}
-            </a>
+            <BaseHyperLink url={url}>{url}</BaseHyperLink>
           </Box>
         </Box>
       </Box>

@@ -1,5 +1,5 @@
 import { db, firebase } from "../";
-import getUrls from "../../helpers/functions/checkIfContainsUrl";
+import getUrls from "../../helpers/functions/getUrls";
 
 const sendMessage = (message, chatId, user) => {
   if (!message) {

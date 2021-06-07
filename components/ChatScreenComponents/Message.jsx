@@ -3,9 +3,8 @@ import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import React, { Fragment, useState } from "react";
 import { deleteMessage, editMessage } from "../../firebase/functions";
+import getReplacedMessage from "../../helpers/functions/getReplacedMessage";
 import MessageOptionsMenu from "./MessageOptionsMenu";
-import getUrls from "../../helpers/functions/checkIfContainsUrl";
-import getUrlFromLink from "../../helpers/functions/getUrlFromLink";
 
 const useStyles = makeStyles({
   container: {
@@ -73,17 +72,8 @@ const Message = ({ isSender, message, messageId, chatId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newMessage, setNewMessage] = useState(message);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  let msg = message;
-  const urls = getUrls(message);
-  if (urls) {
-    urls.forEach((url) => {
-      console.log(url);
-      const URL = getUrlFromLink(url);
-      msg = msg.replaceAll(url, `<a target="_blank" href=${URL} rel="noopener noreferrer">${url}</a>`);
-    });
-    console.log(msg);
-  }
+  const msg = getReplacedMessage(message);
+  console.log(msg);
 
   return (
     <Container className={classes.container}>
