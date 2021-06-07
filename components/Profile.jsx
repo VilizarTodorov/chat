@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BaseSecondaryContainer from "./BaseSecondaryContainer";
+import BaseSecondaryContainer from "./BaseComponents/BaseSecondaryContainer";
 import ProfileAdditionalInfo from "./ProfileComponents/ProfileAdditionalInfo";
 import ProfileAvatar from "./ProfileComponents/ProfileAvatar";
 import ProfileHeader from "./ProfileComponents/ProfileHeader";

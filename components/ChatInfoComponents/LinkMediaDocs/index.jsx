@@ -1,8 +1,8 @@
 import { makeStyles, Tab, Tabs } from "@material-ui/core";
 import React, { useState } from "react";
 import getUrlFromLink from "../../../helpers/functions/getUrlFromLink";
-import BaseSecondaryContainer from "../../BaseSecondaryContainer";
-import BaseSecondaryHeader from "../../BaseSecondaryHeader";
+import BaseSecondaryContainer from "../../BaseComponents/BaseSecondaryContainer";
+import BaseSecondaryHeader from "../../BaseComponents/BaseSecondaryHeader";
 import LinkItem from "./LinkItem";
 import TabPanel from "./TabPanel";
 

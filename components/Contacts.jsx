@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { createChat } from "../firebase/functions";
 import { useUser } from "../UserContext";
-import BaseSecondaryContainer from "./BaseSecondaryContainer";
+import BaseSecondaryContainer from "./BaseComponents/BaseSecondaryContainer";
 import AddNewContact from "./ContactsComponents/AddNewContact";
 import AddNewContactModal from "./ContactsComponents/AddNewContactModal";
 import ContactsHeader from "./ContactsComponents/ContactsHeader";

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ContactsHeader = ({ close, title }) => {
+const BaseSecondaryHeader = ({ close, title }) => {
   const classes = useStyles();
   return (
     <header className={classes.header}>
@@ -37,4 +37,4 @@ const ContactsHeader = ({ close, title }) => {
   );
 };
 
-export default ContactsHeader;
+export default BaseSecondaryHeader;

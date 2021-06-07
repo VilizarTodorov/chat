@@ -1,6 +1,6 @@
 import { Container, makeStyles } from "@material-ui/core";
 import React from "react";
-import BaseSecondaryContainer from "../BaseSecondaryContainer";
+import BaseSecondaryContainer from "../BaseComponents/BaseSecondaryContainer";
 
 const useStyles = makeStyles({
   container: {

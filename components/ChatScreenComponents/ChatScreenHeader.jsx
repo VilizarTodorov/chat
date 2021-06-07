@@ -1,8 +1,7 @@
 import { Avatar, Box, IconButton, makeStyles, Typography } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
-import BaseHeader from "../BaseHeader";
+import BaseHeader from "../BaseComponents/BaseHeader";
 import ChatScreenMoreVertIconMenu from "./ChatScreenMoreVertIconMenu";
 
 const useStyles = makeStyles({

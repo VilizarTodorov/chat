@@ -1,6 +1,6 @@
 import { Avatar, Box, IconButton, makeStyles } from "@material-ui/core";
 import React from "react";
-import BaseHeader from "../BaseHeader";
+import BaseHeader from "../BaseComponents/BaseHeader";
 import ChatIcon from "@material-ui/icons/Chat";
 import SidebarMoreVertIconMenu from "./SidebarMoreVertIconMenu";
 

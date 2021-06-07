@@ -1,5 +1,5 @@
 import React from "react";
-import BaseHeader from "../BaseHeader";
+import BaseHeader from "../BaseComponents/BaseHeader";
 import ClearIcon from "@material-ui/icons/Clear";
 import { Box, IconButton, makeStyles, Typography } from "@material-ui/core";
 
