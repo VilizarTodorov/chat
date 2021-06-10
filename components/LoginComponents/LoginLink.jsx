@@ -1,5 +1,5 @@
 import React from "react";
-import BaseLinkButton from "../BaseLinkButton";
+import BaseLinkButton from "../BaseComponents/BaseLinkButton";
 
 const LoginLink = () => {
   return <BaseLinkButton route="/login">Already have an account? Click here!</BaseLinkButton>;

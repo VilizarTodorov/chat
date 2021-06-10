@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     borderRight: "1px solid whitesmoke",
+    backgroundColor: "#131c21",
   },
 });
 

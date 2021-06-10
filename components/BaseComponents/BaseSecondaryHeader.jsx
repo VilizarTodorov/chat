@@ -7,6 +7,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "flex-end",
     height: "120px",
+    backgroundColor: "#323739",
   },
   container: {
     padding: 0,

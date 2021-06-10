@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@material-ui/core";
-import useButtonStyles from "../styles/ButtonStyles";
+import useButtonStyles from "../../styles/ButtonStyles";
 
 const BaseLinkButton = ({ route, children }) => {
   const classes = useButtonStyles();

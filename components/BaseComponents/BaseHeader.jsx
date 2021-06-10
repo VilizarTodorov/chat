@@ -5,6 +5,7 @@ const useStyles = makeStyles({
   root: {
     zIndex: 10,
     boxShadow: "none",
+    backgroundColor: "#2a2f32",
   },
   toolbar: {
     height: "80px",

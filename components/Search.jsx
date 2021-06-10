@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     margin: "0 20px",
     borderRadius: "15px",
     padding: "5px",
-    backgroundColor: "#242d32",
+    backgroundColor: "#323739",
   },
   icon: {
     marginRight: "25px",
