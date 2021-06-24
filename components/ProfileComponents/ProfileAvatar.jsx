@@ -2,6 +2,7 @@ import { Avatar, Container, makeStyles } from "@material-ui/core";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import React, { useState } from "react";
+import ProfileModal from "./ProfileModal/ProfileModal";
 
 const useStyles = makeStyles({
   container: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
 
 const ProfileAvatar = ({ isOpen, photoURL, email }) => {
   const classes = useStyles();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -77,6 +78,12 @@ const ProfileAvatar = ({ isOpen, photoURL, email }) => {
           <input onChange={handleImageOnChange} id="image" type="file" style={{ display: "none" }} />
         </MenuItem>
       </Menu>
+      <ProfileModal
+        close={() => isModalOpen(false)}
+        isOpen={isModalOpen}
+        title={"Drag the image to adjust"}
+        img={imageUrl}
+      ></ProfileModal>
     </Container>
   );
 };
