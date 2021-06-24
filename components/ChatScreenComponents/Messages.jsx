@@ -14,6 +14,10 @@ const useStyles = makeStyles({
     overflowY: "scroll",
     msOverflowStyle: "none",
     scrollbarWidth: "none",
+    backgroundImage: `url(https://wallpapercave.com/wp/wp5406324.jpg)`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
     "&::-webkit-scrollbar": {
       display: "none",
     },

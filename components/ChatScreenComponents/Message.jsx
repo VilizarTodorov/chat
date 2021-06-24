@@ -99,15 +99,14 @@ const Message = ({ isSender, message, messageId, chatId }) => {
             </IconButton>
           </Fragment>
         )}
-        {isSender && (
-          <MessageOptionsMenu
-            setIsMenuOpen={setIsMenuOpen}
-            isMenuOpen={isMenuOpen}
-            setIsEditing={setIsEditing}
-            deleteMessage={() => deleteMessage(chatId, messageId)}
-            classes={{ messageOptions: classes.messageOptions, menuOpen: classes.menuOpen }}
-          ></MessageOptionsMenu>
-        )}
+        <MessageOptionsMenu
+          isSender={isSender}
+          setIsMenuOpen={setIsMenuOpen}
+          isMenuOpen={isMenuOpen}
+          setIsEditing={setIsEditing}
+          deleteMessage={() => deleteMessage(chatId, messageId)}
+          classes={{ messageOptions: classes.messageOptions, menuOpen: classes.menuOpen }}
+        ></MessageOptionsMenu>
       </Box>
     </Container>
   );

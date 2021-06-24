@@ -1,7 +1,7 @@
-import { Box, debounce, makeStyles } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import React, { useCallback, useState } from "react";
+import { Box, makeStyles } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
+import SearchIcon from "@material-ui/icons/Search";
+import React, { useState } from "react";
 import useDebounce from "../hooks/useDebounce";
 
 const useStyles = makeStyles({

@@ -67,8 +67,15 @@ const MessageOptionsMenu = (props) => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id="menu-list-grow">
-                  <MenuItem onClick={startEdit}>Edit</MenuItem>
-                  <MenuItem onClick={deleteMessage}>Delete</MenuItem>
+                  <MenuItem onClick={handleClose}>Reply</MenuItem>
+                  <MenuItem onClick={handleClose}>Forward Message</MenuItem>
+                  <MenuItem onClick={handleClose}>Star</MenuItem>
+                  {props.isSender && (
+                    <Fragment>
+                      <MenuItem onClick={startEdit}>Edit</MenuItem>
+                      <MenuItem onClick={deleteMessage}>Delete</MenuItem>
+                    </Fragment>
+                  )}
                 </MenuList>
               </ClickAwayListener>
             </Paper>
