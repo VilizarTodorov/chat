@@ -5,6 +5,9 @@ const useStyles = makeStyles({
   container: {
     display: "flex",
     flexDirection: "column",
+    height: "500px",
+    width: "500px",
+    margin: "auto",
   },
 });
 

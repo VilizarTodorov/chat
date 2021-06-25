@@ -19,6 +19,13 @@ const useStyles = makeStyles({
   avatar: {
     width: "200px",
     height: "200px",
+    cursor: "pointer",
+  },
+  label: {
+    cursor: "pointer",
+  },
+  input: {
+    display: "none",
   },
 });
 
@@ -33,6 +40,7 @@ const ProfileAvatar = ({ isOpen, photoURL, email }) => {
     const file = e.target.files[0];
     setImage(file);
     setImageUrl(URL.createObjectURL(file));
+    setIsModalOpen(true);
   };
 
   const handleClick = (event) => {
@@ -41,6 +49,12 @@ const ProfileAvatar = ({ isOpen, photoURL, email }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setImageUrl("");
+    setImage(null);
   };
 
   const open = Boolean(anchorEl);
@@ -74,16 +88,13 @@ const ProfileAvatar = ({ isOpen, photoURL, email }) => {
       >
         <MenuItem onClick={handleClose}>Take Photo</MenuItem>
         <MenuItem onClick={handleClose}>
-          <label htmlFor="image">Upload Image</label>
-          <input onChange={handleImageOnChange} id="image" type="file" style={{ display: "none" }} />
+          <label className={classes.label} htmlFor="image">
+            Upload Image
+          </label>
+          <input onChange={handleImageOnChange} id="image" type="file" className={classes.input} />
         </MenuItem>
       </Menu>
-      <ProfileModal
-        close={() => isModalOpen(false)}
-        isOpen={isModalOpen}
-        title={"Drag the image to adjust"}
-        img={imageUrl}
-      ></ProfileModal>
+      <ProfileModal close={closeModal} isOpen={isModalOpen} title={"Drag the image to adjust"} img={imageUrl}></ProfileModal>
     </Container>
   );
 };

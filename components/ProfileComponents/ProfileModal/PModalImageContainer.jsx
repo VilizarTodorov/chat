@@ -1,15 +1,19 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
+import PModalImageCrop from "./PModalImageCrop";
 
 const useStyles = makeStyles({
-  container: {},
+  container: {
+    flex: "1",
+    position: "relative",
+  },
 });
 
 const PModalImageContainer = ({ img }) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <img src={img} alt="New Profile Picture" />
+      <PModalImageCrop img={img}></PModalImageCrop>
     </div>
   );
 };
