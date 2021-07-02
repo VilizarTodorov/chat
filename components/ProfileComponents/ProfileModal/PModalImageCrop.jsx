@@ -25,7 +25,7 @@ const PModalImageCrop = ({ img }) => {
         <Slider
           value={zoom}
           min={1}
-          max={4}
+          max={3}
           step={0.1}
           aria-labelledby="Zoom"
           onChange={(e, zoom) => setZoom(zoom)}
